@@ -16,6 +16,7 @@ public class BattleSystem : MonoBehaviour
 
     BattleState state;
     int currentAction;
+    int currentMove;
 
     private void Start()
     {
@@ -28,7 +29,10 @@ public class BattleSystem : MonoBehaviour
         enemyUnit.setUp();
         playerHud.SetData(playerUnit.pokemon);
         enemyHud.SetData(enemyUnit.pokemon);
-        yield return dialogBox.TypeDialog($"Pokemon {playerUnit.pokemon.Base.Name} xu?t hi?n ");
+        
+        dialogBox.setMoveNames(playerUnit.pokemon.Moves);
+
+        yield return dialogBox.TypeDialog($"Pokemon {playerUnit.pokemon.Base.Name} xuat hien!");
         yield return new WaitForSeconds(1f);
         PlayerAction();
 
@@ -47,6 +51,50 @@ public class BattleSystem : MonoBehaviour
         {
             HandleActionSelection();
         }
+        else
+        {
+            if(state == BattleState.PlayerMove)
+            {
+                HandleMoveSelection();
+            }
+        }
+    }
+
+    void HandleMoveSelection()
+    {
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            if (currentMove < playerUnit.pokemon.Moves.Count - 1)
+                ++currentMove;
+        }
+        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            if (currentMove > 0)
+                --currentMove;
+        }
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            if(currentMove < playerUnit.pokemon.Moves.Count -2)
+                currentMove +=2;
+        }
+        else if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            if(currentMove > 1)
+            {
+                currentMove -=2;
+            }
+        }
+        dialogBox.updateMoveSelection(currentMove,playerUnit.pokemon.Moves[currentMove]);
+
+    }
+
+    void PlayerMove()
+    {
+        state = BattleState.PlayerMove;
+        dialogBox.enableActionSelector(false);
+        dialogBox.enableDialogText(false);
+        dialogBox.enableMoveSelector(true);
+
     }
 
     void HandleActionSelection()
@@ -70,5 +118,21 @@ public class BattleSystem : MonoBehaviour
         }
 
         dialogBox.updateActionSelection(currentAction);
+
+        if(Input.GetKeyDown(KeyCode.Return))
+        {
+             if(currentAction == 0)
+            {
+                //Fight
+                PlayerMove();
+            }
+             else
+            {
+                if(currentAction == 1)
+                {
+
+                }
+            }
+        }
     }
 }

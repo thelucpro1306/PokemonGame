@@ -19,6 +19,11 @@ public class MoveBase : ScriptableObject
         get { return name; }
     }
 
+    public PokemonType Type
+    {
+        get { return type; }
+    }
+
     public string Description
     {
         get { return decsription; }
