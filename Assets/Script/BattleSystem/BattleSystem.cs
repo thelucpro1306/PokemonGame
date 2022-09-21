@@ -33,7 +33,7 @@ public class BattleSystem : MonoBehaviour
         dialogBox.setMoveNames(playerUnit.pokemon.Moves);
 
         yield return dialogBox.TypeDialog($"Pokemon {playerUnit.pokemon.Base.Name} xuat hien!");
-        yield return new WaitForSeconds(1f);
+        
         PlayerAction();
 
     }
@@ -108,10 +108,11 @@ public class BattleSystem : MonoBehaviour
         state = BattleState.Busy;
         var move = playerUnit.pokemon.Moves[currentMove];
         yield return dialogBox.TypeDialog($"{playerUnit.pokemon.Base.Name} used {move.Base.Name}");
-        yield return new WaitForSeconds(1f);
-        bool isFainted = enemyUnit.pokemon.TakeDamage(move, playerUnit.pokemon);
+        
+        var damageDetails = enemyUnit.pokemon.TakeDamage(move, playerUnit.pokemon);
         yield return enemyHud.UpdateHP();
-        if (isFainted)
+        yield return ShowDamageDetails(damageDetails);
+        if (damageDetails.Fainted)
         {
             yield return dialogBox.TypeDialog($"{enemyUnit.pokemon.Base.Name} fainted");
         }
@@ -130,10 +131,10 @@ public class BattleSystem : MonoBehaviour
 
         
         yield return dialogBox.TypeDialog($"{enemyUnit.pokemon.Base.Name} used {move.Base.Name}");
-        yield return new WaitForSeconds(1f);
-        bool isFainted = playerUnit.pokemon.TakeDamage(move, playerUnit.pokemon);
+        var damageDetails = playerUnit.pokemon.TakeDamage(move, playerUnit.pokemon);
         yield return playerHud.UpdateHP();
-        if (isFainted)
+        yield return ShowDamageDetails(damageDetails);
+        if (damageDetails.Fainted)
         {
             yield return dialogBox.TypeDialog($"{playerUnit.pokemon.Base.Name} fainted");
         }
@@ -141,6 +142,16 @@ public class BattleSystem : MonoBehaviour
         {
             PlayerAction();
         }
+    }
+
+    IEnumerator ShowDamageDetails(DamageDetails damageDetails)
+    {
+        if (damageDetails.Critical > 1f)
+            yield return dialogBox.TypeDialog("A Critical Hit");
+        if (damageDetails.TypeEffectiveness > 1f)
+            yield return dialogBox.TypeDialog("It's super effective");
+        else if(damageDetails.TypeEffectiveness < 1f)
+            yield return dialogBox.TypeDialog("It's not super effective");
     }
 
     void HandleActionSelection()
