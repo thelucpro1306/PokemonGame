@@ -7,8 +7,8 @@ using DG.Tweening;
 public class BattleUnit : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] PokemonBase _base;
-    [SerializeField] int Level;
+    //[SerializeField] PokemonBase _base;
+    //[SerializeField] int Level;
     [SerializeField] bool isPlayerUnit;
 
     public Pokemon pokemon { get; set; }
@@ -22,17 +22,18 @@ public class BattleUnit : MonoBehaviour
         originalColor = image.color;
     }
 
-    public void setUp()
+    public void setUp(Pokemon nPokemon)
     {
-        pokemon = new Pokemon(_base,Level);
+        pokemon = nPokemon;  
         if (isPlayerUnit)
         {
            image.sprite = pokemon.Base.BackSprite;   
         }
-        else
+        else 
         {
             image.sprite = pokemon.Base.FrontSprite;   
         }
+        image.color = originalColor;    
         PlayerEnterAnimation();
     }
 

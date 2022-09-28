@@ -192,6 +192,7 @@ GameObject:
   - component: {fileID: 259771831}
   - component: {fileID: 259771830}
   - component: {fileID: 259771832}
+  - component: {fileID: 259771833}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -325,6 +326,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &259771833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 259771829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38a102716dfd9f04fb20707d285ce1b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wildPokemons:
+  - _base: {fileID: 11400000, guid: 9605aa5dc7c8b0b40ace0a8a2d62f5c7, type: 2}
+    level: 5
+  - _base: {fileID: 11400000, guid: 9605aa5dc7c8b0b40ace0a8a2d62f5c7, type: 2}
+    level: 7
 --- !u!1 &268950474
 GameObject:
   m_ObjectHideFlags: 0
@@ -532,8 +550,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cb53c0ec9b47b34f9943441310dcff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _base: {fileID: 11400000, guid: 9605aa5dc7c8b0b40ace0a8a2d62f5c7, type: 2}
-  Level: 7
   isPlayerUnit: 0
 --- !u!114 &285647806
 MonoBehaviour:
@@ -1698,8 +1714,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cb53c0ec9b47b34f9943441310dcff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _base: {fileID: 11400000, guid: f469603d34ec5334e85ba63ad75e2183, type: 2}
-  Level: 7
   isPlayerUnit: 1
 --- !u!1 &1032317611
 GameObject:
@@ -81587,6 +81601,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1353745858}
   m_CullTransparentMesh: 1
+--- !u!20 &1455370301 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 1652409727282729934, guid: d447c59677405344a84e88e352a29ac3, type: 3}
+  m_PrefabInstance: {fileID: 1652409727732411313}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1597569326
 GameObject:
   m_ObjectHideFlags: 0
@@ -82699,6 +82718,54 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &1666571364
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1666571366}
+  - component: {fileID: 1666571365}
+  m_Layer: 0
+  m_Name: GameController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1666571365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1666571364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5570881a3be1c2e4c8aba04d1c5f3ee4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
+  playerController: {fileID: 1919718384}
+  battleSystem: {fileID: 2078513850}
+  worldCamera: {fileID: 1455370301}
+--- !u!4 &1666571366
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1666571364}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -76.42982, y: -24.221226, z: 0.5775195}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1675638235
 GameObject:
   m_ObjectHideFlags: 0
@@ -82928,6 +82995,34 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1919718384 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1652409725881382998, guid: d447c59677405344a84e88e352a29ac3, type: 3}
+  m_PrefabInstance: {fileID: 1652409727732411313}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1919718372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5af7f942469e8b04d8dfec9eee6bfe56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1919718386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1919718372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a5a687795cf7c74abd178d0e30a5ce4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pokemons:
+  - _base: {fileID: 11400000, guid: f469603d34ec5334e85ba63ad75e2183, type: 2}
+    level: 7
+  - _base: {fileID: 11400000, guid: 9605aa5dc7c8b0b40ace0a8a2d62f5c7, type: 2}
+    level: 3
 --- !u!1 &2019502160
 GameObject:
   m_ObjectHideFlags: 0
@@ -83264,7 +83359,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2078513849
 Transform:
   m_ObjectHideFlags: 0
@@ -83386,9 +83481,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1652409727282729777, guid: d447c59677405344a84e88e352a29ac3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1652409727282729777, guid: d447c59677405344a84e88e352a29ac3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1652409727282729933, guid: d447c59677405344a84e88e352a29ac3, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d447c59677405344a84e88e352a29ac3, type: 3}

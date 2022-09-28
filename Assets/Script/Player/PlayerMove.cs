@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 public class PlayerMove : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -15,6 +15,8 @@ public class PlayerMove : MonoBehaviour
     public LayerMask treeLayer;
     public LayerMask grassLayer;
 
+    public event Action onEncountered;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -27,7 +29,7 @@ public class PlayerMove : MonoBehaviour
     }
 
     // Update is called once per frame
-    private void Update()
+    public void HandleUpdate()
     {
         if (!IsMoving)
         {
@@ -77,9 +79,11 @@ public class PlayerMove : MonoBehaviour
     {
         if (Physics2D.OverlapCircle(transform.position, 0.2f, grassLayer) != null)
         {
-            if(Random.Range(1, 101) <= 10)
+            if(UnityEngine.Random.Range(1, 101) <= 10)
             {
-                Debug.Log("Enounter wild Pokemon");
+                animator.SetBool("IsMoving", false);
+                onEncountered();
+                
             }
         }
 

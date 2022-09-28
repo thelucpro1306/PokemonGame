@@ -2,25 +2,43 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+[System.Serializable]
 public class Pokemon
 {
-    public PokemonBase Base { get; set; }
-    public int Level { get; set; }
+
+    [SerializeField] PokemonBase _base;
+    [SerializeField] int level;
+
+    public PokemonBase Base
+    {
+        get
+        {
+            return _base;
+        }
+    }
+    public int Level
+    {
+        get
+        {
+            return level;
+        }
+    }
 
     public List<Move> Moves { get; set; }
     public int HP { get; set; }
 
-    public Pokemon(PokemonBase pBase, int pLevel)
+    public void Init()
     {
-        Base = pBase;
-        Level = pLevel;
+
         HP = MaxHP;
 
         Moves = new List<Move>();
-        foreach(var move in Base.LearnableMoves)
+        foreach (var move in Base.LearnableMoves)
         {
             if (move.Level <= Level)
                 Moves.Add(new Move(move.Base));
+
             if (Moves.Count >= 4)
                 break;
         }
@@ -58,11 +76,11 @@ public class Pokemon
 
     public Move GetRandomMove()
     {
-        int r = Random.Range(0,Moves.Count);
+        int r = Random.Range(0, Moves.Count);
         return Moves[r];
     }
 
-    public DamageDetails TakeDamage(Move move,Pokemon attacker)
+    public DamageDetails TakeDamage(Move move, Pokemon attacker)
     {
         float critical = 1f;
         if (Random.value * 100f <= 6.25f)
@@ -77,20 +95,23 @@ public class Pokemon
             Fainted = false
         };
 
+        float attack = (move.Base.isSpecial) ? attacker.SpAttack : attacker.Attack;
+        float defense = (move.Base.isSpecial) ? SpDefense : Defense;
+
         float modifiers = Random.Range(0.85f, 1f) * type * critical;
         float a = (2 * attacker.Level + 10) / 250f;
-        float d = a * move.Base.Power * ((float)attacker.Attack / Defense) + 2 ;
+        float d = a * move.Base.Power * ((float)attack / defense) + 2;
         int damage = Mathf.FloorToInt(d * modifiers);
 
         HP -= damage;
 
         if (HP <= 0)
-        { 
+        {
             HP = 0;
             damageDetails.Fainted = true;
         }
 
-        return damageDetails;    
+        return damageDetails;
 
     }
 
