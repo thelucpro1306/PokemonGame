@@ -13,6 +13,7 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] BattleHud playerHud;
     [SerializeField] BattleHud enemyHud;
     [SerializeField] BattleDialogBox dialogBox;
+    [SerializeField] PartyScreen partyScreen;
 
     BattleState state;
     int currentAction;
@@ -36,6 +37,8 @@ public class BattleSystem : MonoBehaviour
         enemyUnit.setUp(wildPokemon);
         playerHud.SetData(playerUnit.pokemon);
         enemyHud.SetData(enemyUnit.pokemon);
+
+        partyScreen.Init();
         
         dialogBox.setMoveNames(playerUnit.pokemon.Moves);
 
@@ -48,8 +51,14 @@ public class BattleSystem : MonoBehaviour
     void PlayerAction()
     {
         state = BattleState.PlayerAction;
-        StartCoroutine(dialogBox.TypeDialog("Chon mot hanh dong"));
+        dialogBox.setDialog("Chon mot hanh dong");
         dialogBox.enableActionSelector(true);
+    }
+
+    void OpenPartyScreen()
+    {
+        partyScreen.SetPartyData(playerParty.Pokemons);
+        partyScreen.gameObject.SetActive(true);
     }
 
     public void HandleUpdate()
@@ -70,34 +79,30 @@ public class BattleSystem : MonoBehaviour
     void HandleMoveSelection()
     {
         if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            if (currentMove < playerUnit.pokemon.Moves.Count - 1)
-                ++currentMove;
-        }
+            ++currentMove;
         else if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            if (currentMove > 0)
-                --currentMove;
-        }
+            --currentMove;
         else if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            if(currentMove < playerUnit.pokemon.Moves.Count -2)
-                currentMove +=2;
-        }
+            currentMove += 2;
         else if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            if(currentMove > 1)
-            {
-                currentMove -=2;
-            }
-        }
+            currentMove -= 2;
+
+        currentAction = Mathf.Clamp(currentMove, 0, playerUnit.pokemon.Moves.Count - 1);
+
         dialogBox.updateMoveSelection(currentMove,playerUnit.pokemon.Moves[currentMove]);
+
         if (Input.GetKeyDown(KeyCode.Return))
         {
             dialogBox.enableMoveSelector(false);
             dialogBox.enableDialogText(true);
 
             StartCoroutine(PerformPlayerMove());
+        }
+        else if (Input.GetKeyDown(KeyCode.Backspace))
+        {
+            dialogBox.enableMoveSelector(false);
+            dialogBox.enableDialogText(true);
+            PlayerAction();
         }
     }
 
@@ -205,39 +210,39 @@ public class BattleSystem : MonoBehaviour
 
     void HandleActionSelection()
     {
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            if (currentAction < 1)
-            {
-                ++currentAction;
-            }
-        }
-        else
-        {
-            if (Input.GetKeyDown(KeyCode.UpArrow))
-            {
-                if (currentAction > 0)
-                {
-                    --currentAction;
-                }
-            }
-        }
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+            ++currentAction;
+        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+            --currentAction;
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
+            currentAction += 2;
+        else if (Input.GetKeyDown(KeyCode.UpArrow))
+            currentAction -= 2;
+
+        currentAction = Mathf.Clamp(currentAction, 0, 3);
 
         dialogBox.updateActionSelection(currentAction);
 
         if(Input.GetKeyDown(KeyCode.Return))
         {
-             if(currentAction == 0)
+            if(currentAction == 0)
             {
                 //Fight
                 PlayerMove();
             }
-             else
+            else if(currentAction == 1)
             {
-                if(currentAction == 1)
-                {
 
-                }
+            }
+
+            else if (currentAction == 2)
+            {
+                OpenPartyScreen();
+            }
+
+            else if (currentAction == 3)
+            {
+
             }
         }
     }
