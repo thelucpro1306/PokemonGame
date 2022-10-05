@@ -6,7 +6,7 @@ public class PlayerMove : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    public float moveSpeed = 5f;
+    public float moveSpeed = 15f;
     private bool IsMoving;
     public Vector2 input;
   

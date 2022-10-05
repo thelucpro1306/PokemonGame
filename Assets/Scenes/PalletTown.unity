@@ -84419,7 +84419,7 @@ PrefabInstance:
       objectReference: {fileID: 1919718377}
     - target: {fileID: 1652409725881382998, guid: d447c59677405344a84e88e352a29ac3, type: 3}
       propertyPath: moveSpeed
-      value: 5
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1652409725881382998, guid: d447c59677405344a84e88e352a29ac3, type: 3}
       propertyPath: treeLayer.m_Bits

@@ -42,14 +42,27 @@ public class BattleSystem : MonoBehaviour
         dialogBox.setMoveNames(playerUnit.pokemon.Moves);
 
         yield return dialogBox.TypeDialog($"Pokemon {playerUnit.pokemon.Base.Name} xuat hien!");
-        
-        ActionSelection();
 
+        ChooseFirstTurn();
+
+    }
+
+    void ChooseFirstTurn()
+    {
+        if(playerUnit.pokemon.Speed >= enemyUnit.pokemon.Speed)
+        {
+            ActionSelection();
+        }
+        else
+        {
+            StartCoroutine(EnemyMove());
+        }
     }
 
     void BattleOver(bool won)
     {
         state = BattleState.BattleOver;
+        playerParty.Pokemons.ForEach(p => p.OnBattleOver());
         OnBattleOver(won);
     }
 
@@ -156,23 +169,40 @@ public class BattleSystem : MonoBehaviour
     {
         move.PP--;
 
-        yield return dialogBox.TypeDialog($"{playerUnit.pokemon.Base.Name} used {move.Base.Name}");
+        yield return dialogBox.TypeDialog($"{sourceUnit.pokemon.Base.Name} used {move.Base.Name}");
 
-        playerUnit.PlayerAttackAnimation();
+        sourceUnit.PlayerAttackAnimation();
         yield return new WaitForSeconds(1f);
 
         targetUnit.PlayerHitAnimation();
 
-        var damageDetails = targetUnit.pokemon.TakeDamage(move, sourceUnit.pokemon);
-        yield return targetUnit.Hud.UpdateHP();
-        yield return ShowDamageDetails(damageDetails);
-        if (damageDetails.Fainted)
+        if(move.Base.Category == MoveCategory.Status)
+        {
+            yield return RunMoveEffects(move,sourceUnit.pokemon,targetUnit.pokemon);
+        }
+        else
+        {
+            var damageDetails = targetUnit.pokemon.TakeDamage(move, sourceUnit.pokemon);
+            yield return targetUnit.Hud.UpdateHP();
+            yield return ShowDamageDetails(damageDetails);
+        }
+        
+        if (targetUnit.pokemon.HP <= 0)
         {
             yield return dialogBox.TypeDialog($"{targetUnit.pokemon.Base.Name} fainted");
             targetUnit.PlayerFaintAnimation();
             yield return new WaitForSeconds(2f);
 
             CheckForBattleOver(targetUnit);
+        }
+    }
+
+    IEnumerator ShowStatusChanges(Pokemon pokemon)
+    {
+        while(pokemon.StatusChanges.Count > 0)
+        {
+            var message = pokemon.StatusChanges.Dequeue();
+            yield return dialogBox.TypeDialog(message);
         }
     }
 
@@ -285,10 +315,32 @@ public class BattleSystem : MonoBehaviour
 
     }
 
+    IEnumerator RunMoveEffects(Move move , Pokemon source, Pokemon target)
+    {
+        var effects = move.Base.Effects;
+        if (effects.Boosts != null)
+        {
+
+            if (move.Base.Target == MoveTarget.Self)
+            {
+                source.ApplyBoost(effects.Boosts);
+
+            }
+            else
+            {
+                target.ApplyBoost(effects.Boosts);
+            }
+        }
+        yield return ShowStatusChanges(source);
+        yield return ShowStatusChanges(target);
+    }
+
     IEnumerator SwitchPokemon(Pokemon newPokemon)
     {
+        bool currentFainted = true;
         if(playerUnit.pokemon.HP  >  0 )
         {
+            currentFainted = false;
             yield return dialogBox.TypeDialog($"Come back {playerUnit.pokemon.Base.name}");
             playerUnit.PlayerFaintAnimation();
             yield return new WaitForSeconds(1f);
@@ -298,6 +350,15 @@ public class BattleSystem : MonoBehaviour
         dialogBox.setMoveNames(newPokemon.Moves);
 
         yield return dialogBox.TypeDialog($"Go {newPokemon.Base.Name}!");
+
+        if (currentFainted)
+        {
+            ChooseFirstTurn();
+        }
+        else
+        {
+            StartCoroutine(EnemyMove());
+        }
 
         StartCoroutine(EnemyMove());
 
