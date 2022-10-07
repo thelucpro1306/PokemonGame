@@ -195,6 +195,19 @@ public class BattleSystem : MonoBehaviour
 
             CheckForBattleOver(targetUnit);
         }
+
+        //Status
+        sourceUnit.pokemon.OnAfterTurn();
+        yield return ShowStatusChanges(sourceUnit.pokemon);
+        yield return sourceUnit.Hud.UpdateHP();
+        if (sourceUnit.pokemon.HP <= 0)
+        {
+            yield return dialogBox.TypeDialog($"{sourceUnit.pokemon.Base.Name} fainted");
+            targetUnit.PlayerFaintAnimation();
+            yield return new WaitForSeconds(2f);
+
+            CheckForBattleOver(sourceUnit);
+        }
     }
 
     IEnumerator ShowStatusChanges(Pokemon pokemon)
@@ -331,6 +344,12 @@ public class BattleSystem : MonoBehaviour
                 target.ApplyBoost(effects.Boosts);
             }
         }
+
+        if(effects.Status != ConditionID.none)
+        {
+            target.SetStatus(effects.Status);
+        }
+
         yield return ShowStatusChanges(source);
         yield return ShowStatusChanges(target);
     }
