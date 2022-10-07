@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 78baa30db7eba0648a4d7e97e576c29b, type: 3}
-  m_Name: Ember
+  m_Name: Sing
   m_EditorClassIdentifier: 
-  name: Ember
+  name: Sing
   decsription: 
-  type: 2
-  power: 40
+  type: 1
+  power: 0
   accuracy: 100
-  pp: 25
-  category: 0
+  pp: 20
+  category: 2
   effects:
     boosts: []
-    status: 2
+    status: 3
   target: 0

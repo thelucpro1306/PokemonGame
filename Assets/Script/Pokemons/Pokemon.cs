@@ -30,6 +30,7 @@ public class Pokemon
     public Dictionary<Stat, int> Stats { get; private set; }
     public Dictionary<Stat, int> StatBoosts { get; private set; }
     public Conditions Status { get; private set; }
+    public int StausTime { get; set; }
     public Queue<string> StatusChanges { get; private set; } = new Queue<string>(); 
     public bool HpChanged { get; set; }
     public void Init()
@@ -148,6 +149,15 @@ public class Pokemon
         return Moves[r];
     }
 
+    public bool OnBeforeMove()
+    {
+        if(Status?.OnBeforeMove != null)
+        {
+            return Status.OnBeforeMove(this);
+        }
+
+        return true;
+    }
     public void OnAfterTurn()
     {
         Status?.OnAfterTurn?.Invoke(this);
@@ -193,9 +203,15 @@ public class Pokemon
         HpChanged = true;
     }
 
+    public void CureStatus()
+    {
+        Status = null;
+    }
+
     public void SetStatus(ConditionID conditionID)
     {
         Status = ConditionsDB.Conditions[conditionID];
+        Status?.OnStart?.Invoke(this);
         StatusChanges.Enqueue($"{Base.Name}{Status.StartMessage}");
     }
 }
