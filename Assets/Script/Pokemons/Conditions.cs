@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Conditions
 {
+    public ConditionID Id { get; set; }
     public string Name { get; set; }
     public string Desription { get; set; }
     public string StartMessage { get; set; }

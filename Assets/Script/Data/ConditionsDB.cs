@@ -4,6 +4,16 @@ using UnityEngine;
 
 public class ConditionsDB 
 {
+    public static void Init()
+    {
+        foreach (var kvp in Conditions)
+        {
+            var conditionId = kvp.Key;
+            var condition = kvp.Value;
+
+            condition.Id = conditionId;
+        }
+    }
 
     public static Dictionary<ConditionID, Conditions> Conditions { get; set; } = new Dictionary<ConditionID, Conditions>()
     {
@@ -79,20 +89,55 @@ public class ConditionsDB
                 OnStart = (Pokemon pokemon) =>
                 {
                     //Sleep 1-3 turns
-                    pokemon.StausTime = Random.Range(1,4);
-                    Debug.Log($"Will be asleep for {pokemon.StausTime} move");
+                    pokemon.StatusTime = Random.Range(1,4);
+                    Debug.Log($"Will be asleep for {pokemon.StatusTime} move");
                 },
                 OnBeforeMove = (Pokemon pokemon) =>
                 {
-                    if(pokemon.StausTime <= 0)
+                    if(pokemon.StatusTime <= 0)
                     {
                         pokemon.CureStatus();
                         pokemon.StatusChanges.Enqueue($"{pokemon.Base.Name} woke up");
                         return true;
                     }
 
-                    pokemon.StausTime--;
+                    pokemon.StatusTime--;
                     pokemon.StatusChanges.Enqueue($"{pokemon.Base.Name} is sleeping");
+                    return false;
+                }
+            }
+        },
+
+        //Volatile Status Conditions
+        {
+            ConditionID.confusion,
+            new Conditions()
+            {
+                Name = "Confusion",
+                StartMessage = "has been confused",
+                OnStart = (Pokemon pokemon) =>
+                {
+                    //Confused 1-4 turns
+                    pokemon.VolatileStatusTime = Random.Range(1,5);
+                    Debug.Log($"Will be confused for {pokemon.VolatileStatusTime} move");
+                },
+                OnBeforeMove = (Pokemon pokemon) =>
+                {
+                    if(pokemon.VolatileStatusTime <= 0)
+                    {
+                        pokemon.CureVolatileStatus();
+                        pokemon.StatusChanges.Enqueue($"{pokemon.Base.Name} woke up");
+                        return true;
+                    }
+
+                    pokemon.VolatileStatusTime--;
+
+                    //50% chance to do a move
+                    if(Random.Range(1, 3) == 1)
+                        return true;
+                    pokemon.StatusChanges.Enqueue($"{pokemon.Base.Name} is confused");
+                    pokemon.UpdateHp(pokemon.MaxHP / 8);
+                    pokemon.StatusChanges.Enqueue($"It hurt itself due to confusion");
                     return false;
                 }
             }
@@ -103,4 +148,5 @@ public class ConditionsDB
 public enum ConditionID
 {
    none, psn, brn, slp, par, frz,
+   confusion
 }
