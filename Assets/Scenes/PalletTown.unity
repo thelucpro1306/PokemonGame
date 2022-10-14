@@ -545,6 +545,8 @@ MonoBehaviour:
     level: 5
   - _base: {fileID: 11400000, guid: cc7e1ef99670bf148ba15982a6ae0143, type: 2}
     level: 7
+  - _base: {fileID: 11400000, guid: 2e732baff0b49e7489e3992475fc0e4e, type: 2}
+    level: 7
 --- !u!1001 &268302488
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -754,7 +756,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 229, y: 70.545}
+  m_AnchoredPosition: {x: 236.18988, y: 70.54504}
   m_SizeDelta: {x: 160, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &285647805
@@ -31104,7 +31106,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 225.69, y: -0.000030279}
+  m_AnchoredPosition: {x: 225.69, y: -8.2}
   m_SizeDelta: {x: 348.62, y: 105.32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1331161743
