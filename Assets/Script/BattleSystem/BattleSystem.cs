@@ -179,30 +179,48 @@ public class BattleSystem : MonoBehaviour
 
         yield return dialogBox.TypeDialog($"{sourceUnit.pokemon.Base.Name} used {move.Base.Name}");
 
-        sourceUnit.PlayerAttackAnimation();
-        yield return new WaitForSeconds(1f);
-
-        targetUnit.PlayerHitAnimation();
-
-        if(move.Base.Category == MoveCategory.Status)
+        if(CheckIfMoveHits(move, sourceUnit.pokemon, targetUnit.pokemon))
         {
-            yield return RunMoveEffects(move,sourceUnit.pokemon,targetUnit.pokemon);
+            sourceUnit.PlayerAttackAnimation();
+            yield return new WaitForSeconds(1f);
+
+            targetUnit.PlayerHitAnimation();
+
+            if (move.Base.Category == MoveCategory.Status)
+            {
+                yield return RunMoveEffects(move.Base.Effects, sourceUnit.pokemon, targetUnit.pokemon, move.Base.Target);
+            }
+            else
+            {
+                var damageDetails = targetUnit.pokemon.TakeDamage(move, sourceUnit.pokemon);
+                yield return targetUnit.Hud.UpdateHP();
+                yield return ShowDamageDetails(damageDetails);
+            }
+
+            if(move.Base.Sencondaries != null && move.Base.Sencondaries.Count > 0 && targetUnit.pokemon.HP > 0)
+            {
+                foreach(var secondary in move.Base.Sencondaries)
+                {
+                    var rnd = UnityEngine.Random.Range(1, 101);
+                    if (rnd <= secondary.Chance)
+                        yield return RunMoveEffects(secondary, sourceUnit.pokemon, targetUnit.pokemon, secondary.Target);
+                }
+            }
+
+            if (targetUnit.pokemon.HP <= 0)
+            {
+                yield return dialogBox.TypeDialog($"{targetUnit.pokemon.Base.Name} fainted");
+                targetUnit.PlayerFaintAnimation();
+                yield return new WaitForSeconds(2f);
+
+                CheckForBattleOver(targetUnit);
+            }
         }
         else
         {
-            var damageDetails = targetUnit.pokemon.TakeDamage(move, sourceUnit.pokemon);
-            yield return targetUnit.Hud.UpdateHP();
-            yield return ShowDamageDetails(damageDetails);
+            yield return dialogBox.TypeDialog($"{sourceUnit.pokemon.Base.Name}'s attack missed");
         }
-        
-        if (targetUnit.pokemon.HP <= 0)
-        {
-            yield return dialogBox.TypeDialog($"{targetUnit.pokemon.Base.Name} fainted");
-            targetUnit.PlayerFaintAnimation();
-            yield return new WaitForSeconds(2f);
 
-            CheckForBattleOver(targetUnit);
-        }
 
         //Status
         sourceUnit.pokemon.OnAfterTurn();
@@ -336,15 +354,14 @@ public class BattleSystem : MonoBehaviour
 
     }
 
-    IEnumerator RunMoveEffects(Move move , Pokemon source, Pokemon target)
+    IEnumerator RunMoveEffects(MoveEffects effects , Pokemon source, Pokemon target, MoveTarget moveTarget)
     {
-        var effects = move.Base.Effects;
 
         //Stat Boosting
         if (effects.Boosts != null)
         {
 
-            if (move.Base.Target == MoveTarget.Self)
+            if (moveTarget == MoveTarget.Self)
             {
                 source.ApplyBoost(effects.Boosts);
 
@@ -369,6 +386,31 @@ public class BattleSystem : MonoBehaviour
 
         yield return ShowStatusChanges(source);
         yield return ShowStatusChanges(target);
+    }
+
+    bool CheckIfMoveHits(Move move, Pokemon source, Pokemon target)
+    {
+        if (move.Base.AlwaysHits)
+            return true;
+
+        float moveAccuracy = move.Base.Accuracy;
+
+        int accuracy = source.StatBoosts[Stat.Accuracy];
+        int evasion = target.StatBoosts[Stat.Evasion];
+
+        var boostValues = new float[] { 1f, 1.5f, 2f, 2.5f, 3f, 3.5f, 4f };
+
+        if (accuracy > 0)
+            moveAccuracy *= boostValues[accuracy];
+        else
+            moveAccuracy /= boostValues[-accuracy];
+
+        if (evasion > 0)
+            moveAccuracy /= boostValues[evasion];
+        else
+            moveAccuracy *= boostValues[-evasion];
+
+        return UnityEngine.Random.Range(1, 101) <= moveAccuracy;
     }
 
     IEnumerator SwitchPokemon(Pokemon newPokemon)

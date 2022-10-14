@@ -16,10 +16,13 @@ MonoBehaviour:
   decsription: 
   type: 1
   power: 0
-  accuracy: 100
+  accuracy: 55
+  alwaysHits: 0
   pp: 20
   category: 2
   effects:
     boosts: []
     status: 3
+    volatileStatus: 0
+  secondaries: []
   target: 0
