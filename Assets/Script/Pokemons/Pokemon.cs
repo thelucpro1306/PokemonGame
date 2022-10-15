@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -153,7 +154,10 @@ public class Pokemon
 
     public Move GetRandomMove()
     {
-        int r = Random.Range(0, Moves.Count);
+        var moveWithPP = Moves.Where(x => x.PP > 0).ToList();
+
+
+        int r = Random.Range(0, moveWithPP.Count);
         return Moves[r];
     }
 

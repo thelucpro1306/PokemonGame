@@ -111,9 +111,14 @@ public class BattleSystem : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Return))
         {
+            var move = playerUnit.pokemon.Moves[currentMove];   
+            if(move.PP == 0)
+            {
+                return;
+            }
+
             dialogBox.enableMoveSelector(false);
             dialogBox.enableDialogText(true);
-
             StartCoroutine(RunTurns(BattleAction.Move));
         }
         else if (Input.GetKeyDown(KeyCode.Escape))
@@ -141,19 +146,36 @@ public class BattleSystem : MonoBehaviour
             playerUnit.pokemon.CurrentMove = playerUnit.pokemon.Moves[currentMove];
             enemyUnit.pokemon.CurrentMove = enemyUnit.pokemon.GetRandomMove();
 
-            bool playerGoesFirst = playerUnit.pokemon.Speed >= enemyUnit.pokemon.Speed;
+            int playerMovePriority = playerUnit.pokemon.CurrentMove.Base.Priority;
+            int enemyMovePriority = enemyUnit.pokemon.CurrentMove.Base.Priority;
+
+            //Kiem tra ai di truoc
+            bool playerGoesFirst = true;
+            if(enemyMovePriority > playerMovePriority)
+            {
+                playerGoesFirst = false;
+            }
+            else
+            {
+                if(enemyMovePriority == playerMovePriority)
+                {
+                    playerGoesFirst = playerUnit.pokemon.Speed >= enemyUnit.pokemon.Speed;
+                }
+            }
+
+            
 
             var firstUnit = (playerGoesFirst) ? playerUnit : enemyUnit;
             var secondUnit = (playerGoesFirst) ? enemyUnit : playerUnit;
             var secondPokemon = secondUnit.pokemon;
-
+            //luot dau
             yield return RunMove(firstUnit,secondUnit,firstUnit.pokemon.CurrentMove);
             yield return RunAfterTurn(firstUnit);
             if (state == BattleState.BattleOver)
             {
                 yield break;
             }
-            
+            //luot sau
             if(secondPokemon.HP > 0)
             {
                 yield return RunMove(secondUnit, firstUnit, secondUnit.pokemon.CurrentMove);
