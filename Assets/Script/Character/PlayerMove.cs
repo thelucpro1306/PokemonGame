@@ -12,7 +12,8 @@ public class PlayerMove : MonoBehaviour
   
     public Rigidbody2D rb;
     public Animator animator;
-    public LayerMask treeLayer;
+    public LayerMask solidObjectsLayer;
+    public LayerMask interactableLayer;
     public LayerMask grassLayer;
 
     public event Action onEncountered;
@@ -53,6 +54,12 @@ public class PlayerMove : MonoBehaviour
             }
         }
         animator.SetBool("IsMoving", IsMoving);
+
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            Interact();
+        }
+
     }
 
     IEnumerator Move(Vector3 targetPos)
@@ -70,10 +77,30 @@ public class PlayerMove : MonoBehaviour
 
     private bool IsWalkable(Vector3 targetPos)
     {
-        if (Physics2D.OverlapCircle(targetPos, 0.2f, treeLayer) != null)
+        if (Physics2D.OverlapCircle(targetPos, 0.2f, solidObjectsLayer | interactableLayer) != null)
+        {
             return false;
+        }
         return true;
     }
+
+    void Interact()
+    {
+        var x = animator.GetFloat("Horizontal");
+        var y = animator.GetFloat("Vertical");
+       
+        var faceDir = new Vector3(x, y);
+        
+        var interactPos = transform.position + faceDir;
+        //Debug.DrawLine(transform.position,interactPos,Color.green,0.5f);
+
+        var collider = Physics2D.OverlapCircle(interactPos, 0.3f, interactableLayer);
+        if(collider != null)
+        {
+            collider.GetComponent<Interactable>()?.Interact();  
+        }
+    }
+
 
     private void CheckForEncounter()
     {
