@@ -11,7 +11,7 @@ public class PlayerMove : MonoBehaviour
     public Vector2 input;
   
     public Rigidbody2D rb;
-    public Animator animator;
+    public CharacterAnimator animator;
     public LayerMask solidObjectsLayer;
     public LayerMask interactableLayer;
     public LayerMask grassLayer;
@@ -20,7 +20,7 @@ public class PlayerMove : MonoBehaviour
 
     private void Awake()
     {
-        animator = GetComponent<Animator>();
+        animator = GetComponent<CharacterAnimator>();
     }
 
     // Update is called once per frame
@@ -44,8 +44,8 @@ public class PlayerMove : MonoBehaviour
 
             if (input != Vector2.zero)
             {
-                animator.SetFloat("Horizontal", input.x);
-                animator.SetFloat("Vertical", input.y); 
+                animator.MoveX = input.x;
+                animator.MoveY =  input.y; 
                 var targetPos = transform.position;
                 targetPos.x += input.x;
                 targetPos.y += input.y;
@@ -53,7 +53,7 @@ public class PlayerMove : MonoBehaviour
                     StartCoroutine(Move(targetPos));
             }
         }
-        animator.SetBool("IsMoving", IsMoving);
+        animator.isMoving =  IsMoving;
 
         if (Input.GetKeyDown(KeyCode.Return))
         {
@@ -86,8 +86,8 @@ public class PlayerMove : MonoBehaviour
 
     void Interact()
     {
-        var x = animator.GetFloat("Horizontal");
-        var y = animator.GetFloat("Vertical");
+        var x = animator.MoveX;
+        var y = animator.MoveY;
        
         var faceDir = new Vector3(x, y);
         
@@ -108,7 +108,7 @@ public class PlayerMove : MonoBehaviour
         {
             if(UnityEngine.Random.Range(1, 101) <= 10)
             {
-                animator.SetBool("IsMoving", false);
+                animator.isMoving =  false;
                 onEncountered();
                 
             }
