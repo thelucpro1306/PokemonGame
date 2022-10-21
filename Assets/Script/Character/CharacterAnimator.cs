@@ -77,10 +77,12 @@ public class CharacterAnimator : MonoBehaviour
         {
             spriteRenderer.sprite = currentAnim.Frames[0];
         }
+
         if (currentAnim != preAnim || isMoving != wasPreviousMoving)
         {
             currentAnim.Start();
         }
+
         wasPreviousMoving = isMoving;
     }
 

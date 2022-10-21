@@ -15,6 +15,8 @@ public class DialogManager : MonoBehaviour
     public event Action OnShowDialog;
     public event Action OnCloseDialog;
 
+    public bool isShowing { get; private set; } 
+
     int currentLine = 0;
     bool isTyping;
 
@@ -29,7 +31,7 @@ public class DialogManager : MonoBehaviour
     {
         yield return new WaitForEndOfFrame();
 
-
+        isShowing = true;
         OnShowDialog?.Invoke();
         this.dialog = dialog;
         dialogBox.SetActive(true);
@@ -48,7 +50,9 @@ public class DialogManager : MonoBehaviour
             }
             else
             {
+
                 currentLine = 0;
+                isShowing = false;
                 dialogBox.SetActive(false);
                 OnCloseDialog?.Invoke();
             }
