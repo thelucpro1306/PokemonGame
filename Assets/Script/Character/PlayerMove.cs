@@ -4,15 +4,9 @@ using UnityEngine;
 using System;
 public class PlayerMove : MonoBehaviour
 {
-    // Start is called before the first frame update
-
-    
-    
+  
     public Vector2 input;
   
-   
-   
-    
 
     private Character character;
 
@@ -24,13 +18,7 @@ public class PlayerMove : MonoBehaviour
         character = GetComponent<Character>();   
     }
 
-    // Update is called once per frame
-    private void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
     public void HandleUpdate()
     {
         if (!character.isMoving)
@@ -58,8 +46,7 @@ public class PlayerMove : MonoBehaviour
 
     }
 
-   
-
+  
     void Interact()
     {
         var x = character.Animator.MoveX;
@@ -72,7 +59,7 @@ public class PlayerMove : MonoBehaviour
         var collider = Physics2D.OverlapCircle(interactPos, 0.3f, GameLayers.i.InteractableLayer);
         if(collider != null)
         {
-            collider.GetComponent<Interactable>()?.Interact();  
+            collider.GetComponent<Interactable>()?.Interact(transform);  
         }
     }
 
