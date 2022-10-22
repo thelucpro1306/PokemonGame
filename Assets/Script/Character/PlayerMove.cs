@@ -10,7 +10,7 @@ public class PlayerMove : MonoBehaviour
     
     public Vector2 input;
   
-    public Rigidbody2D rb;
+   
    
     
 
@@ -27,7 +27,7 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     private void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        
     }
 
     // Update is called once per frame

@@ -8,15 +8,15 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Background
+  - 
   - Water
   - UI
-  - Player
+  - 
   - Tree
   - Longgrass
   - interactable
-  - 
-  - 
+  - Player
+  - Daxua
   - 
   - 
   - 

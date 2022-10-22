@@ -29,6 +29,7 @@ public class Character : MonoBehaviour
         }
 
         isMoving = true;
+
         while ((targetPos - transform.position).sqrMagnitude > Mathf.Epsilon)
         {
             transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
@@ -45,8 +46,8 @@ public class Character : MonoBehaviour
     {
         var diff = targetPos - transform.position;
         var dif = diff.normalized;
-        if( Physics2D.BoxCast(transform.position +dif, new Vector2(0.2f, 0.2f), 0f, dif, diff.magnitude
-            , GameLayers.i.SoildLayer | GameLayers.i.InteractableLayer) == true)
+        if( Physics2D.BoxCast(transform.position + dif, new Vector2(0.08f, 0.08f), 0f, dif, diff.magnitude-1
+            , GameLayers.i.SoildLayer | GameLayers.i.InteractableLayer | GameLayers.i.PlayerLayer) == true)
         {
             return false;
         }
