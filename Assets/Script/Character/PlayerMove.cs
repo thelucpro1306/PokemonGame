@@ -11,6 +11,7 @@ public class PlayerMove : MonoBehaviour
     private Character character;
 
     public event Action onEncountered;
+    public event Action<Collider2D> onEnterTrainerView;
 
     private void Awake()
     {
@@ -33,7 +34,7 @@ public class PlayerMove : MonoBehaviour
 
             if (input != Vector2.zero)
             {
-                StartCoroutine(character.Move(input,CheckForEncounter));
+                StartCoroutine(character.Move(input,OnMoveOver));
             }
         }
         
@@ -63,6 +64,21 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
+    private void OnMoveOver()
+    {
+        CheckForEncounter();
+        CheckIfInTrainerView();
+    }
+
+    private void CheckIfInTrainerView()
+    {
+        var collider = Physics2D.OverlapCircle(transform.position, 0.2f, GameLayers.i.FovLayer);
+        if (collider != null)
+        {
+            character.Animator.isMoving = false;
+            onEnterTrainerView?.Invoke(collider);
+        }
+    }
 
     private void CheckForEncounter()
     {

@@ -10,6 +10,7 @@ public class CharacterAnimator : MonoBehaviour
     [SerializeField] List<Sprite> walkUpSprites;
     [SerializeField] List<Sprite> walkRightSprites;
     [SerializeField] List<Sprite> walkLeftSprites;
+    [SerializeField] FacingDirection defaultDirection = FacingDirection.Down;
 
     SpriteAnimator currentAnim;
 
@@ -27,13 +28,22 @@ public class CharacterAnimator : MonoBehaviour
 
     SpriteRenderer spriteRenderer;
 
-    private void Start()
+    public FacingDirection DefaultDirection
+    {
+        get => defaultDirection;
+    }
+
+
+    private void Start() 
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        
         WalkDownAnim = new SpriteAnimator(walkDownSprites,spriteRenderer);
         WalkUpAnim = new SpriteAnimator(walkUpSprites, spriteRenderer);
         WalkRightAnim = new SpriteAnimator(walkRightSprites, spriteRenderer);
         WalkLeftAnim = new SpriteAnimator(walkLeftSprites, spriteRenderer);
+
+        SetFacingDirection(defaultDirection);
 
         currentAnim = WalkDownAnim;
     }
@@ -67,8 +77,6 @@ public class CharacterAnimator : MonoBehaviour
             }
         }
 
-        
-
         if (isMoving)
         {
             currentAnim.HandleUpdate();
@@ -86,4 +94,35 @@ public class CharacterAnimator : MonoBehaviour
         wasPreviousMoving = isMoving;
     }
 
+    public void SetFacingDirection(FacingDirection dir)
+    {
+        if(dir == FacingDirection.Right)
+        {
+            MoveX = 1;
+        }
+        else
+        {
+            if(dir == FacingDirection.Left)
+            {
+                MoveX = -1;
+            }
+            else
+            {
+                if (dir == FacingDirection.Down)
+                {
+                    MoveY = -1;
+                }
+                else
+                {
+                    if(dir == FacingDirection.Up)
+                    {
+                        MoveY = 1;
+                    }
+                }
+            }
+        }
+    }
+
 }
+
+public enum FacingDirection { Up, Down, Left, Right }

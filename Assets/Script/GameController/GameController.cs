@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum GameState { FreeRoam,Battle,Dialog}
+public enum GameState { FreeRoam,Battle,Dialog,CutScene}
 
 public class GameController : MonoBehaviour
 {
@@ -21,11 +21,26 @@ public class GameController : MonoBehaviour
     {
         playerController.onEncountered += StartBattle;
         battleSystem.OnBattleOver += EndBattle;
+        playerController.onEnterTrainerView += (Collider2D trainerCollider) =>
+        {
+            var trainer = trainerCollider.GetComponentInParent<TrainerController>(); 
+            if(trainer!= null)
+            {
+                state = GameState.CutScene;
+                StartCoroutine(trainer.triggerTrainerBattle(playerController));
+            }
+        };
+
+        //Bat su kien 
+
+        
 
         DialogManager.Instance.OnShowDialog += () =>
         {
             state = GameState.Dialog;
         };
+
+
         DialogManager.Instance.OnCloseDialog += () =>
         {
             if(state == GameState.Dialog)
