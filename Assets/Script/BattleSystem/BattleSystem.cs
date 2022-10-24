@@ -38,6 +38,8 @@ public class BattleSystem : MonoBehaviour
     PlayerMove player;
     TrainerController trainer;
 
+    int escapeAttempts;
+
     public event Action<bool> OnBattleOver;
 
     public void StartBattle(PokemonParty playerParty, Pokemon wildPokemon)
@@ -108,6 +110,7 @@ public class BattleSystem : MonoBehaviour
             dialogBox.setMoveNames(playerUnit.pokemon.Moves);
         }
 
+        escapeAttempts = 0;
         partyScreen.Init();
         ActionSelection();
 
@@ -315,13 +318,14 @@ public class BattleSystem : MonoBehaviour
                 state = BattleState.Busy;
                 yield return SwitchPokemon(selectedPokemon);
             }
-            else
+            else if (playerAction == BattleAction.UseItem)
             {
-                if(playerAction == BattleAction.UseItem)
-                {
-                    dialogBox.enableActionSelector(false);
-                    yield return ThrowPokeball();
-                }
+                dialogBox.enableActionSelector(false);
+                yield return ThrowPokeball();
+            }
+            else if (playerAction == BattleAction.Run)
+            {
+                yield return TryToEscape();
             }
 
             var enemyMove = enemyUnit.pokemon.GetRandomMove();
@@ -506,13 +510,15 @@ public class BattleSystem : MonoBehaviour
 
             else if (currentAction == 2)
             {
+                //pokemon
                 prevState = state;
                 OpenPartyScreen();
             }
 
             else if (currentAction == 3)
             {
-
+                //run
+                StartCoroutine(RunTurns(BattleAction.Run));
             }
         }
     }
@@ -787,6 +793,43 @@ public class BattleSystem : MonoBehaviour
 
         return shakeCount;
 
+    }
+
+    IEnumerator TryToEscape()
+    {
+        state = BattleState.Busy;
+        if (isTrainerBattle)
+        {
+            yield return dialogBox.TypeDialog($"You can't run from trainer battle!");
+            state = BattleState.RunningTurn;
+            yield break;
+        }
+
+        ++escapeAttempts;
+
+        int playerSpeed = playerUnit.pokemon.Speed;
+        int enemySpeed = enemyUnit.pokemon.Speed;
+
+        if (playerSpeed > enemySpeed)
+        {
+            yield return dialogBox.TypeDialog($"Ran away safely!");
+            BattleOver(true);
+        }
+        else
+        {
+            float f = (playerSpeed * 128) / enemySpeed + 30 * escapeAttempts;
+            f = f % 256;
+            if(UnityEngine.Random.Range(0, 256) < f)
+            {
+                yield return dialogBox.TypeDialog($"Ran away safely!");
+                BattleOver(true);
+            }
+            else
+            {
+                yield return dialogBox.TypeDialog($"Ran away failed!");
+                state = BattleState.RunningTurn;
+            }
+        }
     }
 
 }
