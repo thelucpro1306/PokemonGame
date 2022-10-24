@@ -4,7 +4,10 @@ using UnityEngine;
 using System;
 public class PlayerMove : MonoBehaviour
 {
-  
+
+    [SerializeField] string name;
+    [SerializeField] Sprite sprite;
+
     public Vector2 input;
   
 
@@ -92,5 +95,14 @@ public class PlayerMove : MonoBehaviour
             }
         }
 
+    }
+    public string Name
+    {
+        get => name;
+    }
+
+    public Sprite Sprite
+    {
+        get => sprite;
     }
 }

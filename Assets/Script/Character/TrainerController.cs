@@ -5,10 +5,10 @@ using UnityEngine;
 public class TrainerController : MonoBehaviour
 {
     [SerializeField] GameObject exclaimation;
-
     [SerializeField] Dialog dialog;
-
     [SerializeField] GameObject fov;
+    [SerializeField] Sprite sprite;
+    [SerializeField] string name;
 
     Character character;
 
@@ -70,8 +70,18 @@ public class TrainerController : MonoBehaviour
 
         StartCoroutine(DialogManager.Instance.ShowDialog(dialog, () =>
         {
-            Debug.Log("Start battle");
+            GameController.Instance.StartTrainerBattle(this);
         }));
 
+    }
+
+    public string Name
+    {
+        get => name;
+    }
+
+    public Sprite Sprite
+    {
+        get => sprite;
     }
 }
