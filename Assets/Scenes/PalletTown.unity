@@ -888,6 +888,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 393270884}
     m_Modifications:
+    - target: {fileID: 614862345722946042, guid: d1fa7e844a4ac7547a8468337902831c, type: 3}
+      propertyPath: m_Text
+      value: Lv.
+      objectReference: {fileID: 0}
     - target: {fileID: 614862346454958945, guid: d1fa7e844a4ac7547a8468337902831c, type: 3}
       propertyPath: m_Name
       value: EnemyHud
@@ -84964,6 +84968,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 393270884}
     m_Modifications:
+    - target: {fileID: 614862345722946042, guid: d1fa7e844a4ac7547a8468337902831c, type: 3}
+      propertyPath: m_Text
+      value: Lv.
+      objectReference: {fileID: 0}
     - target: {fileID: 614862346454958945, guid: d1fa7e844a4ac7547a8468337902831c, type: 3}
       propertyPath: m_Name
       value: PlayerHud

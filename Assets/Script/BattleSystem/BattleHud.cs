@@ -23,7 +23,7 @@ public class BattleHud : MonoBehaviour
     {
         _pokemon = pokemon;
         nameText.text = pokemon.Base.Name;
-        levelText.text = "Lvl" + " " + pokemon.Level;
+        levelText.text = "Lv." + " " + pokemon.Level;
         hpbar.setHp((float)pokemon.HP / pokemon.MaxHP);
 
         statusColors = new Dictionary<ConditionID, Color>()

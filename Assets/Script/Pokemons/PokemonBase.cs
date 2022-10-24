@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,10 +24,100 @@ public class PokemonBase : ScriptableObject
     [SerializeField] int spAttack;
     [SerializeField] int spDefense;
     [SerializeField] int speed;
-
+    [SerializeField] int expYield;
+    [SerializeField] GrowthRate growthRate;
     [SerializeField] int catchRate = 255;
 
     [SerializeField] List<LearnableMove> learnableMoves;
+
+    public int GetExpForLevel(int level)
+    {
+        int n3 = level * level * level;
+        if(growthRate == GrowthRate.Fast)
+        {
+            return (4 * n3)/5;
+        }
+        else
+        {
+            if(growthRate == GrowthRate.MediumFast)
+            {
+                return n3;
+            }
+            else
+            {
+                if(growthRate == GrowthRate.Erratic)
+                {
+                    if(level < 50)
+                    {
+                        return Mathf.FloorToInt((n3 * (100 - level)) / 50);
+                    }
+                    else
+                    {
+                        if(level >= 50 && level < 68)
+                        {
+                            return Mathf.FloorToInt((n3 * (150 - level)) / 100);
+                        }
+                        else
+                        {
+                            if(level >= 68 && level < 98)
+                            {
+                                return Mathf.FloorToInt((n3 * (((1911 - 10 * level)) / 3)) / 500);
+                            }
+                            else
+                            {
+                                if(level >= 68 && level < 100)
+                                {
+                                    return Mathf.FloorToInt((n3 * (160 - level)) / 100);
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    if(growthRate == GrowthRate.MediumSlow)
+                    {
+                        return Mathf.FloorToInt((6/5)* n3 - 15*Mathf.Pow(level,2) + 100*level - 140 );
+                    }
+                    else
+                    {
+                        if(growthRate == GrowthRate.Slow)
+                        {
+                            return Mathf.FloorToInt((5 * n3) /4);
+                        }
+                        else
+                        {
+                            if (growthRate == GrowthRate.Fluctuating)
+                            {
+                                if (level < 15)
+                                {
+                                    return Mathf.FloorToInt(n3 * ((level +1 )/3) + 24 );
+                                }
+                                else
+                                {
+                                    if (level >= 15 && level < 36)
+                                    {
+                                        return Mathf.FloorToInt( (n3*(level + 14))/50 );
+                                    }
+                                    else
+                                    {
+                                        if (level >= 36 && level < 100)
+                                        {
+                                            return Mathf.FloorToInt( (n3*((level / 2) + 32)) /50 );
+                                        }
+                                        
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return -1;
+
+    }
 
     public string Name
     {
@@ -89,6 +180,9 @@ public class PokemonBase : ScriptableObject
 
     public int CatchRate => catchRate;
     
+    public int ExpYield => expYield;
+
+    public GrowthRate GrowthRate => growthRate; 
 
     public List<LearnableMove> LearnableMoves
     {
@@ -110,9 +204,6 @@ public class LearnableMove
     {
         get { return level; }
     }
-
-
-
 }
 
 
@@ -187,4 +278,8 @@ public class TypeChart
 
         return chart[row][col];
     }
+
+    
+
 }
+public enum GrowthRate { Erratic, Fast, MediumFast, MediumSlow, Slow, Fluctuating }

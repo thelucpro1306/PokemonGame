@@ -344,7 +344,34 @@ public class BattleSystem : MonoBehaviour
 
     }
 
+    IEnumerator HandlePokemonFainted(BattleUnit fanitedUnit)
+    {
+        yield return dialogBox.TypeDialog($"{fanitedUnit.pokemon.Base.Name} fainted");
+        fanitedUnit.PlayerFaintAnimation();
+        yield return new WaitForSeconds(2f);
 
+        if (!fanitedUnit.IsPlayerUnit)
+        {
+            //exp nhan duoc
+            int expYield = fanitedUnit.pokemon.Base.ExpYield; // 160 7 1 
+            int enemyLevel = fanitedUnit.pokemon.Level;       
+            float trainerBonus = (isTrainerBattle) ? 1.5f : 1f;
+            int expGain = Mathf.FloorToInt((expYield * enemyLevel * trainerBonus) / 7);
+
+            playerUnit.pokemon.Exp += expGain;
+            yield return dialogBox.TypeDialog($"{playerUnit.pokemon.Base.Name} gain {expGain} exp.");
+
+
+            //kiem tra len cap
+        }
+        else
+        {
+
+        }
+
+
+        CheckForBattleOver(fanitedUnit);
+    }
 
     IEnumerator RunMove(BattleUnit sourceUnit, BattleUnit targetUnit, Move move)
     {
@@ -390,11 +417,7 @@ public class BattleSystem : MonoBehaviour
 
             if (targetUnit.pokemon.HP <= 0)
             {
-                yield return dialogBox.TypeDialog($"{targetUnit.pokemon.Base.Name} fainted");
-                targetUnit.PlayerFaintAnimation();
-                yield return new WaitForSeconds(2f);
-
-                CheckForBattleOver(targetUnit);
+                yield return HandlePokemonFainted(targetUnit);
             }
         }
         else
@@ -419,11 +442,7 @@ public class BattleSystem : MonoBehaviour
         yield return sourceUnit.Hud.UpdateHP();
         if (sourceUnit.pokemon.HP <= 0)
         {
-            yield return dialogBox.TypeDialog($"{sourceUnit.pokemon.Base.Name} fainted");
-            sourceUnit.PlayerFaintAnimation();
-            yield return new WaitForSeconds(2f);
-
-            CheckForBattleOver(sourceUnit);
+            yield return HandlePokemonFainted(sourceUnit);
             yield return new WaitUntil(() => state == BattleState.RunningTurn);
 
         }
