@@ -11,6 +11,15 @@ public class Pokemon
     [SerializeField] PokemonBase _base;
     [SerializeField] int level;
 
+
+    public Pokemon(PokemonBase pBase, int pLevel)
+    {
+        _base = pBase;
+        level = pLevel; 
+
+        Init();
+    }
+
     public PokemonBase Base
     {
         get
@@ -35,7 +44,7 @@ public class Pokemon
     public int StatusTime { get; set; }
     public Conditions VolatileStatus { get; private set; }
     public int VolatileStatusTime { get; set; }
-    public Queue<string> StatusChanges { get; private set; } = new Queue<string>(); 
+    public Queue<string> StatusChanges { get; private set; } 
     public bool HpChanged { get; set; }
     public event System.Action OnStatusChanged;
     public void Init()
@@ -52,7 +61,7 @@ public class Pokemon
         }
 
         CaculateStats();
-
+        StatusChanges = new Queue<string>();
         HP = MaxHP;
         ResetStatBoost();
         Status = null;
