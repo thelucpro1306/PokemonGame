@@ -356,13 +356,20 @@ public class BattleSystem : MonoBehaviour
             int expYield = fanitedUnit.pokemon.Base.ExpYield; // 160 7 1 
             int enemyLevel = fanitedUnit.pokemon.Level;       
             float trainerBonus = (isTrainerBattle) ? 1.5f : 1f;
-            int expGain = Mathf.FloorToInt((expYield * enemyLevel * trainerBonus) / 7);
 
+            int expGain = Mathf.FloorToInt((expYield * enemyLevel * trainerBonus) / 7);
             playerUnit.pokemon.Exp += expGain;
             yield return dialogBox.TypeDialog($"{playerUnit.pokemon.Base.Name} gain {expGain} exp.");
-
+            yield return playerUnit.Hud.SetExpSmooth();
 
             //kiem tra len cap
+            while (playerUnit.pokemon.CheckForLevelUp())
+            {
+                playerUnit.Hud.SetLevel();
+                yield return dialogBox.TypeDialog($"{playerUnit.pokemon.Base.Name} grew to level {playerUnit.pokemon.Level}");
+
+                yield return playerUnit.Hud.SetExpSmooth(true);
+            }
         }
         else
         {

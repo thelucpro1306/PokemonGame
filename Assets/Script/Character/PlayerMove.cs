@@ -8,6 +8,8 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] string name;
     [SerializeField] Sprite sprite;
 
+    const float offsetY = 0.3f;
+
     public Vector2 input;
   
 
@@ -85,7 +87,7 @@ public class PlayerMove : MonoBehaviour
 
     private void CheckForEncounter()
     {
-        if (Physics2D.OverlapCircle(transform.position, 0.2f, GameLayers.i.GrassLayer) != null)
+        if (Physics2D.OverlapCircle(transform.position - new Vector3(0, offsetY), 0.2f, GameLayers.i.GrassLayer) != null)
         {
             if(UnityEngine.Random.Range(1, 101) <= 10)
             {

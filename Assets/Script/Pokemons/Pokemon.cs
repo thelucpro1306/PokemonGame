@@ -138,6 +138,17 @@ public class Pokemon
         }
     }
 
+    public bool CheckForLevelUp()
+    {
+        if(Exp > Base.GetExpForLevel(level + 1))
+        {
+            ++level;
+            return true;
+        }
+
+        return false;
+    }
+
     public int MaxHP { get; private set; }
 
     public int Attack
