@@ -30,6 +30,7 @@ public class PokemonBase : ScriptableObject
 
     [SerializeField] List<LearnableMove> learnableMoves;
 
+    public static int MaxNumOfMoves { get; private set; } = 4;
     public int GetExpForLevel(int level)
     {
         int n3 = level * level * level;

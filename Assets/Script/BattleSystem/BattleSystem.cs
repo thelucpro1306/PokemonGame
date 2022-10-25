@@ -2,10 +2,11 @@ using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum BattleState { Start, ActionSelection, MoveSelection, RunningTurn, Busy, PartyScreen, BattleOver, AboutToUse }
+public enum BattleState { Start, ActionSelection, MoveSelection, RunningTurn, Busy, PartyScreen, BattleOver, AboutToUse, MoveToForget }
 
 public enum BattleAction { Move, SwitchPokemon, UseItem, Run }
 
@@ -19,7 +20,7 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] Image playerImage;
     [SerializeField] Image trainerImage;
     [SerializeField] GameObject pokeballSprite;
-
+    [SerializeField] MoveSelectionUI moveSelectionUI;
 
     BattleState state;
     BattleState? prevState;
@@ -28,7 +29,7 @@ public class BattleSystem : MonoBehaviour
     int currentMove;
     int currentMember;
     bool aboutToUseChoice = true;
-
+    MoveBase moveToLearn;
 
     PokemonParty playerParty;
     PokemonParty trainerParty;
@@ -171,14 +172,44 @@ public class BattleSystem : MonoBehaviour
                     {
                         HandleAboutToUse();
                     }
+                    else
+                    {
+                        if(state == BattleState.MoveToForget)
+                        {
+
+                            Action<int> onMoveSelected = (moveIndex) => 
+                            {
+                                moveSelectionUI.gameObject.SetActive(false);
+                                if(moveIndex == PokemonBase.MaxNumOfMoves)
+                                {
+                                    // khong hoc chieu moi
+                                    StartCoroutine(dialogBox
+                                        .TypeDialog($"{playerUnit.pokemon.Base.Name} don't learn new move"));
+
+                                }
+                                else
+                                {
+                                    //Hoc chieu moi va lang quen chieu cu
+
+                                    var selectedMove = playerUnit.pokemon.Moves[moveIndex].Base;
+                                    StartCoroutine(dialogBox
+                                        .TypeDialog($"{playerUnit.pokemon.Base.Name} forgot {selectedMove.Name} and learned {moveToLearn.Name}"));
+
+                                    playerUnit.pokemon.Moves[moveIndex] = new Move(moveToLearn);
+                                }
+
+                                moveToLearn = null;
+                                state = BattleState.RunningTurn;
+
+                            };
+                            moveSelectionUI.HandleMoveSelection(onMoveSelected);
+                        }
+                    }
                 }
             }
         }
 
-        if (Input.GetKeyUp(KeyCode.T))
-        {
-            StartCoroutine(ThrowPokeball());
-        }
+        
 
     }
 
@@ -366,7 +397,35 @@ public class BattleSystem : MonoBehaviour
             while (playerUnit.pokemon.CheckForLevelUp())
             {
                 playerUnit.Hud.SetLevel();
-                yield return dialogBox.TypeDialog($"{playerUnit.pokemon.Base.Name} grew to level {playerUnit.pokemon.Level}");
+                yield return dialogBox
+                    .TypeDialog($"{playerUnit.pokemon.Base.Name} grew to level {playerUnit.pokemon.Level}");
+                
+                //Hoc chieu moi
+                var newMove = playerUnit.pokemon.GetLearnableMoveAtCurrentLevel();
+                if(newMove != null)
+                {
+                    if(playerUnit.pokemon.Moves.Count < PokemonBase.MaxNumOfMoves)
+                    {
+                        //Hoc chieu moi
+                        playerUnit.pokemon.LearnMove(newMove);
+                        yield return dialogBox.TypeDialog($"{playerUnit.pokemon.Base.Name} learned {newMove.Base.Name}");
+                        dialogBox.setMoveNames(playerUnit.pokemon.Moves); 
+
+                    }
+                    else
+                    {
+                        // lang quen chieu 
+                        yield return dialogBox.TypeDialog($"{playerUnit.pokemon.Base.Name} trying to learn {newMove.Base.Name}");
+                        yield return dialogBox.TypeDialog($"But it cannot learn more than {PokemonBase.MaxNumOfMoves} moves");
+                        
+                        yield return ChooseMoveToForget(playerUnit.pokemon, newMove.Base);
+
+                        yield return new WaitUntil(()=> state != BattleState.MoveToForget);
+                        yield return new WaitForSeconds(2f);
+
+                    }
+                }
+
 
                 yield return playerUnit.Hud.SetExpSmooth(true);
             }
@@ -378,6 +437,16 @@ public class BattleSystem : MonoBehaviour
 
 
         CheckForBattleOver(fanitedUnit);
+    }
+
+    IEnumerator ChooseMoveToForget(Pokemon pokemon, MoveBase newMove)
+    {
+        state = BattleState.Busy;
+        yield return dialogBox.TypeDialog($"Choose a move you want to forget");
+        moveSelectionUI.gameObject.SetActive(true);
+        moveSelectionUI.SetMoveData(pokemon.Moves.Select(p=>p.Base).ToList(), newMove);
+        moveToLearn = newMove;
+        state = BattleState.MoveToForget;
     }
 
     IEnumerator RunMove(BattleUnit sourceUnit, BattleUnit targetUnit, Move move)
