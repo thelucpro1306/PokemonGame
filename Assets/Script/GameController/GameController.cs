@@ -24,17 +24,7 @@ public class GameController : MonoBehaviour
 
     public void Start()
     {
-        playerController.onEncountered += StartBattle;
         battleSystem.OnBattleOver += EndBattle;
-        playerController.onEnterTrainerView += (Collider2D trainerCollider) =>
-        {
-            var trainer = trainerCollider.GetComponentInParent<TrainerController>(); 
-            if(trainer!= null)
-            {
-                state = GameState.CutScene;
-                StartCoroutine(trainer.triggerTrainerBattle(playerController));
-            }
-        };
 
         //Bat su kien 
 
@@ -72,7 +62,7 @@ public class GameController : MonoBehaviour
         worldCamera.gameObject.SetActive(true);
     }
 
-    void StartBattle()
+    public void StartBattle()
     {
         state = GameState.Battle;
         battleSystem.gameObject.SetActive(true);
@@ -96,6 +86,12 @@ public class GameController : MonoBehaviour
         var trainerParty = trainer.GetComponent<PokemonParty>();
 
         battleSystem.StartTrainerBattle(playerParty, trainerParty);
+    }
+
+    public void OnEnterTrainersView(TrainerController trainer)
+    {
+        state = GameState.CutScene;
+        StartCoroutine(trainer.triggerTrainerBattle(playerController));
     }
 
     private void Update()
