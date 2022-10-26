@@ -17,7 +17,8 @@ public class GameController : MonoBehaviour
     TrainerController trainer;
 
     GameState stateBeforePause;
-
+    public SceneDetails CurrentScene { get; private set; }
+    public SceneDetails PreScene { get; private set; }
 
     private void Awake()
     {
@@ -106,6 +107,12 @@ public class GameController : MonoBehaviour
     {
         state = GameState.CutScene;
         StartCoroutine(trainer.triggerTrainerBattle(playerController));
+    }
+
+    public void SetCurrentScene(SceneDetails currScene)
+    {
+        PreScene = CurrentScene;
+        CurrentScene = currScene;
     }
 
     private void Update()
