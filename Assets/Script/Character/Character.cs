@@ -11,14 +11,24 @@ public class Character : MonoBehaviour
 
     public bool isMoving { get; private set; }
 
+    public float OffSetY { get; private set; } = 0.3f;
+
+
     private void Awake()
     {
         animator = GetComponent<CharacterAnimator>();
+        SetPositionAndSnapToTile(transform.position);
+
+        
     }
+
+
+
     public IEnumerator Move(Vector2 moveVec, Action OnMoveOver = null)
     {
         animator.MoveX = Mathf.Clamp(moveVec.x,-1f, 1f);
         animator.MoveY = Mathf.Clamp(moveVec.y, -1f, 1f);
+                
         var targetPos = transform.position;
         targetPos.x += moveVec.x;
         targetPos.y += moveVec.y;
@@ -53,6 +63,16 @@ public class Character : MonoBehaviour
         }
         return true;
     }
+
+    public void SetPositionAndSnapToTile(Vector2 pos)
+    {
+
+        pos.x = Mathf.Floor(pos.x) + 0.5f;
+        pos.y = Mathf.Floor(pos.y) + 0.5f + OffSetY;
+
+        transform.position = pos;
+    }
+
 
     public void LookTowards(Vector3 targetPos)
     {
