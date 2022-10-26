@@ -8,7 +8,15 @@ public class Portal : MonoBehaviour, IPlayerTriggerable
     [SerializeField] int SceneToLoad = -1;
     [SerializeField] Transform spawnPoint;
     [SerializeField] DestinationIdentifier destinationIdentifier;
+
     PlayerMove player;
+    Fader fader;
+
+
+    private void Start()
+    {
+        fader = FindObjectOfType<Fader>();
+    }
 
     public void onPlayerTriggered(PlayerMove player)
     {
@@ -19,11 +27,23 @@ public class Portal : MonoBehaviour, IPlayerTriggerable
     IEnumerator SwitchScene()
     {
         DontDestroyOnLoad(gameObject);
+
         GameController.Instance.PauseGame(true);
+
+        //lam` mo` 
+        yield return fader.FaderIn(0.5f);
+
+
+        //load scene
         yield return SceneManager.LoadSceneAsync(SceneToLoad);
-        Debug.Log("Logggggggggg");
-        var desPortal = FindObjectsOfType<Portal>().First(x => x != this && x.destinationIdentifier == this.destinationIdentifier); 
+        
+        var desPortal = FindObjectsOfType<Portal>().First(x => x != this 
+                            && x.destinationIdentifier == this.destinationIdentifier); 
         player.Character.SetPositionAndSnapToTile(desPortal.spawnPoint.position);
+
+        //sau khi nhan vat chuyen canh thi` tat lam` mo`
+
+        yield return fader.FaderOut(0.5f);
         GameController.Instance.PauseGame(false);
         Destroy(gameObject); 
     }
