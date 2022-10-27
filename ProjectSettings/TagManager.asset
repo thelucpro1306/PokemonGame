@@ -50,6 +50,12 @@ TagManager:
   - name: Tree
     uniqueID: 2646347283
     locked: 0
+  - name: Interior
+    uniqueID: 3569109937
+    locked: 0
+  - name: Tree2
+    uniqueID: 2527841777
+    locked: 0
   - name: Player
     uniqueID: 2797148595
     locked: 0
