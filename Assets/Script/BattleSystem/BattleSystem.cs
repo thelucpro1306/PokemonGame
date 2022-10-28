@@ -21,7 +21,7 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] Image trainerImage;
     [SerializeField] GameObject pokeballSprite;
     [SerializeField] MoveSelectionUI moveSelectionUI;
-
+    [SerializeField] GameObject dmgUI;
     BattleState state;
     BattleState? prevState;
 
@@ -324,6 +324,7 @@ public class BattleSystem : MonoBehaviour
             var secondPokemon = secondUnit.pokemon;
             //luot dau
             yield return RunMove(firstUnit, secondUnit, firstUnit.pokemon.CurrentMove);
+            
             yield return RunAfterTurn(firstUnit);
             if (state == BattleState.BattleOver)
             {
@@ -469,7 +470,7 @@ public class BattleSystem : MonoBehaviour
             yield return new WaitForSeconds(1f);
 
             targetUnit.PlayerHitAnimation();
-
+            
             if (move.Base.Category == MoveCategory.Status)
             {
                 yield return RunMoveEffects(move.Base.Effects, sourceUnit.pokemon, targetUnit.pokemon, move.Base.Target);
@@ -477,6 +478,10 @@ public class BattleSystem : MonoBehaviour
             else
             {
                 var damageDetails = targetUnit.pokemon.TakeDamage(move, sourceUnit.pokemon);
+
+                yield return ShowDmg(targetUnit.transform.position + new Vector3(0, 1, 0)
+                    , targetUnit.pokemon.dmgTake, targetUnit.pokemon.isCritical);
+                Debug.Log("? " +targetUnit.pokemon.isCritical);
                 yield return targetUnit.Hud.UpdateHP();
                 yield return ShowDamageDetails(damageDetails);
             }
@@ -788,6 +793,25 @@ public class BattleSystem : MonoBehaviour
         yield return dialogBox.TypeDialog($"{trainer.Name} send out {nextPokemon.Base.Name}");
 
         state = BattleState.RunningTurn;
+    }
+
+    public IEnumerator ShowDmg(Vector3 dmgPos, int dmg, bool isCrit)
+    {
+        dmgUI.SetActive(true);
+        var text = dmgUI.GetComponentInChildren<Text>();
+        text.transform.position = dmgPos;
+        if (isCrit)
+        {
+
+            text.color = Color.red;  
+        }
+        else
+        {
+            text.color = Color.black;
+        }
+        text.text = "-" + dmg;
+        yield return new WaitForSeconds(1.5f);
+        dmgUI.SetActive(false);
     }
 
     IEnumerator ThrowPokeball()

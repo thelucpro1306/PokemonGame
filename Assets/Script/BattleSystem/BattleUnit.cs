@@ -107,6 +107,15 @@ public class BattleUnit : MonoBehaviour
         yield return sequence.WaitForCompletion();
     }
 
+    public IEnumerator ShowDmgAnimation()
+    {
+        var sequence = DOTween.Sequence();
+        sequence.Append(image.DOFade(0, 0.5f));
+        sequence.Join(transform.DOLocalMoveY(originalPos.y, 0.5f));
+        
+        yield return sequence.WaitForCompletion();
+    }
+
     public IEnumerator PlayBreakOutAnimation()
     {
         var sequence = DOTween.Sequence();

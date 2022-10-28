@@ -11,6 +11,7 @@ public class Pokemon
     [SerializeField] PokemonBase _base;
     [SerializeField] int level;
 
+    
 
     public Pokemon(PokemonBase pBase, int pLevel)
     {
@@ -49,6 +50,10 @@ public class Pokemon
     public Queue<string> StatusChanges { get; private set; } 
     public bool HpChanged { get; set; }
     public event System.Action OnStatusChanged;
+
+    public int dmgTake;
+    public bool isCritical = true;
+
     public void Init()
     {
 
@@ -231,7 +236,7 @@ public class Pokemon
         float critical = 1f;
         if (Random.value * 100f <= 6.25f)
             critical = 2f;
-
+        CheckCrit(critical);
         float type = TypeChart.GetEffectiveness(move.Base.Type, this.Base.Type1) * TypeChart.GetEffectiveness(move.Base.Type, this.Base.Type2);
 
         var damageDetails = new DamageDetails()
@@ -248,11 +253,28 @@ public class Pokemon
         float a = (2 * attacker.Level + 10) / 250f;
         float d = a * move.Base.Power * ((float)attack / defense) + 2;
         int damage = Mathf.FloorToInt(d * modifiers);
-
+        GetDamage(damage);
         UpdateHp(damage);
-
+        
         return damageDetails;
 
+    }
+
+    public void GetDamage(int dmg)
+    {
+        dmgTake = dmg;  
+    }
+
+    public void CheckCrit(float crit)
+    {
+        if(crit == 2)
+        {
+            isCritical = true;
+        }
+        else
+        {
+            isCritical = false;
+        }
     }
 
     public void UpdateHp(int damage)
