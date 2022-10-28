@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-public class PlayerMove : MonoBehaviour
+public class PlayerMove : MonoBehaviour, ISavable
 {
 
     [SerializeField] string name;
@@ -77,6 +77,23 @@ public class PlayerMove : MonoBehaviour
                 break;
             }
         }
+    }
+
+    public object CaptureState()
+    {
+        float[] position = new float[] { 
+            transform.position.x,  
+            transform.position.y
+        };
+        return position;
+
+
+    }
+
+    public void RestoreState(object state)
+    {
+        var position = (float[])state;
+        transform.position = new Vector3((float)position[0], (float)position[1]);
     }
 
     public string Name

@@ -100,6 +100,7 @@ GameObject:
   - component: {fileID: 8272517393904280901}
   - component: {fileID: 8272517393904280896}
   - component: {fileID: 8272517393904280898}
+  - component: {fileID: 1597825914092008127}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -162,7 +163,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1497818701
-  m_SortingLayer: 4
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 749404529, guid: ab0822c6f2f2fb745bec07126897047d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -250,14 +251,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pokemons:
-  - _base: {fileID: 11400000, guid: f469603d34ec5334e85ba63ad75e2183, type: 2}
-    level: 12
-  - _base: {fileID: 11400000, guid: cc7e1ef99670bf148ba15982a6ae0143, type: 2}
-    level: 10
   - _base: {fileID: 11400000, guid: 26cd4c186ae76bb4980e77a32c042c08, type: 2}
     level: 10
+    dmgTake: 0
+    isCritical: 0
   - _base: {fileID: 11400000, guid: 2e732baff0b49e7489e3992475fc0e4e, type: 2}
     level: 10
+    dmgTake: 0
+    isCritical: 0
 --- !u!114 &8272517393904280896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -304,3 +305,16 @@ MonoBehaviour:
   - {fileID: -64040226, guid: ab0822c6f2f2fb745bec07126897047d, type: 3}
   - {fileID: -224477700, guid: ab0822c6f2f2fb745bec07126897047d, type: 3}
   defaultDirection: 1
+--- !u!114 &1597825914092008127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8272517393904280915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4881f89f8b930e34489bbb86116ccd4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uniqueId: 

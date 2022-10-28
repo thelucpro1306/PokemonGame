@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TrainerController : MonoBehaviour, Interactable
+public class TrainerController : MonoBehaviour, Interactable, ISavable
 {
     [SerializeField] GameObject exclaimation;
     [SerializeField] Dialog dialog;
@@ -107,7 +107,23 @@ public class TrainerController : MonoBehaviour, Interactable
 
     }
 
-    
+    public object CaptureState()
+    {
+        return battleLost;
+    }
+
+    public void RestoreState(object state)
+    {
+        battleLost = (bool) state;
+        if (battleLost)
+        {
+            fov.gameObject.SetActive(false);
+        }
+        else
+        {
+            fov.gameObject.SetActive(true);
+        }
+    }
 
     public string Name
     {

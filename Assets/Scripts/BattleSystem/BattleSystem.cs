@@ -481,7 +481,6 @@ public class BattleSystem : MonoBehaviour
 
                 yield return ShowDmg(targetUnit.transform.position + new Vector3(0, 1, 0)
                     , targetUnit.pokemon.dmgTake, targetUnit.pokemon.isCritical);
-                Debug.Log("? " +targetUnit.pokemon.isCritical);
                 yield return targetUnit.Hud.UpdateHP();
                 yield return ShowDamageDetails(damageDetails);
             }
