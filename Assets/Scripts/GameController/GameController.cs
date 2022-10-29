@@ -18,13 +18,13 @@ public class GameController : MonoBehaviour
 
     GameState stateBeforePause;
     public SceneDetails CurrentScene { get; private set; }
-    public SceneDetails PreScene { get; private set; }
+    public SceneDetails PrevScene { get; private set; }
 
     private void Awake()
     {
         Instance = this;
         PokemonDB.Init();
-        MoveDB.Init();
+        MoveDB.Init(); 
         ConditionsDB.Init();
         
     }
@@ -114,7 +114,7 @@ public class GameController : MonoBehaviour
 
     public void SetCurrentScene(SceneDetails currScene)
     {
-        PreScene = CurrentScene;
+        PrevScene = CurrentScene;
         CurrentScene = currScene;
     }
 
