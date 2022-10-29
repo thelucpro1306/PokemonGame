@@ -56,7 +56,7 @@ public class Pokemon
 
     public void Init()
     {
-
+        //khoi tao chieu cho pokemon
         Moves = new List<Move>();
         foreach (var move in Base.LearnableMoves)
         {
@@ -75,6 +75,47 @@ public class Pokemon
         ResetStatBoost();
         Status = null;
         VolatileStatus = null;
+    }
+
+    public Pokemon(PokemonSaveData saveData)
+    {
+        _base = PokemonDB.GetPokemonByName(saveData.name);
+        HP = saveData.hp;
+        level = saveData.level;
+        Exp = saveData.exp;
+            
+        if (saveData.statusId != null)
+        {
+            Status = ConditionsDB.Conditions[saveData.statusId.Value];
+        }
+        else
+        {
+            Status = null;
+        }
+
+        //Khoi tao chieu
+        Moves = saveData.moves.Select(s=> new Move(s)).ToList();
+
+        CaculateStats();
+        StatusChanges = new Queue<string>();
+        ResetStatBoost();        
+        VolatileStatus = null;
+    }
+
+    public PokemonSaveData GetSaveData()
+    {
+        var saveData = new PokemonSaveData()
+        {
+            name = Base.Name,
+            hp = HP,
+            level = Level,
+            exp = Exp,
+            statusId = Status?.Id,
+            moves = Moves.Select(m=>m.getSaveData()).ToList(),
+        };
+
+
+        return saveData;
     }
 
     void CaculateStats()
@@ -321,4 +362,14 @@ public class DamageDetails
     public float Critical { get; set; }
 
     public float TypeEffectiveness { get; set; }
+}
+[System.Serializable]
+public class PokemonSaveData
+{
+    public string name;
+    public int hp;
+    public int level;
+    public int exp;
+    public ConditionID? statusId;
+    public List<MoveSaveData> moves;
 }

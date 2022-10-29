@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Linq;
+
 public class PlayerMove : MonoBehaviour, ISavable
 {
 
@@ -9,14 +11,14 @@ public class PlayerMove : MonoBehaviour, ISavable
     [SerializeField] Sprite sprite;
 
     public Vector2 input;
-  
+
 
     private Character character;
 
     private void Awake()
     {
-        
-        character = GetComponent<Character>();   
+
+        character = GetComponent<Character>();
     }
 
 
@@ -34,10 +36,10 @@ public class PlayerMove : MonoBehaviour, ISavable
 
             if (input != Vector2.zero)
             {
-                StartCoroutine(character.Move(input,OnMoveOver));
+                StartCoroutine(character.Move(input, OnMoveOver));
             }
         }
-        
+
         character.HandleUpdate();
 
         if (Input.GetKeyDown(KeyCode.Return))
@@ -47,20 +49,20 @@ public class PlayerMove : MonoBehaviour, ISavable
 
     }
 
-  
+
     void Interact()
     {
         var x = character.Animator.MoveX;
         var y = character.Animator.MoveY;
-       
+
         var faceDir = new Vector3(x, y);
-        
+
         var interactPos = transform.position + faceDir;
 
         var collider = Physics2D.OverlapCircle(interactPos, 0.3f, GameLayers.i.InteractableLayer);
-        if(collider != null)
+        if (collider != null)
         {
-            collider.GetComponent<Interactable>()?.Interact(transform);  
+            collider.GetComponent<Interactable>()?.Interact(transform);
         }
     }
 
@@ -68,10 +70,10 @@ public class PlayerMove : MonoBehaviour, ISavable
     {
         var colliders = Physics2D.OverlapCircleAll(transform.position - new Vector3(0, character.OffSetY), 0.2f, GameLayers.i.TriggerableLayer);
 
-        foreach(var collider in colliders)
+        foreach (var collider in colliders)
         {
             var triggerable = collider.GetComponent<IPlayerTriggerable>();
-            if(triggerable != null)
+            if (triggerable != null)
             {
                 triggerable.onPlayerTriggered(this);
                 break;
@@ -81,19 +83,32 @@ public class PlayerMove : MonoBehaviour, ISavable
 
     public object CaptureState()
     {
-        float[] position = new float[] { 
-            transform.position.x,  
-            transform.position.y
+        var saveData = new PlayerSaveData()
+        {
+            position = new float[]
+            {
+                transform.position.x,
+                transform.position.y
+            },
+            pokemons = GetComponent<PokemonParty>().Pokemons.Select(p => p.GetSaveData()).ToList(),
+
+
         };
-        return position;
 
 
+        return saveData;
     }
 
     public void RestoreState(object state)
     {
-        var position = (float[])state;
-        transform.position = new Vector3((float)position[0], (float)position[1]);
+        var saveData = (PlayerSaveData)state;
+        //load vi tri nhan vat
+        var pos = saveData.position;
+        transform.position = new Vector3(pos[0],pos[1]);
+        //load pokemon party
+
+        GetComponent<PokemonParty>().Pokemons =  saveData.pokemons.Select(p => new Pokemon(p)).ToList();
+
     }
 
     public string Name
@@ -106,6 +121,13 @@ public class PlayerMove : MonoBehaviour, ISavable
         get => sprite;
     }
 
-    public Character Character => character; 
+    public Character Character => character;
 
+}
+
+[Serializable]
+public class PlayerSaveData
+{
+    public float[] position;
+    public List<PokemonSaveData> pokemons;
 }
