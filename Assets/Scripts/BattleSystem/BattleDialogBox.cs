@@ -17,7 +17,7 @@ public class BattleDialogBox : MonoBehaviour
 
 
 
-    [SerializeField] Color hightlightedColor;
+    
 
     [SerializeField] Text PPTexts;
     [SerializeField] Text typeTexts;
@@ -25,6 +25,13 @@ public class BattleDialogBox : MonoBehaviour
     [SerializeField] Text yesTexts;
     [SerializeField] Text noTexts;
 
+    Color hightlightedColor;
+
+
+    private void Start()
+    {
+        hightlightedColor = GlobalSetting.i.HighlightedColor;
+    }
 
     public void setDialog(string dialog)
     {

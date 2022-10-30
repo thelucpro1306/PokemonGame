@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum GameState { FreeRoam,Battle,Dialog,CutScene, Paused}
+public enum GameState { FreeRoam, Battle, Dialog, CutScene, Paused, Menu }
 
 public class GameController : MonoBehaviour
 {
@@ -20,13 +20,18 @@ public class GameController : MonoBehaviour
     public SceneDetails CurrentScene { get; private set; }
     public SceneDetails PrevScene { get; private set; }
 
+    MenuController menuController;
+
+
+
     private void Awake()
     {
         Instance = this;
         PokemonDB.Init();
-        MoveDB.Init(); 
+        MoveDB.Init();
+        menuController = GetComponent<MenuController>();
         ConditionsDB.Init();
-        
+
     }
 
     public void Start()
@@ -35,7 +40,7 @@ public class GameController : MonoBehaviour
 
         //Bat su kien 
 
-        
+
 
         DialogManager.Instance.OnShowDialog += () =>
         {
@@ -45,12 +50,21 @@ public class GameController : MonoBehaviour
 
         DialogManager.Instance.OnCloseDialog += () =>
         {
-            if(state == GameState.Dialog)
+            if (state == GameState.Dialog)
             {
                 state = GameState.FreeRoam;
             }
-            
+
         };
+
+        menuController.onBack += () =>
+        {
+            state = GameState.FreeRoam;
+        };
+
+        menuController.onMenuSelected += OnMenuSelected;
+        
+
     }
 
     public void PauseGame(bool pause)
@@ -69,7 +83,7 @@ public class GameController : MonoBehaviour
     void EndBattle(bool won)
     {
 
-        if(trainer != null && won == true)
+        if (trainer != null && won == true)
         {
             trainer.BattleLost();
             trainer = null;
@@ -85,7 +99,7 @@ public class GameController : MonoBehaviour
         state = GameState.Battle;
         battleSystem.gameObject.SetActive(true);
         worldCamera.gameObject.SetActive(false);
-        
+
         var playerParty = playerController.GetComponent<PokemonParty>();
         var wildPokemon = CurrentScene.GetComponent<MapArea>().GetRandomWildPokemon();
 
@@ -120,36 +134,76 @@ public class GameController : MonoBehaviour
 
     private void Update()
     {
-        if(state == GameState.FreeRoam)
+        if (state == GameState.FreeRoam)
         {
             playerController.HandleUpdate();
+            
+            if (Input.GetKeyDown(KeyCode.O))
+            {
+                menuController.OpenMenu();
+                state = GameState.Menu;
 
-            if (Input.GetKeyDown(KeyCode.M))
-            {
-                SavingSystem.i.Save("saveSlot1");
-            }
-            if (Input.GetKeyDown(KeyCode.N))
-            {
-                SavingSystem.i.Load("saveSlot1");
             }
 
         }
         else
         {
-            if(state == GameState.Battle)
+            if (state == GameState.Battle)
             {
                 battleSystem.HandleUpdate();
             }
             else
             {
-                if(state == GameState.Dialog)
+                if (state == GameState.Dialog)
                 {
                     DialogManager.Instance.HandleUpdate();
+                }
+                else
+                {
+                    if (state == GameState.Menu)
+                    {
+                        menuController.HandleUpdate();
+                    }
                 }
             }
         }
 
-       
+
 
     }
+
+    void OnMenuSelected(int slectedItem)
+    {
+        if(slectedItem == 0)
+        {
+            //pokemon
+        }
+        else
+        {
+            if (slectedItem == 1)
+            {
+                //bag
+            }
+            else
+            {
+                if (slectedItem == 2)
+                {
+                    //save
+                    SavingSystem.i.Save("saveSlot1");
+                   
+                }
+                else
+                {
+                    if (slectedItem == 3)
+                    {
+                        SavingSystem.i.Load("saveSlot1");
+                    }
+                }
+            }
+        }
+
+        state = GameState.FreeRoam;
+
+    }
+
 }
