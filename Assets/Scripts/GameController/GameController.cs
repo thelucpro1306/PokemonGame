@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum GameState { FreeRoam, Battle, Dialog, CutScene, Paused, Menu }
+public enum GameState { FreeRoam, Battle, Dialog, CutScene, Paused, Menu, PartyScreen }
 
 public class GameController : MonoBehaviour
 {
@@ -11,7 +11,7 @@ public class GameController : MonoBehaviour
     [SerializeField] PlayerMove playerController;
     [SerializeField] BattleSystem battleSystem;
     [SerializeField] Camera worldCamera;
-
+    [SerializeField] PartyScreen partyScreen;
     public static GameController Instance { get; private set; }
 
     TrainerController trainer;
@@ -63,7 +63,9 @@ public class GameController : MonoBehaviour
         };
 
         menuController.onMenuSelected += OnMenuSelected;
-        
+
+        partyScreen.Init();
+
 
     }
 
@@ -164,6 +166,24 @@ public class GameController : MonoBehaviour
                     {
                         menuController.HandleUpdate();
                     }
+                    else
+                    {
+                        if (state == GameState.PartyScreen)
+                        {
+                            Action onSelected = () =>
+                            {
+                                // lam man hinh tom tat thong tin cua pokemon
+                            };
+
+                            Action onBack = () =>
+                            {
+                                partyScreen.gameObject.SetActive(false);
+                                state = GameState.FreeRoam;
+                            };
+
+                            partyScreen.HandleUpdate(onSelected,onBack);
+                        }
+                    }
                 }
             }
         }
@@ -177,6 +197,10 @@ public class GameController : MonoBehaviour
         if(slectedItem == 0)
         {
             //pokemon
+            partyScreen.gameObject.SetActive(true);
+            partyScreen.SetPartyData(playerController.GetComponent<PokemonParty>().Pokemons);
+            state = GameState.PartyScreen;
+
         }
         else
         {
@@ -190,19 +214,20 @@ public class GameController : MonoBehaviour
                 {
                     //save
                     SavingSystem.i.Save("saveSlot1");
-                   
+                    state = GameState.FreeRoam;
                 }
                 else
                 {
                     if (slectedItem == 3)
                     {
                         SavingSystem.i.Load("saveSlot1");
+                        state = GameState.FreeRoam;
                     }
                 }
             }
         }
 
-        state = GameState.FreeRoam;
+        
 
     }
 
