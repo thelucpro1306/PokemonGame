@@ -27,6 +27,8 @@ public class GameController : MonoBehaviour
 
     private void Awake()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         Instance = this;
         PokemonDB.Init();
         MoveDB.Init();

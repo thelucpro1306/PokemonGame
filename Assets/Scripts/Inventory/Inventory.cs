@@ -5,9 +5,14 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-     [SerializeField] List<ItemSlot> slots;
+    [SerializeField] List<ItemSlot> slots;
 
+    public List<ItemSlot> Slots => slots;
 
+    public static Inventory GetInventory()
+    {
+        return FindObjectOfType<PlayerMove>().GetComponent<Inventory>();
+    }
 
 }
 
