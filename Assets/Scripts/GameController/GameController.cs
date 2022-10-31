@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum GameState { FreeRoam, Battle, Dialog, CutScene, Paused, Menu, PartyScreen }
+public enum GameState { FreeRoam, Battle, Dialog, CutScene, Paused, Menu, PartyScreen, Bag }
 
 public class GameController : MonoBehaviour
 {
@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour
     [SerializeField] BattleSystem battleSystem;
     [SerializeField] Camera worldCamera;
     [SerializeField] PartyScreen partyScreen;
+    [SerializeField] InventoryUI inventoryUI;
     public static GameController Instance { get; private set; }
 
     TrainerController trainer;
@@ -139,7 +140,7 @@ public class GameController : MonoBehaviour
         if (state == GameState.FreeRoam)
         {
             playerController.HandleUpdate();
-            
+
             if (Input.GetKeyDown(KeyCode.O))
             {
                 menuController.OpenMenu();
@@ -181,7 +182,20 @@ public class GameController : MonoBehaviour
                                 state = GameState.FreeRoam;
                             };
 
-                            partyScreen.HandleUpdate(onSelected,onBack);
+                            partyScreen.HandleUpdate(onSelected, onBack);
+                        }
+                        else
+                        {
+                            if (state == GameState.Bag)
+                            {
+                                Action onBack = () =>
+                                {
+                                    inventoryUI.gameObject.SetActive(false);
+                                    state = GameState.FreeRoam;
+                                };
+
+                                inventoryUI.HandleUpdate(onBack);
+                            }
                         }
                     }
                 }
@@ -194,7 +208,7 @@ public class GameController : MonoBehaviour
 
     void OnMenuSelected(int slectedItem)
     {
-        if(slectedItem == 0)
+        if (slectedItem == 0)
         {
             //pokemon
             partyScreen.gameObject.SetActive(true);
@@ -207,6 +221,8 @@ public class GameController : MonoBehaviour
             if (slectedItem == 1)
             {
                 //bag
+                inventoryUI.gameObject.SetActive(true);
+                state = GameState.Bag;
             }
             else
             {
@@ -227,7 +243,7 @@ public class GameController : MonoBehaviour
             }
         }
 
-        
+
 
     }
 

@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff9fe08bbf833ac459fb369c3bffa056, type: 3}
+  m_Name: MaXEther
+  m_EditorClassIdentifier: 
+  name: Max Ether
+  description: "H\u1ED3i l\u1EA1i to\xE0n b\u1ED9 \u0111i\u1EC3m PP cho m\u1ED9t
+    Pokemon"
+  icon: {fileID: 21300000, guid: b28a48bc938eeb24491ed52ef178c36d, type: 3}
+  hpAmount: 0
+  restoreMaxHP: 0
+  ppAmount: 0
+  restoreMaxPP: 1
+  status: 0
+  recoverAllStatus: 0
+  revive: 0
+  maxRevive: 0

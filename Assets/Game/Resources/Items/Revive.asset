@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff9fe08bbf833ac459fb369c3bffa056, type: 3}
+  m_Name: Revive
+  m_EditorClassIdentifier: 
+  name: Revive
+  description: "D\xF9ng \u0111\u1EC3 ch\u1EEFa m\u1ED9t Pokemon \u0111\xE3 ki\u1EC7t
+    s\u1EE9c v\xE0 h\u1ED3i l\u1EA1i m\u1ED9t n\u1EEDa m\xE1u"
+  icon: {fileID: 21300000, guid: 67a605f107f67234cbebbb19c848132f, type: 3}
+  hpAmount: 0
+  restoreMaxHP: 0
+  ppAmount: 0
+  restoreMaxPP: 0
+  status: 0
+  recoverAllStatus: 0
+  revive: 1
+  maxRevive: 0
