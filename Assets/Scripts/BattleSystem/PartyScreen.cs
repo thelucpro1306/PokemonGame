@@ -11,11 +11,16 @@ public class PartyScreen : MonoBehaviour
     PartyMemberUI[] memberSlots;
 
     List<Pokemon> pokemons;
+    PokemonParty party;
+
 
     /// <summary>
     /// Party screen co the goi o mot trang thai khac nhu ActionSelection, RunningTurn, AboutToUse
     /// 
     /// </summary>
+    /// 
+
+
     public BattleState? CalledFrom { get;  set; }
 
     int selection = 0;
@@ -25,11 +30,18 @@ public class PartyScreen : MonoBehaviour
     public void Init()
     {
         memberSlots = GetComponentsInChildren<PartyMemberUI>(true);
+
+        party = PokemonParty.GetPlayerParty();
+        SetPartyData();
+
+        party.onUpdated += SetPartyData;
     }
 
-    public void SetPartyData(List<Pokemon> pokemons)
+    public void SetPartyData()
     {
-        this.pokemons = pokemons;
+
+        pokemons = party.Pokemons;
+
         for (int i = 0; i < memberSlots.Length; i++)
         {
             if (i < pokemons.Count)

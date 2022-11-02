@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,8 @@ public class PokemonParty : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] List<Pokemon> pokemons;
+
+    public event Action onUpdated;
 
     public List<Pokemon> Pokemons
     {
@@ -38,7 +41,18 @@ public class PokemonParty : MonoBehaviour
         if(pokemons.Count < 6)
         {
             pokemons.Add(newPokemon);
+            onUpdated?.Invoke();
+        }
+        else
+        {
+            //
         }
     }
+
+    public static PokemonParty GetPlayerParty()
+    {
+        return FindObjectOfType<PlayerMove>().GetComponent<PokemonParty>();
+    }
+
 
 }
