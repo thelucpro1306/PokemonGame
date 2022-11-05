@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -169,11 +169,11 @@ public class InventoryUI : MonoBehaviour
         var useItem = inventory.UseItem(selectedItem,partyScreen.SelectedMember);
         if (useItem != null)
         {
-            yield return DialogManager.Instance.ShowDialogText($"B?n ?� s? d?ng {useItem.Name}");
+            yield return DialogManager.Instance.ShowDialogText($"Bạn bị ồn {useItem.Name}");
         }
         else
         {
-            yield return DialogManager.Instance.ShowDialogText($"V?t ph?m kh�ng c� hi?u l?c!");
+            yield return DialogManager.Instance.ShowDialogText($"Vật phẩm không có hiệu lực!");
         }
         ClosePartyScreen();
     }
