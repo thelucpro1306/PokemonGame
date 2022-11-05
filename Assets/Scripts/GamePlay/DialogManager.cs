@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -28,6 +29,19 @@ public class DialogManager : MonoBehaviour
         Instance = this;
     }
 
+    public IEnumerator ShowDialogText(string text,bool waitForInput = true)
+    {
+        isShowing = true;
+        dialogBox.SetActive(true);
+        yield return TypeDialog(text);
+        if (waitForInput)
+        {
+            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
+        }
+        dialogBox.SetActive(false);
+        isShowing = false;
+    }
+
     public IEnumerator ShowDialog(Dialog dialog, Action onFinished = null)
     {
         yield return new WaitForEndOfFrame();
@@ -36,8 +50,8 @@ public class DialogManager : MonoBehaviour
         OnShowDialog?.Invoke();
         
         this.dialog = dialog;
-
         onDialogFinished = onFinished;
+
         dialogBox.SetActive(true);
         StartCoroutine(TypeDialog(dialog.Lines[0]));
 

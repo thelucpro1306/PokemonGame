@@ -6,7 +6,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum BattleState { Start, ActionSelection, MoveSelection, RunningTurn, Busy, PartyScreen, BattleOver, AboutToUse, MoveToForget }
+public enum BattleState { Start, ActionSelection, MoveSelection, RunningTurn, Busy, Bag, PartyScreen, BattleOver, AboutToUse, MoveToForget }
 
 public enum BattleAction { Move, SwitchPokemon, UseItem, Run }
 
@@ -22,6 +22,9 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] GameObject pokeballSprite;
     [SerializeField] MoveSelectionUI moveSelectionUI;
     [SerializeField] GameObject dmgUI;
+    [SerializeField] InventoryUI inventoryUI;
+
+
     BattleState state;
     
 
@@ -579,6 +582,11 @@ public class BattleSystem : MonoBehaviour
             yield return dialogBox.TypeDialog("It's not effective");
     }
 
+    void OpenBag()
+    {
+        state = BattleState.Bag;
+        inventoryUI.gameObject.SetActive(true);
+    }
     void HandleActionSelection()
     {
         if (Input.GetKeyDown(KeyCode.RightArrow))
@@ -604,7 +612,8 @@ public class BattleSystem : MonoBehaviour
             else if (currentAction == 1)
             {
                 //bag
-                StartCoroutine(RunTurns(BattleAction.UseItem)); 
+                //StartCoroutine(RunTurns(BattleAction.UseItem)); 
+                OpenBag();
             }
 
             else if (currentAction == 2)

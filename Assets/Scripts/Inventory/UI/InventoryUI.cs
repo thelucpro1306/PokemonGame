@@ -38,6 +38,9 @@ public class InventoryUI : MonoBehaviour
     private void Start()
     {
         UpdateItemList();
+
+        inventory.onUpdated += UpdateItemList;
+
     }
 
     void UpdateItemList() 
@@ -107,6 +110,7 @@ public class InventoryUI : MonoBehaviour
                 Action onSelected = () =>
                 {
                     // use Item on pokemon
+                    StartCoroutine(UseItem());
                 };
 
                 Action onBackPartyScreen = () =>
@@ -116,11 +120,8 @@ public class InventoryUI : MonoBehaviour
 
                 partyScreen.HandleUpdate(onSelected,onBackPartyScreen);
             }
-        }
-
-        
+        }        
     }
-
     void UpdateItemSelection()
     {
         for (int i = 0; i < slotUIList.Count; i++)
@@ -162,7 +163,20 @@ public class InventoryUI : MonoBehaviour
 
     }
 
-
+    IEnumerator UseItem()
+    {
+        state = InventoryUIState.Busy;
+        var useItem = inventory.UseItem(selectedItem,partyScreen.SelectedMember);
+        if (useItem != null)
+        {
+            yield return DialogManager.Instance.ShowDialogText($"B?n ?ã s? d?ng {useItem.Name}");
+        }
+        else
+        {
+            yield return DialogManager.Instance.ShowDialogText($"V?t ph?m không có hi?u l?c!");
+        }
+        ClosePartyScreen();
+    }
     void OpenPartyScreen()
     {
         state = InventoryUIState.PartySelection;

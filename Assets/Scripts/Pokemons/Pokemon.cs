@@ -49,7 +49,9 @@ public class Pokemon
     public int VolatileStatusTime { get; set; }
     public Queue<string> StatusChanges { get; private set; } 
     public bool HpChanged { get; set; }
+
     public event System.Action OnStatusChanged;
+    public event System.Action OnHpChanged;
 
     public int dmgTake;
     public bool isCritical = true;
@@ -295,7 +297,7 @@ public class Pokemon
         float d = a * move.Base.Power * ((float)attack / defense) + 2;
         int damage = Mathf.FloorToInt(d * modifiers);
         GetDamage(damage);
-        UpdateHp(damage);
+        DecreaseHP(damage);
         
         return damageDetails;
 
@@ -318,11 +320,22 @@ public class Pokemon
         }
     }
 
-    public void UpdateHp(int damage)
+    public void DecreaseHP(int damage)
     {
         HP = Mathf.Clamp(HP - damage, 0, MaxHP);
+        OnHpChanged?.Invoke();
         HpChanged = true;
+
     }
+
+    public void IncreaseHP(int amount)
+    {
+        HP = Mathf.Clamp(HP + amount, 0, MaxHP);
+        OnHpChanged?.Invoke();
+        HpChanged = true;
+
+    }
+
 
     public void CureStatus()
     {
