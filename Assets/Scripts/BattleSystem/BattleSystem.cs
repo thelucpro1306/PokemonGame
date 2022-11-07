@@ -1,4 +1,4 @@
-using DG.Tweening;
+﻿using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -81,7 +81,15 @@ public class BattleSystem : MonoBehaviour
             enemyUnit.setUp(wildPokemon);
 
             dialogBox.setMoveNames(playerUnit.pokemon.Moves);
+<<<<<<< Updated upstream
             yield return dialogBox.TypeDialog($"Pokemon {playerUnit.pokemon.Base.Name} xu?t hi?n!");
+=======
+<<<<<<< HEAD
+            yield return dialogBox.TypeDialog($"Pokemon {playerUnit.pokemon.Base.Name} xuất hiện!");
+=======
+            yield return dialogBox.TypeDialog($"Pokemon {playerUnit.pokemon.Base.Name} xu?t hi?n!");
+>>>>>>> b4c0970d2ae8b8b553360b1fbe0540f2d31a30e6
+>>>>>>> Stashed changes
         }
         else
         {
@@ -96,21 +104,45 @@ public class BattleSystem : MonoBehaviour
             playerImage.sprite = player.Sprite;
             trainerImage.sprite = trainer.Sprite;
 
+<<<<<<< Updated upstream
             yield return dialogBox.TypeDialog($"{trainer.Name} b?t ??u tr?n chi?n");
+=======
+<<<<<<< HEAD
+            yield return dialogBox.TypeDialog($"{trainer.Name} muốn chiến đấu với bạn!!");
+=======
+            yield return dialogBox.TypeDialog($"{trainer.Name} b?t ??u tr?n chi?n");
+>>>>>>> b4c0970d2ae8b8b553360b1fbe0540f2d31a30e6
+>>>>>>> Stashed changes
 
             //Send out first pokemon of the trainer
             trainerImage.gameObject.SetActive(false);
             enemyUnit.gameObject.SetActive(true);
             var enemyPokemon = trainerParty.GetHealthyPokemon();
             enemyUnit.setUp(enemyPokemon);
+<<<<<<< Updated upstream
             yield return dialogBox.TypeDialog($"{trainer.Name} d�ng {enemyPokemon.Base.Name}");
+=======
+<<<<<<< HEAD
+            yield return dialogBox.TypeDialog($"{trainer.Name} đã xuất {enemyPokemon.Base.Name} ra trận chiến");
+=======
+            yield return dialogBox.TypeDialog($"{trainer.Name} d�ng {enemyPokemon.Base.Name}");
+>>>>>>> b4c0970d2ae8b8b553360b1fbe0540f2d31a30e6
+>>>>>>> Stashed changes
 
             //Send out first pokemon of the player
             playerImage.gameObject.SetActive(false);
             playerUnit.gameObject.SetActive(true);
             var playerPokemon = playerParty.GetHealthyPokemon();
             playerUnit.setUp(playerPokemon);
+<<<<<<< Updated upstream
             yield return dialogBox.TypeDialog($"Ti?n l�n {enemyPokemon.Base.Name}");
+=======
+<<<<<<< HEAD
+            yield return dialogBox.TypeDialog($"Hãy lên nào {enemyPokemon.Base.Name} !!!");
+=======
+            yield return dialogBox.TypeDialog($"Ti?n l�n {enemyPokemon.Base.Name}");
+>>>>>>> b4c0970d2ae8b8b553360b1fbe0540f2d31a30e6
+>>>>>>> Stashed changes
             dialogBox.setMoveNames(playerUnit.pokemon.Moves);
         }
 
@@ -131,15 +163,25 @@ public class BattleSystem : MonoBehaviour
     void ActionSelection()
     {
         state = BattleState.ActionSelection;
-        dialogBox.setDialog("Select an action");
+        dialogBox.setDialog("Chọn một hành động");
         dialogBox.enableActionSelector(true);
     }
 
     IEnumerator AboutToUse(Pokemon newPokemon)
     {
         state = BattleState.Busy;
+<<<<<<< Updated upstream
         yield return dialogBox.TypeDialog($"{ trainer.Name} s? d�ng " +
             $"{newPokemon.Base.Name}. B?n c� mu?n ??i Pokemon kh�ng?");
+=======
+<<<<<<< HEAD
+        yield return dialogBox.TypeDialog($"{ trainer.Name} chuẩn bị xuất " +
+            $"{newPokemon.Base.Name} ra trận chiến. Bạn có muốn đổi Pokemon ko?");
+=======
+        yield return dialogBox.TypeDialog($"{ trainer.Name} s? d�ng " +
+            $"{newPokemon.Base.Name}. B?n c� mu?n ??i Pokemon kh�ng?");
+>>>>>>> b4c0970d2ae8b8b553360b1fbe0540f2d31a30e6
+>>>>>>> Stashed changes
         state = BattleState.AboutToUse;
         dialogBox.EnableChoiceBox(true);
     }
@@ -202,21 +244,45 @@ public class BattleSystem : MonoBehaviour
 
                                 Action<int> onMoveSelected = (moveIndex) =>
                                 {
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+                                    // khong hoc chieu moi
+                                    StartCoroutine(dialogBox
+                                        .TypeDialog($"{playerUnit.pokemon.Base.Name} không muốn học chiêu mới !!"));
+=======
+>>>>>>> Stashed changes
                                     moveSelectionUI.gameObject.SetActive(false);
                                     if (moveIndex == PokemonBase.MaxNumOfMoves)
                                     {
                                         // khong hoc chieu moi
                                         StartCoroutine(dialogBox
                                             .TypeDialog($"{playerUnit.pokemon.Base.Name} kh�ng h?c chi�u th?c m?i"));
+<<<<<<< Updated upstream
+=======
+>>>>>>> b4c0970d2ae8b8b553360b1fbe0540f2d31a30e6
+>>>>>>> Stashed changes
 
                                     }
                                     else
                                     {
                                         //Hoc chieu moi va lang quen chieu cu
 
+<<<<<<< Updated upstream
                                         var selectedMove = playerUnit.pokemon.Moves[moveIndex].Base;
                                         StartCoroutine(dialogBox
                                             .TypeDialog($"{playerUnit.pokemon.Base.Name} l�ng qu�n {selectedMove.Name} v� h?c ???c {moveToLearn.Name}"));
+=======
+<<<<<<< HEAD
+                                    var selectedMove = playerUnit.pokemon.Moves[moveIndex].Base;
+                                    StartCoroutine(dialogBox
+                                        .TypeDialog($"{playerUnit.pokemon.Base.Name} đã bỏ {selectedMove.Name} và học {moveToLearn.Name}"));
+=======
+                                        var selectedMove = playerUnit.pokemon.Moves[moveIndex].Base;
+                                        StartCoroutine(dialogBox
+                                            .TypeDialog($"{playerUnit.pokemon.Base.Name} l�ng qu�n {selectedMove.Name} v� h?c ???c {moveToLearn.Name}"));
+>>>>>>> b4c0970d2ae8b8b553360b1fbe0540f2d31a30e6
+>>>>>>> Stashed changes
 
                                         playerUnit.pokemon.Moves[moveIndex] = new Move(moveToLearn);
                                     }
@@ -402,7 +468,15 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator HandlePokemonFainted(BattleUnit fanitedUnit)
     {
+<<<<<<< Updated upstream
         yield return dialogBox.TypeDialog($"{fanitedUnit.pokemon.Base.Name} ki?t s?c");
+=======
+<<<<<<< HEAD
+        yield return dialogBox.TypeDialog($"{fanitedUnit.pokemon.Base.Name} đã bị hạ gục !!");
+=======
+        yield return dialogBox.TypeDialog($"{fanitedUnit.pokemon.Base.Name} ki?t s?c");
+>>>>>>> b4c0970d2ae8b8b553360b1fbe0540f2d31a30e6
+>>>>>>> Stashed changes
         fanitedUnit.PlayerFaintAnimation();
         yield return new WaitForSeconds(2f);
 
@@ -415,7 +489,15 @@ public class BattleSystem : MonoBehaviour
 
             int expGain = Mathf.FloorToInt((expYield * enemyLevel * trainerBonus) / 7);
             playerUnit.pokemon.Exp += expGain;
+<<<<<<< Updated upstream
             yield return dialogBox.TypeDialog($"{playerUnit.pokemon.Base.Name} nh?n ???c {expGain} exp.");
+=======
+<<<<<<< HEAD
+            yield return dialogBox.TypeDialog($"{playerUnit.pokemon.Base.Name} đã nhận được {expGain} kinh nghiệm.");
+=======
+            yield return dialogBox.TypeDialog($"{playerUnit.pokemon.Base.Name} nh?n ???c {expGain} exp.");
+>>>>>>> b4c0970d2ae8b8b553360b1fbe0540f2d31a30e6
+>>>>>>> Stashed changes
             yield return playerUnit.Hud.SetExpSmooth();
 
             //kiem tra len cap
@@ -423,7 +505,15 @@ public class BattleSystem : MonoBehaviour
             {
                 playerUnit.Hud.SetLevel();
                 yield return dialogBox
+<<<<<<< Updated upstream
                     .TypeDialog($"{playerUnit.pokemon.Base.Name} l�n c?p {playerUnit.pokemon.Level}");
+=======
+<<<<<<< HEAD
+                    .TypeDialog($"{playerUnit.pokemon.Base.Name} đã lên level {playerUnit.pokemon.Level}");
+=======
+                    .TypeDialog($"{playerUnit.pokemon.Base.Name} l�n c?p {playerUnit.pokemon.Level}");
+>>>>>>> b4c0970d2ae8b8b553360b1fbe0540f2d31a30e6
+>>>>>>> Stashed changes
                 
                 //Hoc chieu moi
                 var newMove = playerUnit.pokemon.GetLearnableMoveAtCurrentLevel();
@@ -433,15 +523,33 @@ public class BattleSystem : MonoBehaviour
                     {
                         //Hoc chieu moi
                         playerUnit.pokemon.LearnMove(newMove);
+<<<<<<< Updated upstream
                         yield return dialogBox.TypeDialog($"{playerUnit.pokemon.Base.Name} h?c ???c {newMove.Base.Name}");
+=======
+<<<<<<< HEAD
+                        yield return dialogBox.TypeDialog($"{playerUnit.pokemon.Base.Name} đã học {newMove.Base.Name}");
+=======
+                        yield return dialogBox.TypeDialog($"{playerUnit.pokemon.Base.Name} h?c ???c {newMove.Base.Name}");
+>>>>>>> b4c0970d2ae8b8b553360b1fbe0540f2d31a30e6
+>>>>>>> Stashed changes
                         dialogBox.setMoveNames(playerUnit.pokemon.Moves); 
 
                     }
                     else
                     {
                         // lang quen chieu 
+<<<<<<< Updated upstream
                         yield return dialogBox.TypeDialog($"{playerUnit.pokemon.Base.Name} ?ang h?c chi�u th?c {newMove.Base.Name}");
                         yield return dialogBox.TypeDialog($"nh?ng kh�ng th? h?c ???c nhi?u h?n {PokemonBase.MaxNumOfMoves} chi�u th?c");
+=======
+<<<<<<< HEAD
+                        yield return dialogBox.TypeDialog($"{playerUnit.pokemon.Base.Name} đang cố gắng học {newMove.Base.Name}");
+                        yield return dialogBox.TypeDialog($"Nhưng Pokémon này không thể học quá {PokemonBase.MaxNumOfMoves} chiêu");
+=======
+                        yield return dialogBox.TypeDialog($"{playerUnit.pokemon.Base.Name} ?ang h?c chi�u th?c {newMove.Base.Name}");
+                        yield return dialogBox.TypeDialog($"nh?ng kh�ng th? h?c ???c nhi?u h?n {PokemonBase.MaxNumOfMoves} chi�u th?c");
+>>>>>>> b4c0970d2ae8b8b553360b1fbe0540f2d31a30e6
+>>>>>>> Stashed changes
                         
                         yield return ChooseMoveToForget(playerUnit.pokemon, newMove.Base);
 
@@ -467,7 +575,15 @@ public class BattleSystem : MonoBehaviour
     IEnumerator ChooseMoveToForget(Pokemon pokemon, MoveBase newMove)
     {
         state = BattleState.Busy;
+<<<<<<< Updated upstream
         yield return dialogBox.TypeDialog($"Ch?n m?t k? n?ng b?n mu?n l�ng qu�n");
+=======
+<<<<<<< HEAD
+        yield return dialogBox.TypeDialog($"Chọn một chiêu để bỏ ra:");
+=======
+        yield return dialogBox.TypeDialog($"Ch?n m?t k? n?ng b?n mu?n l�ng qu�n");
+>>>>>>> b4c0970d2ae8b8b553360b1fbe0540f2d31a30e6
+>>>>>>> Stashed changes
         moveSelectionUI.gameObject.SetActive(true);
         moveSelectionUI.SetMoveData(pokemon.Moves.Select(p=>p.Base).ToList(), newMove);
         moveToLearn = newMove;
@@ -486,7 +602,15 @@ public class BattleSystem : MonoBehaviour
 
         move.PP--;
 
+<<<<<<< Updated upstream
         yield return dialogBox.TypeDialog($"{sourceUnit.pokemon.Base.Name} ?� s? d?ng {move.Base.Name}");
+=======
+<<<<<<< HEAD
+        yield return dialogBox.TypeDialog($"{sourceUnit.pokemon.Base.Name} đã sử dụng {move.Base.Name}");
+=======
+        yield return dialogBox.TypeDialog($"{sourceUnit.pokemon.Base.Name} ?� s? d?ng {move.Base.Name}");
+>>>>>>> b4c0970d2ae8b8b553360b1fbe0540f2d31a30e6
+>>>>>>> Stashed changes
 
         if (CheckIfMoveHits(move, sourceUnit.pokemon, targetUnit.pokemon))
         {
@@ -526,7 +650,15 @@ public class BattleSystem : MonoBehaviour
         }
         else
         {
+<<<<<<< Updated upstream
             yield return dialogBox.TypeDialog($"{sourceUnit.pokemon.Base.Name} t?n c�ng h?t");
+=======
+<<<<<<< HEAD
+            yield return dialogBox.TypeDialog($"đòn tấn công của {sourceUnit.pokemon.Base.Name} đã bị trượt !!!");
+=======
+            yield return dialogBox.TypeDialog($"{sourceUnit.pokemon.Base.Name} t?n c�ng h?t");
+>>>>>>> b4c0970d2ae8b8b553360b1fbe0540f2d31a30e6
+>>>>>>> Stashed changes
         }
 
 
@@ -596,11 +728,11 @@ public class BattleSystem : MonoBehaviour
     IEnumerator ShowDamageDetails(DamageDetails damageDetails)
     {
         if (damageDetails.Critical > 1f)
-            yield return dialogBox.TypeDialog("A Critical Hit");
+            yield return dialogBox.TypeDialog("Đòn trí mạng!!!!");
         if (damageDetails.TypeEffectiveness > 1f)
-            yield return dialogBox.TypeDialog("It's super effective");
+            yield return dialogBox.TypeDialog("Siêu hiệu quả !!!!");
         else if (damageDetails.TypeEffectiveness < 1f)
-            yield return dialogBox.TypeDialog("It's not effective");
+            yield return dialogBox.TypeDialog("Không hiệu quả !!!!");
     }
 
     void OpenBag()
@@ -659,12 +791,12 @@ public class BattleSystem : MonoBehaviour
             var selectedMember = partyScreen.SelectedMember;
             if (selectedMember.HP <= 0)
             {
-                partyScreen.setMessageText("You can't use a fainted Pokemon!");
+                partyScreen.setMessageText("Bạn không thể sử dụng Pokémon bị hạ gục!");
                 return;
             }
             if (selectedMember == playerUnit.pokemon)
             {
-                partyScreen.setMessageText("You can't switch same Pokemon!");
+                partyScreen.setMessageText("Bạn không thể đổi Pokémon cùng loại!");
                 return;
             }
             partyScreen.gameObject.SetActive(false);
@@ -689,7 +821,7 @@ public class BattleSystem : MonoBehaviour
         {
             if (playerUnit.pokemon.HP <= 0)
             {
-                partyScreen.setMessageText("you have to choose a pokemon to continue");
+                partyScreen.setMessageText("Bạn phải chọn một Pokémon để tiếp tục !");
                 return;
             }
 
@@ -777,7 +909,15 @@ public class BattleSystem : MonoBehaviour
         if (playerUnit.pokemon.HP > 0)
         {
 
+<<<<<<< Updated upstream
             yield return dialogBox.TypeDialog($"Tr? l?i ?i {playerUnit.pokemon.Base.name}");
+=======
+<<<<<<< HEAD
+            yield return dialogBox.TypeDialog($"Trở lại nào {playerUnit.pokemon.Base.name}!!");
+=======
+            yield return dialogBox.TypeDialog($"Tr? l?i ?i {playerUnit.pokemon.Base.name}");
+>>>>>>> b4c0970d2ae8b8b553360b1fbe0540f2d31a30e6
+>>>>>>> Stashed changes
             playerUnit.PlayerFaintAnimation();
             yield return new WaitForSeconds(1f);
         }
@@ -804,7 +944,15 @@ public class BattleSystem : MonoBehaviour
         state = BattleState.Busy;
 
         enemyUnit.setUp(nextPokemon);
+<<<<<<< Updated upstream
         yield return dialogBox.TypeDialog($"{trainer.Name} s? d?ng {nextPokemon.Base.Name}");
+=======
+<<<<<<< HEAD
+        yield return dialogBox.TypeDialog($"{trainer.Name} đã xuất {nextPokemon.Base.Name} ra trận chiến !!!");
+=======
+        yield return dialogBox.TypeDialog($"{trainer.Name} s? d?ng {nextPokemon.Base.Name}");
+>>>>>>> b4c0970d2ae8b8b553360b1fbe0540f2d31a30e6
+>>>>>>> Stashed changes
 
         state = BattleState.RunningTurn;
     }
@@ -834,13 +982,29 @@ public class BattleSystem : MonoBehaviour
 
         if (isTrainerBattle)
         {
+<<<<<<< Updated upstream
             yield return dialogBox.TypeDialog($"{player.Name} b?n kh�ng th? b?t pokemon c?a ng??i kh�c!");
+=======
+<<<<<<< HEAD
+            yield return dialogBox.TypeDialog($"{player.Name} Bạn không thể bắt Pokémon của trainer khác !");
+=======
+            yield return dialogBox.TypeDialog($"{player.Name} b?n kh�ng th? b?t pokemon c?a ng??i kh�c!");
+>>>>>>> b4c0970d2ae8b8b553360b1fbe0540f2d31a30e6
+>>>>>>> Stashed changes
             state = BattleState.RunningTurn;
             yield break;
         }
         
 
+<<<<<<< Updated upstream
         yield return dialogBox.TypeDialog($"{player.Name} ?� s? d?ng POKEBALL!!!");
+=======
+<<<<<<< HEAD
+        yield return dialogBox.TypeDialog($"{player.Name} sử dụng POKEBALL!!!");
+=======
+        yield return dialogBox.TypeDialog($"{player.Name} ?� s? d?ng POKEBALL!!!");
+>>>>>>> b4c0970d2ae8b8b553360b1fbe0540f2d31a30e6
+>>>>>>> Stashed changes
 
         var pokeballObj = Instantiate(pokeballSprite,playerUnit.transform.position - new Vector3(2,0),Quaternion.identity);
 
@@ -866,11 +1030,25 @@ public class BattleSystem : MonoBehaviour
         if(shakeCount == 4)
         {
             // bat duoc pokemon
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+            yield return dialogBox.TypeDialog($"{enemyUnit.pokemon.Base.name} đã bị bắt!");
+            yield return pokeball.DOFade(0, 1.5f).WaitForCompletion();
+
+            playerParty.AddPokemon(enemyUnit.pokemon);
+            yield return dialogBox.TypeDialog($"{enemyUnit.pokemon.Base.name} đã được thêm vào nhóm của bạn!");
+=======
+>>>>>>> Stashed changes
             yield return dialogBox.TypeDialog($"{enemyUnit.pokemon.Base.name} ?� b? b?t");
             yield return pokeball.DOFade(0, 1.5f).WaitForCompletion();
 
             playerParty.AddPokemon(enemyUnit.pokemon);
             yield return dialogBox.TypeDialog($"{enemyUnit.pokemon.Base.name} ?� th�m v�o t? ??i c?a b?n");
+<<<<<<< Updated upstream
+=======
+>>>>>>> b4c0970d2ae8b8b553360b1fbe0540f2d31a30e6
+>>>>>>> Stashed changes
             Destroy(pokeball);
             BattleOver(true);
 
@@ -883,11 +1061,25 @@ public class BattleSystem : MonoBehaviour
             yield return enemyUnit.PlayBreakOutAnimation();
             if(shakeCount < 2)
             {
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+                yield return dialogBox.TypeDialog($"{enemyUnit.pokemon.Base.name} đã thoát được!");
+            }
+            else
+            {
+                yield return dialogBox.TypeDialog("Suýt thì được!!!");
+=======
+>>>>>>> Stashed changes
                 yield return dialogBox.TypeDialog($"{enemyUnit.pokemon.Base.name} ?� tr?n tho�t");
             }
             else
             {
                 yield return dialogBox.TypeDialog("G?n b?t ???c r?i!");
+<<<<<<< Updated upstream
+=======
+>>>>>>> b4c0970d2ae8b8b553360b1fbe0540f2d31a30e6
+>>>>>>> Stashed changes
             }
 
             Destroy(pokeball);
@@ -933,7 +1125,15 @@ public class BattleSystem : MonoBehaviour
         state = BattleState.Busy;
         if (isTrainerBattle)
         {
+<<<<<<< Updated upstream
             yield return dialogBox.TypeDialog($"B?n kh�ng th? ch?y tr?n kh?i tr?n chi?n v?i nh� hu?n luy?n!");
+=======
+<<<<<<< HEAD
+            yield return dialogBox.TypeDialog($"Mày không thoát được đâu con trai !!");
+=======
+            yield return dialogBox.TypeDialog($"B?n kh�ng th? ch?y tr?n kh?i tr?n chi?n v?i nh� hu?n luy?n!");
+>>>>>>> b4c0970d2ae8b8b553360b1fbe0540f2d31a30e6
+>>>>>>> Stashed changes
             state = BattleState.RunningTurn;
             yield break;
         }
@@ -945,7 +1145,15 @@ public class BattleSystem : MonoBehaviour
 
         if (playerSpeed > enemySpeed)
         {
+<<<<<<< Updated upstream
             yield return dialogBox.TypeDialog($"Ch?y tr?n an to�n!");
+=======
+<<<<<<< HEAD
+            yield return dialogBox.TypeDialog($"Chạy thoát thành công!");
+=======
+            yield return dialogBox.TypeDialog($"Ch?y tr?n an to�n!");
+>>>>>>> b4c0970d2ae8b8b553360b1fbe0540f2d31a30e6
+>>>>>>> Stashed changes
             BattleOver(true);
         }
         else
@@ -954,12 +1162,28 @@ public class BattleSystem : MonoBehaviour
             f = f % 256;
             if(UnityEngine.Random.Range(0, 256) < f)
             {
+<<<<<<< Updated upstream
                 yield return dialogBox.TypeDialog($"Ch?y tr?n an to�n!");
+=======
+<<<<<<< HEAD
+                yield return dialogBox.TypeDialog($"Chạy thoát thành công!");
+=======
+                yield return dialogBox.TypeDialog($"Ch?y tr?n an to�n!");
+>>>>>>> b4c0970d2ae8b8b553360b1fbe0540f2d31a30e6
+>>>>>>> Stashed changes
                 BattleOver(true);
             }
             else
             {
+<<<<<<< Updated upstream
                 yield return dialogBox.TypeDialog($"Ch?y tr?n th?t b?i!");
+=======
+<<<<<<< HEAD
+                yield return dialogBox.TypeDialog($"Chạy thoát thất bại!");
+=======
+                yield return dialogBox.TypeDialog($"Ch?y tr?n th?t b?i!");
+>>>>>>> b4c0970d2ae8b8b553360b1fbe0540f2d31a30e6
+>>>>>>> Stashed changes
                 state = BattleState.RunningTurn;
             }
         }
