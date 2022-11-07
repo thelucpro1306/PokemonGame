@@ -81,7 +81,7 @@ public class BattleSystem : MonoBehaviour
             enemyUnit.setUp(wildPokemon);
 
             dialogBox.setMoveNames(playerUnit.pokemon.Moves);
-            yield return dialogBox.TypeDialog($"Pokemon {playerUnit.pokemon.Base.Name} xuat hien!");
+            yield return dialogBox.TypeDialog($"Pokemon {playerUnit.pokemon.Base.Name} xu?t hi?n!");
         }
         else
         {
@@ -96,21 +96,21 @@ public class BattleSystem : MonoBehaviour
             playerImage.sprite = player.Sprite;
             trainerImage.sprite = trainer.Sprite;
 
-            yield return dialogBox.TypeDialog($"{trainer.Name} wants to battle");
+            yield return dialogBox.TypeDialog($"{trainer.Name} b?t ??u tr?n chi?n");
 
             //Send out first pokemon of the trainer
             trainerImage.gameObject.SetActive(false);
             enemyUnit.gameObject.SetActive(true);
             var enemyPokemon = trainerParty.GetHealthyPokemon();
             enemyUnit.setUp(enemyPokemon);
-            yield return dialogBox.TypeDialog($"{trainer.Name} send out {enemyPokemon.Base.Name}");
+            yield return dialogBox.TypeDialog($"{trainer.Name} dùng {enemyPokemon.Base.Name}");
 
             //Send out first pokemon of the player
             playerImage.gameObject.SetActive(false);
             playerUnit.gameObject.SetActive(true);
             var playerPokemon = playerParty.GetHealthyPokemon();
             playerUnit.setUp(playerPokemon);
-            yield return dialogBox.TypeDialog($"Go {enemyPokemon.Base.Name}");
+            yield return dialogBox.TypeDialog($"Ti?n lên {enemyPokemon.Base.Name}");
             dialogBox.setMoveNames(playerUnit.pokemon.Moves);
         }
 
@@ -138,8 +138,8 @@ public class BattleSystem : MonoBehaviour
     IEnumerator AboutToUse(Pokemon newPokemon)
     {
         state = BattleState.Busy;
-        yield return dialogBox.TypeDialog($"{ trainer.Name} is about to use " +
-            $"{newPokemon.Base.Name}. Do you want to change Pokemon?");
+        yield return dialogBox.TypeDialog($"{ trainer.Name} s? dùng " +
+            $"{newPokemon.Base.Name}. B?n có mu?n ??i Pokemon không?");
         state = BattleState.AboutToUse;
         dialogBox.EnableChoiceBox(true);
     }
@@ -171,41 +171,62 @@ public class BattleSystem : MonoBehaviour
                 }
                 else
                 {
-                    if (state == BattleState.AboutToUse)
+                    if (state == BattleState.Bag)
                     {
-                        HandleAboutToUse();
+
+                        Action onBack = () =>
+                        {
+                            inventoryUI.gameObject.SetActive(false);
+                            state = BattleState.ActionSelection;
+                        };
+
+                        Action onItemUsed = () =>
+                        {
+                            state = BattleState.Busy;
+                            inventoryUI.gameObject.SetActive(false);
+                            StartCoroutine(RunTurns(BattleAction.UseItem));
+                        };
+
+                        inventoryUI.HandleUpdate(onBack, onItemUsed);
                     }
                     else
                     {
-                        if(state == BattleState.MoveToForget)
+                        if (state == BattleState.AboutToUse)
                         {
-
-                            Action<int> onMoveSelected = (moveIndex) => 
+                            HandleAboutToUse();
+                        }
+                        else
+                        {
+                            if (state == BattleState.MoveToForget)
                             {
-                                moveSelectionUI.gameObject.SetActive(false);
-                                if(moveIndex == PokemonBase.MaxNumOfMoves)
+
+                                Action<int> onMoveSelected = (moveIndex) =>
                                 {
-                                    // khong hoc chieu moi
-                                    StartCoroutine(dialogBox
-                                        .TypeDialog($"{playerUnit.pokemon.Base.Name} don't learn new move"));
+                                    moveSelectionUI.gameObject.SetActive(false);
+                                    if (moveIndex == PokemonBase.MaxNumOfMoves)
+                                    {
+                                        // khong hoc chieu moi
+                                        StartCoroutine(dialogBox
+                                            .TypeDialog($"{playerUnit.pokemon.Base.Name} không h?c chiêu th?c m?i"));
 
-                                }
-                                else
-                                {
-                                    //Hoc chieu moi va lang quen chieu cu
+                                    }
+                                    else
+                                    {
+                                        //Hoc chieu moi va lang quen chieu cu
 
-                                    var selectedMove = playerUnit.pokemon.Moves[moveIndex].Base;
-                                    StartCoroutine(dialogBox
-                                        .TypeDialog($"{playerUnit.pokemon.Base.Name} forgot {selectedMove.Name} and learned {moveToLearn.Name}"));
+                                        var selectedMove = playerUnit.pokemon.Moves[moveIndex].Base;
+                                        StartCoroutine(dialogBox
+                                            .TypeDialog($"{playerUnit.pokemon.Base.Name} lãng quên {selectedMove.Name} và h?c ???c {moveToLearn.Name}"));
 
-                                    playerUnit.pokemon.Moves[moveIndex] = new Move(moveToLearn);
-                                }
+                                        playerUnit.pokemon.Moves[moveIndex] = new Move(moveToLearn);
+                                    }
 
-                                moveToLearn = null;
-                                state = BattleState.RunningTurn;
+                                    moveToLearn = null;
+                                    state = BattleState.RunningTurn;
 
-                            };
-                            moveSelectionUI.HandleMoveSelection(onMoveSelected);
+                                };
+                                moveSelectionUI.HandleMoveSelection(onMoveSelected);
+                            }
                         }
                     }
                 }
@@ -356,7 +377,7 @@ public class BattleSystem : MonoBehaviour
             else if (playerAction == BattleAction.UseItem)
             {
                 dialogBox.enableActionSelector(false);
-                yield return ThrowPokeball();
+                // sau khi s? d?ng Item, ng??i ch?i b? m?t l??t và ??n l??t c?a ??i ph??ng
             }
             else if (playerAction == BattleAction.Run)
             {
@@ -381,7 +402,7 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator HandlePokemonFainted(BattleUnit fanitedUnit)
     {
-        yield return dialogBox.TypeDialog($"{fanitedUnit.pokemon.Base.Name} fainted");
+        yield return dialogBox.TypeDialog($"{fanitedUnit.pokemon.Base.Name} ki?t s?c");
         fanitedUnit.PlayerFaintAnimation();
         yield return new WaitForSeconds(2f);
 
@@ -394,7 +415,7 @@ public class BattleSystem : MonoBehaviour
 
             int expGain = Mathf.FloorToInt((expYield * enemyLevel * trainerBonus) / 7);
             playerUnit.pokemon.Exp += expGain;
-            yield return dialogBox.TypeDialog($"{playerUnit.pokemon.Base.Name} gain {expGain} exp.");
+            yield return dialogBox.TypeDialog($"{playerUnit.pokemon.Base.Name} nh?n ???c {expGain} exp.");
             yield return playerUnit.Hud.SetExpSmooth();
 
             //kiem tra len cap
@@ -402,7 +423,7 @@ public class BattleSystem : MonoBehaviour
             {
                 playerUnit.Hud.SetLevel();
                 yield return dialogBox
-                    .TypeDialog($"{playerUnit.pokemon.Base.Name} grew to level {playerUnit.pokemon.Level}");
+                    .TypeDialog($"{playerUnit.pokemon.Base.Name} lên c?p {playerUnit.pokemon.Level}");
                 
                 //Hoc chieu moi
                 var newMove = playerUnit.pokemon.GetLearnableMoveAtCurrentLevel();
@@ -412,15 +433,15 @@ public class BattleSystem : MonoBehaviour
                     {
                         //Hoc chieu moi
                         playerUnit.pokemon.LearnMove(newMove);
-                        yield return dialogBox.TypeDialog($"{playerUnit.pokemon.Base.Name} learned {newMove.Base.Name}");
+                        yield return dialogBox.TypeDialog($"{playerUnit.pokemon.Base.Name} h?c ???c {newMove.Base.Name}");
                         dialogBox.setMoveNames(playerUnit.pokemon.Moves); 
 
                     }
                     else
                     {
                         // lang quen chieu 
-                        yield return dialogBox.TypeDialog($"{playerUnit.pokemon.Base.Name} trying to learn {newMove.Base.Name}");
-                        yield return dialogBox.TypeDialog($"But it cannot learn more than {PokemonBase.MaxNumOfMoves} moves");
+                        yield return dialogBox.TypeDialog($"{playerUnit.pokemon.Base.Name} ?ang h?c chiêu th?c {newMove.Base.Name}");
+                        yield return dialogBox.TypeDialog($"nh?ng không th? h?c ???c nhi?u h?n {PokemonBase.MaxNumOfMoves} chiêu th?c");
                         
                         yield return ChooseMoveToForget(playerUnit.pokemon, newMove.Base);
 
@@ -446,7 +467,7 @@ public class BattleSystem : MonoBehaviour
     IEnumerator ChooseMoveToForget(Pokemon pokemon, MoveBase newMove)
     {
         state = BattleState.Busy;
-        yield return dialogBox.TypeDialog($"Choose a move you want to forget");
+        yield return dialogBox.TypeDialog($"Ch?n m?t k? n?ng b?n mu?n lãng quên");
         moveSelectionUI.gameObject.SetActive(true);
         moveSelectionUI.SetMoveData(pokemon.Moves.Select(p=>p.Base).ToList(), newMove);
         moveToLearn = newMove;
@@ -459,13 +480,13 @@ public class BattleSystem : MonoBehaviour
         if (!canRunMove)
         {
             yield return ShowStatusChanges(sourceUnit.pokemon);
-            yield return sourceUnit.Hud.UpdateHP();
+            yield return sourceUnit.Hud.WaitForHPUpdate();
             yield break;
         }
 
         move.PP--;
 
-        yield return dialogBox.TypeDialog($"{sourceUnit.pokemon.Base.Name} used {move.Base.Name}");
+        yield return dialogBox.TypeDialog($"{sourceUnit.pokemon.Base.Name} ?ã s? d?ng {move.Base.Name}");
 
         if (CheckIfMoveHits(move, sourceUnit.pokemon, targetUnit.pokemon))
         {
@@ -484,7 +505,7 @@ public class BattleSystem : MonoBehaviour
 
                 yield return ShowDmg(targetUnit.transform.position + new Vector3(0, 1, 0)
                     , targetUnit.pokemon.dmgTake, targetUnit.pokemon.isCritical);
-                yield return targetUnit.Hud.UpdateHP();
+                yield return targetUnit.Hud.WaitForHPUpdate();
                 yield return ShowDamageDetails(damageDetails);
             }
 
@@ -505,7 +526,7 @@ public class BattleSystem : MonoBehaviour
         }
         else
         {
-            yield return dialogBox.TypeDialog($"{sourceUnit.pokemon.Base.Name}'s attack missed");
+            yield return dialogBox.TypeDialog($"{sourceUnit.pokemon.Base.Name} t?n công h?t");
         }
 
 
@@ -522,7 +543,7 @@ public class BattleSystem : MonoBehaviour
         //Status
         sourceUnit.pokemon.OnAfterTurn();
         yield return ShowStatusChanges(sourceUnit.pokemon);
-        yield return sourceUnit.Hud.UpdateHP();
+        yield return sourceUnit.Hud.WaitForHPUpdate();
         if (sourceUnit.pokemon.HP <= 0)
         {
             yield return HandlePokemonFainted(sourceUnit);
@@ -756,7 +777,7 @@ public class BattleSystem : MonoBehaviour
         if (playerUnit.pokemon.HP > 0)
         {
 
-            yield return dialogBox.TypeDialog($"Come back {playerUnit.pokemon.Base.name}");
+            yield return dialogBox.TypeDialog($"Tr? l?i ?i {playerUnit.pokemon.Base.name}");
             playerUnit.PlayerFaintAnimation();
             yield return new WaitForSeconds(1f);
         }
@@ -764,7 +785,7 @@ public class BattleSystem : MonoBehaviour
         playerUnit.setUp(newPokemon);
         dialogBox.setMoveNames(newPokemon.Moves);
 
-        yield return dialogBox.TypeDialog($"Go {newPokemon.Base.Name}!");
+        yield return dialogBox.TypeDialog($"Ti?n lên {newPokemon.Base.Name}!");
 
         if (isTrainerAboutToUse)
         {
@@ -783,7 +804,7 @@ public class BattleSystem : MonoBehaviour
         state = BattleState.Busy;
 
         enemyUnit.setUp(nextPokemon);
-        yield return dialogBox.TypeDialog($"{trainer.Name} send out {nextPokemon.Base.Name}");
+        yield return dialogBox.TypeDialog($"{trainer.Name} s? d?ng {nextPokemon.Base.Name}");
 
         state = BattleState.RunningTurn;
     }
@@ -813,13 +834,13 @@ public class BattleSystem : MonoBehaviour
 
         if (isTrainerBattle)
         {
-            yield return dialogBox.TypeDialog($"{player.Name} you can't catch the trainer Pokemon!");
+            yield return dialogBox.TypeDialog($"{player.Name} b?n không th? b?t pokemon c?a ng??i khác!");
             state = BattleState.RunningTurn;
             yield break;
         }
         
 
-        yield return dialogBox.TypeDialog($"{player.Name} used POKEBALL!!!");
+        yield return dialogBox.TypeDialog($"{player.Name} ?ã s? d?ng POKEBALL!!!");
 
         var pokeballObj = Instantiate(pokeballSprite,playerUnit.transform.position - new Vector3(2,0),Quaternion.identity);
 
@@ -845,11 +866,11 @@ public class BattleSystem : MonoBehaviour
         if(shakeCount == 4)
         {
             // bat duoc pokemon
-            yield return dialogBox.TypeDialog($"{enemyUnit.pokemon.Base.name} was caught");
+            yield return dialogBox.TypeDialog($"{enemyUnit.pokemon.Base.name} ?ã b? b?t");
             yield return pokeball.DOFade(0, 1.5f).WaitForCompletion();
 
             playerParty.AddPokemon(enemyUnit.pokemon);
-            yield return dialogBox.TypeDialog($"{enemyUnit.pokemon.Base.name} has been added your party");
+            yield return dialogBox.TypeDialog($"{enemyUnit.pokemon.Base.name} ?ã thêm vào t? ??i c?a b?n");
             Destroy(pokeball);
             BattleOver(true);
 
@@ -862,11 +883,11 @@ public class BattleSystem : MonoBehaviour
             yield return enemyUnit.PlayBreakOutAnimation();
             if(shakeCount < 2)
             {
-                yield return dialogBox.TypeDialog($"{enemyUnit.pokemon.Base.name} broke free");
+                yield return dialogBox.TypeDialog($"{enemyUnit.pokemon.Base.name} ?ã tr?n thoát");
             }
             else
             {
-                yield return dialogBox.TypeDialog("Almost caught it!");
+                yield return dialogBox.TypeDialog("G?n b?t ???c r?i!");
             }
 
             Destroy(pokeball);
@@ -912,7 +933,7 @@ public class BattleSystem : MonoBehaviour
         state = BattleState.Busy;
         if (isTrainerBattle)
         {
-            yield return dialogBox.TypeDialog($"You can't run from trainer battle!");
+            yield return dialogBox.TypeDialog($"B?n không th? ch?y tr?n kh?i tr?n chi?n v?i nhà hu?n luy?n!");
             state = BattleState.RunningTurn;
             yield break;
         }
@@ -924,7 +945,7 @@ public class BattleSystem : MonoBehaviour
 
         if (playerSpeed > enemySpeed)
         {
-            yield return dialogBox.TypeDialog($"Ran away safely!");
+            yield return dialogBox.TypeDialog($"Ch?y tr?n an toàn!");
             BattleOver(true);
         }
         else
@@ -933,12 +954,12 @@ public class BattleSystem : MonoBehaviour
             f = f % 256;
             if(UnityEngine.Random.Range(0, 256) < f)
             {
-                yield return dialogBox.TypeDialog($"Ran away safely!");
+                yield return dialogBox.TypeDialog($"Ch?y tr?n an toàn!");
                 BattleOver(true);
             }
             else
             {
-                yield return dialogBox.TypeDialog($"Ran away failed!");
+                yield return dialogBox.TypeDialog($"Ch?y tr?n th?t b?i!");
                 state = BattleState.RunningTurn;
             }
         }

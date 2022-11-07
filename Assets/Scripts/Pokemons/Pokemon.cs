@@ -48,7 +48,7 @@ public class Pokemon
     public Conditions VolatileStatus { get; private set; }
     public int VolatileStatusTime { get; set; }
     public Queue<string> StatusChanges { get; private set; } 
-    public bool HpChanged { get; set; }
+    
 
     public event System.Action OnStatusChanged;
     public event System.Action OnHpChanged;
@@ -176,11 +176,11 @@ public class Pokemon
             
             if(boost > 0)
             {
-                StatusChanges.Enqueue($"{Base.Name}'s {stat} rose!");
+                StatusChanges.Enqueue($"Pokemon {Base.Name} t?ng {stat} !");
             }
             else
             {
-                StatusChanges.Enqueue($"{Base.Name}'s {stat} fell!");
+                StatusChanges.Enqueue($"Pokemon {Base.Name} gi?m {stat} !");
             }
 
         }
@@ -324,7 +324,7 @@ public class Pokemon
     {
         HP = Mathf.Clamp(HP - damage, 0, MaxHP);
         OnHpChanged?.Invoke();
-        HpChanged = true;
+        
 
     }
 
@@ -332,7 +332,7 @@ public class Pokemon
     {
         HP = Mathf.Clamp(HP + amount, 0, MaxHP);
         OnHpChanged?.Invoke();
-        HpChanged = true;
+        
 
     }
 

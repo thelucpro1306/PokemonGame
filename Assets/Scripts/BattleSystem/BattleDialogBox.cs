@@ -15,10 +15,6 @@ public class BattleDialogBox : MonoBehaviour
     [SerializeField] List<Text> moveTexts;
     [SerializeField] GameObject choiceBox ;
 
-
-
-    
-
     [SerializeField] Text PPTexts;
     [SerializeField] Text typeTexts;
 

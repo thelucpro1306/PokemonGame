@@ -18,6 +18,7 @@ public class InventoryUI : MonoBehaviour
     int selectedItem = 0;
     const int itemInViewport = 8;
 
+    Action onItemUsed;
 
     List<ItemSlotUI> slotUIList;
     RectTransform itemListRec;
@@ -65,10 +66,11 @@ public class InventoryUI : MonoBehaviour
         UpdateItemSelection();
     }
 
-    public void HandleUpdate(Action onBack)
+    public void HandleUpdate(Action onBack, Action onItemUsed = null)
     {
+        this.onItemUsed = onItemUsed;   
 
-        if(state == InventoryUIState.ItemSelection)
+        if (state == InventoryUIState.ItemSelection)
         {
             int prevSelection = selectedItem;
 
@@ -105,7 +107,7 @@ public class InventoryUI : MonoBehaviour
         {
             if(state == InventoryUIState.PartySelection)
             {
-                // party
+                // party 
 
                 Action onSelected = () =>
                 {
@@ -169,7 +171,8 @@ public class InventoryUI : MonoBehaviour
         var useItem = inventory.UseItem(selectedItem,partyScreen.SelectedMember);
         if (useItem != null)
         {
-            yield return DialogManager.Instance.ShowDialogText($"Bạn bị ồn {useItem.Name}");
+            yield return DialogManager.Instance.ShowDialogText($"Bạn đã dùng vật phẩm là {useItem.Name}");
+            onItemUsed?.Invoke();
         }
         else
         {

@@ -23,6 +23,12 @@ public class BattleHud : MonoBehaviour
     Dictionary<ConditionID, Color> statusColors;
     public void SetData(Pokemon pokemon)
     {
+        if(_pokemon != null)
+        {
+            _pokemon.OnHpChanged -= UpdateHP;
+            _pokemon.OnStatusChanged -= SetStatusText;
+        }
+
         _pokemon = pokemon;
         nameText.text = pokemon.Base.Name;
         SetLevel();
@@ -40,6 +46,7 @@ public class BattleHud : MonoBehaviour
 
         SetStatusText();
         _pokemon.OnStatusChanged += SetStatusText;
+        _pokemon.OnHpChanged += UpdateHP;
     }
 
     void SetStatusText()
@@ -95,13 +102,22 @@ public class BattleHud : MonoBehaviour
         return Mathf.Clamp01(normalizedExp);
     }
 
-    public IEnumerator UpdateHP()
+    public void UpdateHP()
     {
-        if (_pokemon.HpChanged)
-        {
-            yield return hpbar.SetHPSmooth((float)_pokemon.HP / _pokemon.MaxHP);
-            _pokemon.HpChanged = false;
-        }
+        StartCoroutine(UpdateHPAsync());
+    }
+
+    public IEnumerator WaitForHPUpdate()
+    {
+        yield return new WaitUntil(() => hpbar.isUpdating == false);
+    }
+
+
+    public IEnumerator UpdateHPAsync()
+    {
+        
+        yield return hpbar.SetHPSmooth((float)_pokemon.HP / _pokemon.MaxHP);
+            
     }
 
 }
