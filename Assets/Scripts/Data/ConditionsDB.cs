@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,12 +21,12 @@ public class ConditionsDB
             ConditionID.psn,
             new Conditions()
             {
-                Name = "Poison",
-                StartMessage = "has been poisoned",
+                Name = "Độc",
+                StartMessage = "đã bị dính độc",
                 OnAfterTurn = (Pokemon pokemon) =>
                 {
                     pokemon.DecreaseHP(pokemon.MaxHP / 8);
-                    pokemon.StatusChanges.Enqueue($"{pokemon.Base.Name} hurt itself due to poison");
+                    pokemon.StatusChanges.Enqueue($"{pokemon.Base.Name} tự làm đau mình bởi vì độc");
                 }
             }
         },
@@ -34,12 +34,12 @@ public class ConditionsDB
             ConditionID.brn,
             new Conditions()
             {
-                Name = "Burn",
-                StartMessage = "has been burned",
+                Name = "Bỏng",
+                StartMessage = "đã bị bỏng",
                 OnAfterTurn = (Pokemon pokemon) =>
                 {
                     pokemon.DecreaseHP(pokemon.MaxHP / 16);
-                    pokemon.StatusChanges.Enqueue($"{pokemon.Base.Name} hurt itself due to burn");
+                    pokemon.StatusChanges.Enqueue($"{pokemon.Base.Name} tự làm đau mình bởi vì bỏng");
                 }
             }
         },
@@ -47,13 +47,13 @@ public class ConditionsDB
             ConditionID.par,
             new Conditions()
             {
-                Name = "Paralyze",
-                StartMessage = "has been paralyzed",
+                Name = "Tê liệt",
+                StartMessage = "bị tê liệt",
                 OnBeforeMove = (Pokemon pokemon) =>
                 {
                     if(Random.Range(1, 5) == 1)
                     {
-                        pokemon.StatusChanges.Enqueue($"{pokemon.Base.Name}'s paralyzed and can't move");
+                        pokemon.StatusChanges.Enqueue($"{pokemon.Base.Name} đã bị tê liệt và không thể cử động");
                         return false;
                     }
 
@@ -65,14 +65,14 @@ public class ConditionsDB
             ConditionID.frz,
             new Conditions()
             {
-                Name = "Freeze",
-                StartMessage = "has been frozen",
+                Name = "Đóng băng",
+                StartMessage = "bị đóng băng",
                 OnBeforeMove = (Pokemon pokemon) =>
                 {
                     if(Random.Range(1, 5) == 1)
                     {
                         pokemon.CureStatus();
-                        pokemon.StatusChanges.Enqueue($"{pokemon.Base.Name} is not frozen anymore");
+                        pokemon.StatusChanges.Enqueue($"{pokemon.Base.Name} không còn bị đóng băng nữa");
                         return true;
                     }
 
@@ -84,25 +84,25 @@ public class ConditionsDB
             ConditionID.slp,
             new Conditions()
             {
-                Name = "Sleep",
-                StartMessage = "has been sleep",
+                Name = "Ngủ",
+                StartMessage = "bị hôn mê",
                 OnStart = (Pokemon pokemon) =>
                 {
                     //Sleep 1-3 turns
                     pokemon.StatusTime = Random.Range(1,4);
-                    Debug.Log($"Will be asleep for {pokemon.StatusTime} move");
+                    Debug.Log($"Sẽ ngủ trong {pokemon.StatusTime} lượt");
                 },
                 OnBeforeMove = (Pokemon pokemon) =>
                 {
                     if(pokemon.StatusTime <= 0)
                     {
                         pokemon.CureStatus();
-                        pokemon.StatusChanges.Enqueue($"{pokemon.Base.Name} woke up");
+                        pokemon.StatusChanges.Enqueue($"{pokemon.Base.Name} đã tỉnh dậy");
                         return true;
                     }
 
                     pokemon.StatusTime--;
-                    pokemon.StatusChanges.Enqueue($"{pokemon.Base.Name} is sleeping");
+                    pokemon.StatusChanges.Enqueue($"{pokemon.Base.Name} đang ngủ");
                     return false;
                 }
             }
@@ -113,20 +113,20 @@ public class ConditionsDB
             ConditionID.confusion,
             new Conditions()
             {
-                Name = "Confusion",
-                StartMessage = "has been confused",
+                Name = "Hoang mang",
+                StartMessage = "đang hoang mang",
                 OnStart = (Pokemon pokemon) =>
                 {
                     //Confused 1-4 turns
                     pokemon.VolatileStatusTime = Random.Range(1,5);
-                    Debug.Log($"Will be confused for {pokemon.VolatileStatusTime} move");
+                    Debug.Log($"Sẽ bị hoang mang trong {pokemon.VolatileStatusTime} lượt");
                 },
                 OnBeforeMove = (Pokemon pokemon) =>
                 {
                     if(pokemon.VolatileStatusTime <= 0)
                     {
                         pokemon.CureVolatileStatus();
-                        pokemon.StatusChanges.Enqueue($"{pokemon.Base.Name} woke up");
+                        pokemon.StatusChanges.Enqueue($"{pokemon.Base.Name} tỉnh dậy");
                         return true;
                     }
 
@@ -135,9 +135,9 @@ public class ConditionsDB
                     //50% chance to do a move
                     if(Random.Range(1, 3) == 1)
                         return true;
-                    pokemon.StatusChanges.Enqueue($"{pokemon.Base.Name} is confused");
+                    pokemon.StatusChanges.Enqueue($"{pokemon.Base.Name} đang hoang mang!");
                     pokemon.DecreaseHP(pokemon.MaxHP / 8);
-                    pokemon.StatusChanges.Enqueue($"It hurt itself due to confusion");
+                    pokemon.StatusChanges.Enqueue($"Tự làm đau mình bởi hoang tưởng");
                     return false;
                 }
             }

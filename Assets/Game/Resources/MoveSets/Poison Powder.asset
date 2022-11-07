@@ -12,14 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78baa30db7eba0648a4d7e97e576c29b, type: 3}
   m_Name: Poison Powder
   m_EditorClassIdentifier: 
-  name: Posion Powder
+  name: "Ph\u1EA5n \u0111\u1ED9c"
   decsription: 
   type: 8
   power: 0
   accuracy: 100
+  alwaysHits: 0
   pp: 20
+  priority: 0
   category: 2
   effects:
     boosts: []
     status: 1
+    volatileStatus: 0
+  secondaries: []
   target: 0

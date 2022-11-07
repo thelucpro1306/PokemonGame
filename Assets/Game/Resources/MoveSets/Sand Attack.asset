@@ -12,13 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78baa30db7eba0648a4d7e97e576c29b, type: 3}
   m_Name: Sand Attack
   m_EditorClassIdentifier: 
-  name: Sand Attack
+  name: "C\xE1t c\xE0n qu\xE9t"
   decsription: 
   type: 1
   power: 0
   accuracy: 100
   alwaysHits: 0
   pp: 30
+  priority: 0
   category: 2
   effects:
     boosts:

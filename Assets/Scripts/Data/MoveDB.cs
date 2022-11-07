@@ -19,7 +19,7 @@ public class MoveDB
         {
             if (moves.ContainsKey(move.Name))
             {
-                Debug.LogError($"There two move with same name  {move.Name}");
+                Debug.LogError($"Có 2 chiêu cùng tên  {move.Name}");
                 continue;
             }
 
@@ -31,7 +31,7 @@ public class MoveDB
     {
         if (!moves.ContainsKey(name))
         {
-            Debug.LogError($"Pokemon with name {name} dosen't contain in DB");
+            Debug.LogError($"Pokémon {name} dosen't contain in DB");
         }
         return moves[name];
     }

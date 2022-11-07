@@ -12,14 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78baa30db7eba0648a4d7e97e576c29b, type: 3}
   m_Name: Thunder Wave
   m_EditorClassIdentifier: 
-  name: Thunder Wave
+  name: "S\xF3ng \u0111i\u1EC7n"
   decsription: 
   type: 4
   power: 0
   accuracy: 100
+  alwaysHits: 0
   pp: 20
+  priority: 0
   category: 2
   effects:
     boosts: []
     status: 4
+    volatileStatus: 0
+  secondaries: []
   target: 0

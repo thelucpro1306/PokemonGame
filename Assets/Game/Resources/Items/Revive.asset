@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff9fe08bbf833ac459fb369c3bffa056, type: 3}
   m_Name: Revive
   m_EditorClassIdentifier: 
-  name: Revive
+  name: "H\u1ED3i sinh"
   description: "D\xF9ng \u0111\u1EC3 ch\u1EEFa m\u1ED9t Pokemon \u0111\xE3 ki\u1EC7t
     s\u1EE9c v\xE0 h\u1ED3i l\u1EA1i m\u1ED9t n\u1EEDa m\xE1u"
   icon: {fileID: 21300000, guid: 67a605f107f67234cbebbb19c848132f, type: 3}

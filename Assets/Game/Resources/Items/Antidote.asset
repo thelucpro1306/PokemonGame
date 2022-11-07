@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff9fe08bbf833ac459fb369c3bffa056, type: 3}
   m_Name: Antidote
   m_EditorClassIdentifier: 
-  name: Antidote
+  name: "Thu\u1ED1c gi\u1EA3i \u0111\u1ED9c"
   description: "Gi\u1EA3i tr\u1EA1ng th\xE1i tr\xFAng \u0111\u1ED9c cho Pokemon"
   icon: {fileID: 21300000, guid: 88d8256e3137ee74fa797601561c1bb2, type: 3}
   hpAmount: 0

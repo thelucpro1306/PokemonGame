@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -54,7 +54,7 @@ public class PartyScreen : MonoBehaviour
         }
 
         UpdateMemberSelection(selection);
-        messageText.text = "Choose a Pokemons";
+        messageText.text = "Hãy chọn Pokémon!";
     }
 
     public void UpdateMemberSelection(int selectedMember)

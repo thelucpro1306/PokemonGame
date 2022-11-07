@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff9fe08bbf833ac459fb369c3bffa056, type: 3}
   m_Name: Awakening
   m_EditorClassIdentifier: 
-  name: Awakening
+  name: "Th\u1EE9c t\u1EC9nh"
   description: "\u0110\xE1nh th\u1EE9c Pokemon t\u1EEB tr\u1EA1ng th\xE1i Ng\u1EE7"
   icon: {fileID: 21300000, guid: a04ad89b2a9629d40b365873dc679353, type: 3}
   hpAmount: 0
