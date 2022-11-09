@@ -156,6 +156,8 @@ public class BattleSystem : MonoBehaviour
     {
         state = BattleState.BattleOver;
         playerParty.Pokemons.ForEach(p => p.OnBattleOver());
+        playerUnit.Hud.ClearData();
+        enemyUnit.Hud.ClearData();
         OnBattleOver(won);
     }
 
@@ -927,29 +929,11 @@ public class BattleSystem : MonoBehaviour
 
         if (isTrainerBattle)
         {
- 
-
- 
- 
             yield return dialogBox.TypeDialog($"{player.Name} Bạn không thể bắt Pokémon của trainer khác !");
- 
- 
- 
             state = BattleState.RunningTurn;
             yield break;
         }
-        
-
- 
-
- 
- 
         yield return dialogBox.TypeDialog($"{player.Name} sử dụng POKEBALL!!!");
- 
-
- 
- 
-
         var pokeballObj = Instantiate(pokeballSprite,playerUnit.transform.position - new Vector3(2,0),Quaternion.identity);
 
         var pokeball = pokeballObj.GetComponent<SpriteRenderer>();
@@ -1044,13 +1028,7 @@ public class BattleSystem : MonoBehaviour
         state = BattleState.Busy;
         if (isTrainerBattle)
         {
- 
-
-
-            yield return dialogBox.TypeDialog($"Mày không thoát được đâu con trai !!");
-
-
-
+            yield return dialogBox.TypeDialog($"Bạn không thể chạy khỏi trận chiến này !!");
             state = BattleState.RunningTurn;
             yield break;
         }
@@ -1062,14 +1040,7 @@ public class BattleSystem : MonoBehaviour
 
         if (playerSpeed > enemySpeed)
         {
-
- 
- 
             yield return dialogBox.TypeDialog($"Chạy thoát thành công!");
- 
-
- 
- 
             BattleOver(true);
         }
         else
@@ -1078,24 +1049,12 @@ public class BattleSystem : MonoBehaviour
             f = f % 256;
             if(UnityEngine.Random.Range(0, 256) < f)
             {
- 
-
- 
- 
                 yield return dialogBox.TypeDialog($"Chạy thoát thành công!");
- 
- 
                 BattleOver(true);
             }
             else
             {
-
-
-
                 yield return dialogBox.TypeDialog($"Chạy thoát thất bại!");
-
-
-
                 state = BattleState.RunningTurn;
             }
         }

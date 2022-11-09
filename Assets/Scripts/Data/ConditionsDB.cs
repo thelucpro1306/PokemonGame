@@ -110,7 +110,7 @@ public class ConditionsDB
 
         //Volatile Status Conditions
         {
-            ConditionID.confusion,
+            ConditionID.cfn,
             new Conditions()
             {
                 Name = "Hoang mang",
@@ -172,6 +172,5 @@ public class ConditionsDB
 
 public enum ConditionID
 {
-   none, psn, brn, slp, par, frz,
-   confusion
+   none, psn, brn, slp, par, frz,cfn
 }

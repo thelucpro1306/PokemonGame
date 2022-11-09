@@ -253,11 +253,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pokemons:
   - _base: {fileID: 11400000, guid: 26cd4c186ae76bb4980e77a32c042c08, type: 2}
-    level: 10
+    level: 6
     dmgTake: 0
     isCritical: 0
   - _base: {fileID: 11400000, guid: 2e732baff0b49e7489e3992475fc0e4e, type: 2}
-    level: 10
+    level: 3
     dmgTake: 0
     isCritical: 0
 --- !u!114 &8272517393904280896
@@ -348,3 +348,9 @@ MonoBehaviour:
     count: 6
   - item: {fileID: 11400000, guid: 1d42a039037ce334783aa9967ef24924, type: 2}
     count: 5
+  pokeballSlots:
+  - item: {fileID: 11400000, guid: 98ded87a555e3664fa73b94f9dc48ba7, type: 2}
+    count: 5
+  - item: {fileID: 11400000, guid: 9caf49dce136f4d42a0590c691e6a8b1, type: 2}
+    count: 3
+  tmSlots: []

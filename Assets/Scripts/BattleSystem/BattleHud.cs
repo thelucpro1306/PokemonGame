@@ -18,6 +18,7 @@ public class BattleHud : MonoBehaviour
     [SerializeField] Color slpColor;
     [SerializeField] Color parColor;
     [SerializeField] Color frzColor;
+    [SerializeField] Color cfnColor;
 
     Pokemon _pokemon;
     Dictionary<ConditionID, Color> statusColors;
@@ -42,6 +43,7 @@ public class BattleHud : MonoBehaviour
             {ConditionID.slp, slpColor },
             {ConditionID.par, parColor },
             {ConditionID.frz, frzColor },
+            {ConditionID.cfn, cfnColor },
         };
 
         SetStatusText();
@@ -112,12 +114,20 @@ public class BattleHud : MonoBehaviour
         yield return new WaitUntil(() => hpbar.isUpdating == false);
     }
 
-
     public IEnumerator UpdateHPAsync()
     {
         
         yield return hpbar.SetHPSmooth((float)_pokemon.HP / _pokemon.MaxHP);
             
+    }
+
+    public void ClearData()
+    {
+        if (_pokemon != null)
+        {
+            _pokemon.OnHpChanged -= UpdateHP;
+            _pokemon.OnStatusChanged -= SetStatusText;
+        }
     }
 
 }

@@ -24,12 +24,17 @@ public class PokemonParty : MonoBehaviour
         }
     }
 
-    private void Start()
+    private void Awake()
     {
         foreach (var pokemon in pokemons)
         {
             pokemon.Init();
-        } 
+        }
+    }
+
+    private void Start()
+    {
+
     }
 
     public Pokemon GetHealthyPokemon()
@@ -39,7 +44,7 @@ public class PokemonParty : MonoBehaviour
 
     public void AddPokemon(Pokemon newPokemon)
     {
-        if(pokemons.Count < 6)
+        if (pokemons.Count < 6)
         {
             pokemons.Add(newPokemon);
             onUpdated?.Invoke();

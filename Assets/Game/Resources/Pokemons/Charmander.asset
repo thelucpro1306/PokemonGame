@@ -20,7 +20,7 @@ MonoBehaviour:
   type1: 1
   type2: 2
   maxHp: 39
-  attack: 200
+  attack: 45
   defense: 43
   spAttack: 60
   spDefense: 50
@@ -33,5 +33,7 @@ MonoBehaviour:
     level: 1
   - moveBase: {fileID: 11400000, guid: fbd0980856dd5f745908604990195519, type: 2}
     level: 1
+  - moveBase: {fileID: 11400000, guid: d9e6f9358b3fc9a40951a232ee12eac5, type: 2}
+    level: 5
   - moveBase: {fileID: 11400000, guid: 5e69e93ed9f649b41926daafee0f3fda, type: 2}
     level: 13

@@ -24,10 +24,12 @@ public class PartyMemberUI : MonoBehaviour
     {
         nameText.text = _pokemon.Base.Name;
         levelText.text = "Lvl" + " " + _pokemon.Level;
-        if(_pokemon.MaxHP > 0)
-        {
-            hpbar.setHp((float)_pokemon.HP / _pokemon.MaxHP);
-        }
+
+        //if(_pokemon.MaxHP > 0)
+        //{
+        //    hpbar.setHp((float)_pokemon.HP / _pokemon.MaxHP);
+        //}
+        hpbar.setHp((float)_pokemon.HP / _pokemon.MaxHP);
     }
 
 

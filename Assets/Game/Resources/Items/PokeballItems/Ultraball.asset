@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0ec4a6ed19d0354b9c91a6d2d02a61e, type: 3}
+  m_Name: Ultraball
+  m_EditorClassIdentifier: 
+  name: Ultraball
+  description: "D\xF9ng \u0111\u1EC3 b\u1EAFt Pokemon, c\xF3 t\u1EC9 l\u1EC7 b\u1EAFt
+    \u0111\u01B0\u1EE3c cao h\u01A1n pokeball v\xE0 greatball"
+  icon: {fileID: 1111843775, guid: e015869b972ef4645badc5dad09b1192, type: 3}
