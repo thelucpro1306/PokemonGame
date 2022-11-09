@@ -16,4 +16,4 @@ MonoBehaviour:
   description: "D\xF9ng \u0111\u1EC3 b\u1EAFt Pokemon, c\xF3 t\u1EC9 l\u1EC7 b\u1EAFt
     \u0111\u01B0\u1EE3c cao h\u01A1n pokeball v\xE0 greatball"
   icon: {fileID: 21300000, guid: c5b4b3077480bb0478a582413d8f72ee, type: 3}
-  catchRateModfier: 1
+  catchRateModfier: 2

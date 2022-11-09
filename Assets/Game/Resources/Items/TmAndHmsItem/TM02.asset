@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef7914452f0391148afdb6a8d59454ce, type: 3}
+  m_Name: TM02
+  m_EditorClassIdentifier: 
+  name: Tm01
+  description: "D\u1EA1y chi\xEAu H\xE1t cho pokemon"
+  icon: {fileID: 21300000, guid: a794e3ba74b22a646a342ced12c67f32, type: 3}
+  move: {fileID: 11400000, guid: f5b7da23a08b4574592764c198130fd5, type: 2}

@@ -3415,7 +3415,27 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5773746422873037408, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
+      propertyPath: tmSlots.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5773746422873037408, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
       propertyPath: pokeballSlots.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5773746422873037408, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
+      propertyPath: tmSlots.Array.data[0].item
+      value: 
+      objectReference: {fileID: 11400000, guid: 5887fab0b8768a745b1c86a8ef48b788, type: 2}
+    - target: {fileID: 5773746422873037408, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
+      propertyPath: tmSlots.Array.data[1].item
+      value: 
+      objectReference: {fileID: 11400000, guid: 9735e7bdad3e4454fa813870d5b79e82, type: 2}
+    - target: {fileID: 5773746422873037408, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
+      propertyPath: tmSlots.Array.data[0].count
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5773746422873037408, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
+      propertyPath: tmSlots.Array.data[1].count
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5773746422873037408, guid: d83c2882aab115c47924be47e7bd5247, type: 3}

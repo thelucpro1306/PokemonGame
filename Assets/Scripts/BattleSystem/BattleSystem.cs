@@ -241,9 +241,6 @@ public class BattleSystem : MonoBehaviour
 
                                 Action<int> onMoveSelected = (moveIndex) =>
                                 {
-
-
-
                                     moveSelectionUI.gameObject.SetActive(false);
                                     if (moveIndex == PokemonBase.MaxNumOfMoves)
                                     {
@@ -458,15 +455,7 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator HandlePokemonFainted(BattleUnit fanitedUnit)
     {
-
-
-
-
         yield return dialogBox.TypeDialog($"{fanitedUnit.pokemon.Base.Name} đã bị hạ gục !!");
-
-
-
-
         fanitedUnit.PlayerFaintAnimation();
         yield return new WaitForSeconds(2f);
 
@@ -479,14 +468,7 @@ public class BattleSystem : MonoBehaviour
 
             int expGain = Mathf.FloorToInt((expYield * enemyLevel * trainerBonus) / 7);
             playerUnit.pokemon.Exp += expGain;
-
-
-
             yield return dialogBox.TypeDialog($"{playerUnit.pokemon.Base.Name} đã nhận được {expGain} kinh nghiệm.");
-
-
-
-
             yield return playerUnit.Hud.SetExpSmooth();
 
             //kiem tra len cap
@@ -502,31 +484,15 @@ public class BattleSystem : MonoBehaviour
                     if (playerUnit.pokemon.Moves.Count < PokemonBase.MaxNumOfMoves)
                     {
                         //Hoc chieu moi
-                        playerUnit.pokemon.LearnMove(newMove);
-
-
-
-
+                        playerUnit.pokemon.LearnMove(newMove.Base);
                         yield return dialogBox.TypeDialog($"{playerUnit.pokemon.Base.Name} đã học {newMove.Base.Name}");
-
-
-
-
                         dialogBox.setMoveNames(playerUnit.pokemon.Moves);
-
                     }
                     else
                     {
                         // lang quen chieu 
-
-
-
                         yield return dialogBox.TypeDialog($"{playerUnit.pokemon.Base.Name} đang cố gắng học {newMove.Base.Name}");
                         yield return dialogBox.TypeDialog($"Nhưng Pokémon này không thể học quá {PokemonBase.MaxNumOfMoves} chiêu");
-
-
-
-
 
                         yield return ChooseMoveToForget(playerUnit.pokemon, newMove.Base);
 
@@ -535,8 +501,6 @@ public class BattleSystem : MonoBehaviour
 
                     }
                 }
-
-
                 yield return playerUnit.Hud.SetExpSmooth(true);
             }
         }
@@ -544,23 +508,13 @@ public class BattleSystem : MonoBehaviour
         {
 
         }
-
-
         CheckForBattleOver(fanitedUnit);
     }
 
     IEnumerator ChooseMoveToForget(Pokemon pokemon, MoveBase newMove)
     {
         state = BattleState.Busy;
-
-
-
-
         yield return dialogBox.TypeDialog($"Chọn một chiêu để bỏ ra:");
-
-
-
-
         moveSelectionUI.gameObject.SetActive(true);
         moveSelectionUI.SetMoveData(pokemon.Moves.Select(p => p.Base).ToList(), newMove);
         moveToLearn = newMove;

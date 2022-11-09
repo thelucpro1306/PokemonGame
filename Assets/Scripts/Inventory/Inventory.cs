@@ -21,8 +21,6 @@ public class Inventory : MonoBehaviour
         "TMs & HMs"
     };
 
-
-
     public event Action onUpdated;
 
     private void Awake()
@@ -43,10 +41,16 @@ public class Inventory : MonoBehaviour
         return FindObjectOfType<PlayerMove>().GetComponent<Inventory>();
     }
 
-    public ItemBase UseItem(int itemIdex, Pokemon selectedPokemon, int selectedCategory)
+    public ItemBase GetItem(int itemIndex, int categoryIndex)
     {
-        var currentSlot =  GetSlotByCategory(selectedCategory);
-        var item = currentSlot[itemIdex].Item;
+        var currentSlot = GetSlotByCategory(categoryIndex);
+        return currentSlot[itemIndex].Item;
+    }
+
+    public ItemBase UseItem(int itemIndex, Pokemon selectedPokemon, int selectedCategory)
+    {
+
+        var item = GetItem(itemIndex, selectedCategory);
         bool itemUsed = item.Use(selectedPokemon);
         if (itemUsed)
         {

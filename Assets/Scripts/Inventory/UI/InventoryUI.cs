@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
 
-public enum InventoryUIState { ItemSelection, PartySelection, Busy }
+public enum InventoryUIState { ItemSelection, PartySelection, MoveToForget, Busy }
 
 public class InventoryUI : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class InventoryUI : MonoBehaviour
     int selectedItem = 0;
     int selectedCategory = 0;
     const int itemInViewport = 4;
+    MoveBase moveToLearn;
 
     Action<ItemBase> onItemUsed;
 
@@ -31,6 +33,7 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] Image downArrow;
 
     [SerializeField] PartyScreen partyScreen;
+    [SerializeField] MoveSelectionUI moveSelectionUI;
 
     InventoryUIState state;
 
@@ -107,13 +110,13 @@ public class InventoryUI : MonoBehaviour
                 }
             }
 
-            if(selectedCategory > Inventory.ItemCategorys.Count - 1)
+            if (selectedCategory > Inventory.ItemCategorys.Count - 1)
             {
                 selectedCategory = 0;
             }
             else
             {
-                if(selectedCategory < 0)
+                if (selectedCategory < 0)
                 {
                     selectedCategory = Inventory.ItemCategorys.Count - 1;
                 }
@@ -167,6 +170,19 @@ public class InventoryUI : MonoBehaviour
 
                 partyScreen.HandleUpdate(onSelected, onBackPartyScreen);
             }
+            else
+            {
+                if (state == InventoryUIState.MoveToForget)
+                {
+
+                    Action<int> onMoveSelected = (int moveIndex) =>
+                    {
+                        StartCoroutine(OnMoveToForgetSelected(moveIndex));
+                    };
+
+                    moveSelectionUI.HandleMoveSelection(onMoveSelected);
+                }
+            }
         }
     }
     void UpdateItemSelection()
@@ -184,7 +200,8 @@ public class InventoryUI : MonoBehaviour
             }
         }
 
-        
+
+
 
         if (inventory.GetSlotByCategory(selectedCategory).Count > 0)
         {
@@ -200,7 +217,7 @@ public class InventoryUI : MonoBehaviour
 
     void ItemSelected()
     {
-        if(selectedCategory == (int) ItemCategory.Pokeballs)
+        if (selectedCategory == (int)ItemCategory.Pokeballs)
         {
             StartCoroutine(UseItem());
         }
@@ -242,13 +259,51 @@ public class InventoryUI : MonoBehaviour
 
     }
 
+    IEnumerator HandleTmItems()
+    {
+        var tmItem = inventory.GetItem(selectedItem, selectedCategory) as TmItem;
+        if (tmItem == null)
+        {
+            yield break;
+        }
+        var pokemon = partyScreen.SelectedMember;
+
+        if (pokemon.Moves.Count < PokemonBase.MaxNumOfMoves)
+        {
+            pokemon.LearnMove(tmItem.Move);
+            yield return DialogManager.Instance.ShowDialogText($"{pokemon.Base.Name} đã học chiêu {tmItem.Move.Name}!");
+        }
+        else
+        {
+            yield return DialogManager.Instance.ShowDialogText($"{pokemon.Base.Name} đang cố gắng học chiêu {tmItem.Move.Name}!");
+            yield return DialogManager.Instance.ShowDialogText($"Nhưng không thể học nhiều hơn {PokemonBase.MaxNumOfMoves} chiêu!");
+            yield return ChooseMoveToForget(pokemon, tmItem.Move);
+            yield return new WaitUntil(() => state != InventoryUIState.MoveToForget);
+            yield return new WaitForSeconds(0.5f);
+        }
+    }
+
+    IEnumerator ChooseMoveToForget(Pokemon pokemon, MoveBase newMove)
+    {
+        state = InventoryUIState.MoveToForget;
+        yield return DialogManager.Instance.ShowDialogText($"Chọn một chiêu để lãng quên:" , true, false);
+        moveSelectionUI.gameObject.SetActive(true);
+        moveSelectionUI.SetMoveData(pokemon.Moves.Select(p => p.Base).ToList(), newMove);
+        moveToLearn = newMove;
+
+        state = InventoryUIState.MoveToForget;
+    }
+
     IEnumerator UseItem()
     {
         state = InventoryUIState.Busy;
+
+        yield return HandleTmItems();
+
         var useItem = inventory.UseItem(selectedItem, partyScreen.SelectedMember, selectedCategory);
         if (useItem != null)
         {
-            if(!(useItem is PokeballItem))
+            if ((useItem is RecoveryItem))
                 yield return DialogManager.Instance.ShowDialogText($"Bạn đã dùng vật phẩm là {useItem.Name}");
             onItemUsed?.Invoke(useItem);
         }
@@ -269,5 +324,31 @@ public class InventoryUI : MonoBehaviour
         state = InventoryUIState.ItemSelection;
         partyScreen.gameObject.SetActive(false);
     }
+
+    IEnumerator OnMoveToForgetSelected(int moveIndex)
+    {
+        var pokemon = partyScreen.SelectedMember;
+
+        DialogManager.Instance.CloseDialog();
+        moveSelectionUI.gameObject.SetActive(false);
+
+        if (moveIndex == PokemonBase.MaxNumOfMoves)
+        {
+            // khong hoc chieu moi
+            yield return DialogManager.Instance.ShowDialogText($"{pokemon.Base.Name} không muốn học chiêu mới !!");
+        }
+        else
+        {
+            //Hoc chieu moi va lang quen chieu cu
+
+            var selectedMove = pokemon.Moves[moveIndex].Base;
+            yield return DialogManager.Instance.ShowDialogText($"{pokemon.Base.Name} đã bỏ {selectedMove.Name} và học {moveToLearn.Name}");
+            pokemon.Moves[moveIndex] = new Move(moveToLearn);
+        }
+
+        moveToLearn = null;
+        state = InventoryUIState.ItemSelection;
+    }
+
 
 }

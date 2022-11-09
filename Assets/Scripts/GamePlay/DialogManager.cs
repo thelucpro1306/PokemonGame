@@ -29,7 +29,7 @@ public class DialogManager : MonoBehaviour
         Instance = this;
     }
 
-    public IEnumerator ShowDialogText(string text,bool waitForInput = true)
+    public IEnumerator ShowDialogText(string text,bool waitForInput = true, bool autoClose = true)
     {
         isShowing = true;
         dialogBox.SetActive(true);
@@ -38,6 +38,14 @@ public class DialogManager : MonoBehaviour
         {
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
         }
+        if (autoClose)
+        {
+            CloseDialog();
+        }
+    }
+
+    public void CloseDialog()
+    {
         dialogBox.SetActive(false);
         isShowing = false;
     }
