@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0ec4a6ed19d0354b9c91a6d2d02a61e, type: 3}
   m_Name: Masterball
   m_EditorClassIdentifier: 
-  name: 
-  description: 
-  icon: {fileID: 0}
+  name: Masterball
+  description: "D\xF9ng \u0111\u1EC3 b\u1EAFt pokemon v\xE0 ch\u1EAFc ch\u1EAFn s\u1EBD
+    b\u1EAFt \u0111\u01B0\u1EE3c"
+  icon: {fileID: 21300000, guid: dddd17d23ea5d5f45bcda6f186c7af1b, type: 3}
+  catchRateModfier: 4

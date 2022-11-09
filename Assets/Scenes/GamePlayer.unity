@@ -3414,6 +3414,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5773746422873037408, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
+      propertyPath: pokeballSlots.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5773746422873037408, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
+      propertyPath: pokeballSlots.Array.data[2].item
+      value: 
+      objectReference: {fileID: 11400000, guid: dc5a6ae955e9c3644ae100580815ffa0, type: 2}
+    - target: {fileID: 5773746422873037408, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
+      propertyPath: pokeballSlots.Array.data[2].count
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5777616843177664803, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -4074,6 +4086,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7010275748720894182, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7016903157895069728, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -4141,6 +4157,10 @@ PrefabInstance:
     - target: {fileID: 7052695827239372905, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7104967210327142038, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7143254069774120705, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
       propertyPath: m_IsActive

@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: Pokeball
   m_EditorClassIdentifier: 
   name: Pokeball
-  description: "D\xF9ng \u0111\u1EC3 b\u1EAFt Pokemon"
-  icon: {fileID: 1111843775, guid: e015869b972ef4645badc5dad09b1192, type: 3}
+  description: "D\xF9ng \u0111\u1EC3 b\u1EAFt Pokemon, c\xF3 kh\u1EA3 n\u0103ng cao
+    pokemon s\u1EBD ch\u1EA1y tho\xE1t"
+  icon: {fileID: 21300000, guid: e58eaefda45312746bf4e93ecc78e80e, type: 3}
+  catchRateModfier: 1

@@ -7,7 +7,7 @@ public enum GameState { FreeRoam, Battle, Dialog, CutScene, Paused, Menu, PartyS
 
 public class GameController : MonoBehaviour
 {
-    public GameState state;
+    GameState state;
     [SerializeField] PlayerMove playerController;
     [SerializeField] BattleSystem battleSystem;
     [SerializeField] Camera worldCamera;
@@ -20,6 +20,8 @@ public class GameController : MonoBehaviour
     GameState stateBeforePause;
     public SceneDetails CurrentScene { get; private set; }
     public SceneDetails PrevScene { get; private set; }
+
+    public GameState State => state;
 
     MenuController menuController;
 

@@ -87,3 +87,5 @@ public class ItemSlot
 
 
 }
+
+public enum ItemCategory { Items, Pokeballs, Tms}

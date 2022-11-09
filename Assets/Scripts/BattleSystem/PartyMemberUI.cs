@@ -29,6 +29,7 @@ public class PartyMemberUI : MonoBehaviour
         //{
         //    hpbar.setHp((float)_pokemon.HP / _pokemon.MaxHP);
         //}
+
         hpbar.setHp((float)_pokemon.HP / _pokemon.MaxHP);
     }
 

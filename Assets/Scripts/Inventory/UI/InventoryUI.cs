@@ -22,7 +22,7 @@ public class InventoryUI : MonoBehaviour
     int selectedCategory = 0;
     const int itemInViewport = 4;
 
-    Action onItemUsed;
+    Action<ItemBase> onItemUsed;
 
     List<ItemSlotUI> slotUIList;
     RectTransform itemListRec;
@@ -72,7 +72,7 @@ public class InventoryUI : MonoBehaviour
         UpdateItemSelection();
     }
 
-    public void HandleUpdate(Action onBack, Action onItemUsed = null)
+    public void HandleUpdate(Action onBack, Action<ItemBase> onItemUsed = null)
     {
         this.onItemUsed = onItemUsed;
 
@@ -135,10 +135,10 @@ public class InventoryUI : MonoBehaviour
                 }
             }
 
-
+            // Dung item
             if (Input.GetKeyDown(KeyCode.Return))
             {
-                OpenPartyScreen();
+                ItemSelected();
             }
             else
             {
@@ -198,6 +198,19 @@ public class InventoryUI : MonoBehaviour
         HandleScrolling();
     }
 
+    void ItemSelected()
+    {
+        if(selectedCategory == (int) ItemCategory.Pokeballs)
+        {
+            StartCoroutine(UseItem());
+        }
+        else
+        {
+            OpenPartyScreen();
+        }
+    }
+
+
     void HandleScrolling()
     {
 
@@ -235,8 +248,9 @@ public class InventoryUI : MonoBehaviour
         var useItem = inventory.UseItem(selectedItem, partyScreen.SelectedMember, selectedCategory);
         if (useItem != null)
         {
-            yield return DialogManager.Instance.ShowDialogText($"Bạn đã dùng vật phẩm là {useItem.Name}");
-            onItemUsed?.Invoke();
+            if(!(useItem is PokeballItem))
+                yield return DialogManager.Instance.ShowDialogText($"Bạn đã dùng vật phẩm là {useItem.Name}");
+            onItemUsed?.Invoke(useItem);
         }
         else
         {
