@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,8 +16,8 @@ public class Inventory : MonoBehaviour
 
     public static List<string> ItemCategorys { get; private set; } = new List<string>()
     {
-        "V?t ph?m", 
-        "POKEBALLS", //this is v?t ph?m
+        "Vật phẩm", 
+        "POKEBALLS", //this is vật phẩm
         "TMs & HMs"
     };
 
@@ -45,8 +45,6 @@ public class Inventory : MonoBehaviour
     {
         int category = (int)GetCategoryFromItem(item);
         var currentSlot = GetSlotByCategory(category);
-
-
         var itemSlot = currentSlot.FirstOrDefault(slot => slot.Item == item);
         if(itemSlot != null)
         {

@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,8 +16,8 @@ public class Pickup : MonoBehaviour, Interactable
             Used = true;
             GetComponent<SpriteRenderer>().enabled = false;  
             GetComponent<BoxCollider2D>().enabled = false;
-
-            yield return DialogManager.Instance.ShowDialogText($"B?n ?� t�m th?y {item.Name}!");
+            var playerName = initiator.GetComponent<PlayerMove>().Name; 
+            yield return DialogManager.Instance.ShowDialogText($"{playerName} đã tìm thấy {item.Name}!");
 
         }
     }

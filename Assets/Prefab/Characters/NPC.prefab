@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 3648624697420404586}
   - component: {fileID: 3648624697420404585}
   - component: {fileID: 3648624697420404584}
+  - component: {fileID: 2706476405899777100}
   m_Layer: 9
   m_Name: NPC
   m_TagString: Untagged
@@ -223,3 +224,20 @@ MonoBehaviour:
   - {fileID: 2082054666, guid: 249236832c062314081ce05ea11e3858, type: 3}
   - {fileID: -885886049, guid: 249236832c062314081ce05ea11e3858, type: 3}
   defaultDirection: 1
+--- !u!114 &2706476405899777100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3648624697420404594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bc658d7b0e73064dbe57cfd5bf83c98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: cf50ee42b52a622498af81cfe0dd6384, type: 2}
+  count: 2
+  dialog:
+    lines:
+    - "C\u1EA7m m\xE0 ch\u01A1i \u0111i con"

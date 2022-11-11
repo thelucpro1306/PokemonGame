@@ -67,8 +67,8 @@ public class Character : MonoBehaviour
     public void SetPositionAndSnapToTile(Vector2 pos)
     {
 
-        pos.x = Mathf.Floor(pos.x) + 0.5f;
-        pos.y = Mathf.Floor(pos.y) + 0.5f + OffSetY;
+        pos.x = Mathf.Floor(pos.x) + 1f;
+        pos.y = Mathf.Floor(pos.y) + 1f + OffSetY;
 
         transform.position = pos;
     }

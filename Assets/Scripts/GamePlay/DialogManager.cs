@@ -17,9 +17,6 @@ public class DialogManager : MonoBehaviour
     public event Action OnCloseDialog;
 
     public bool isShowing { get; private set; } 
-
-
-
     private void Awake()
     {
         Instance = this;
@@ -27,6 +24,7 @@ public class DialogManager : MonoBehaviour
 
     public IEnumerator ShowDialogText(string text,bool waitForInput = true, bool autoClose = true)
     {
+        OnShowDialog?.Invoke();
         isShowing = true;
         dialogBox.SetActive(true);
         yield return TypeDialog(text);
@@ -38,6 +36,7 @@ public class DialogManager : MonoBehaviour
         {
             CloseDialog();
         }
+        OnCloseDialog?.Invoke();
     }
 
     public void CloseDialog()
