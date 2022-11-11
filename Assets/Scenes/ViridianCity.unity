@@ -134,7 +134,6 @@ GameObject:
   - component: {fileID: 259771831}
   - component: {fileID: 259771830}
   - component: {fileID: 259771832}
-  - component: {fileID: 259771833}
   - component: {fileID: 259771835}
   - component: {fileID: 259771834}
   m_Layer: 0
@@ -164,7 +163,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 259771829}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12, y: 128, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -271,31 +270,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &259771833
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 259771829}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38a102716dfd9f04fb20707d285ce1b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  wildPokemons:
-  - _base: {fileID: 11400000, guid: 26cd4c186ae76bb4980e77a32c042c08, type: 2}
-    level: 5
-    dmgTake: 0
-    isCritical: 0
-  - _base: {fileID: 11400000, guid: cc7e1ef99670bf148ba15982a6ae0143, type: 2}
-    level: 7
-    dmgTake: 0
-    isCritical: 0
-  - _base: {fileID: 11400000, guid: 2e732baff0b49e7489e3992475fc0e4e, type: 2}
-    level: 7
-    dmgTake: 0
-    isCritical: 0
 --- !u!483693784 &259771834
 TilemapRenderer:
   m_ObjectHideFlags: 0

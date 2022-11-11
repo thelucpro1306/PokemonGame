@@ -1753,6 +1753,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2774444430599451557, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 2774444430599451557, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 2774444430599451557, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2774444430599451569, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
       propertyPath: pokemons.Array.size
       value: 3
@@ -3431,7 +3443,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5773746422873037408, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
       propertyPath: pokeballSlots.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5773746422873037408, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
       propertyPath: tmSlots.Array.data[0].item
@@ -3466,9 +3478,17 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5773746422873037408, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
+      propertyPath: pokeballSlots.Array.data[0].item
+      value: 
+      objectReference: {fileID: 11400000, guid: 98ded87a555e3664fa73b94f9dc48ba7, type: 2}
+    - target: {fileID: 5773746422873037408, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
       propertyPath: pokeballSlots.Array.data[2].item
       value: 
       objectReference: {fileID: 11400000, guid: dc5a6ae955e9c3644ae100580815ffa0, type: 2}
+    - target: {fileID: 5773746422873037408, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
+      propertyPath: pokeballSlots.Array.data[0].count
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5773746422873037408, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
       propertyPath: pokeballSlots.Array.data[2].count
       value: 3
