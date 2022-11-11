@@ -21,7 +21,7 @@ public class PartyScreen : MonoBehaviour
     /// 
 
 
-    public BattleState? CalledFrom { get;  set; }
+    public BattleState? CalledFrom { get; set; }
 
     int selection = 0;
 
@@ -77,6 +77,24 @@ public class PartyScreen : MonoBehaviour
         messageText.text = message;
     }
 
+    public void ShowIfTmItemCanUsable(TmItem tmItem)
+    {
+        for (int i = 0; i < pokemons.Count; i++)
+        {
+            string message = tmItem.canBeTaught(pokemons[i]) ? "Có thể học" : "Không thể học";
+            memberSlots[i].setMessage(message);
+        }
+    }
+
+    public void ClearMemberShotMessage()
+    {
+        for (int i = 0; i < pokemons.Count; i++)
+        {
+
+            memberSlots[i].setMessage("");
+        }
+    }
+
     public void HandleUpdate(Action onSelected, Action onBack)
     {
         var prevSelection = selection;
@@ -94,13 +112,10 @@ public class PartyScreen : MonoBehaviour
 
         selection = Mathf.Clamp(selection, 0, pokemons.Count - 1);
 
-        if(selection != prevSelection)
+        if (selection != prevSelection)
         {
             UpdateMemberSelection(selection);
         }
-
-        
-
         if (Input.GetKeyDown(KeyCode.Return))
         {
             onSelected?.Invoke();
@@ -111,6 +126,7 @@ public class PartyScreen : MonoBehaviour
             onBack?.Invoke();
         }
     }
+
 
 
 }

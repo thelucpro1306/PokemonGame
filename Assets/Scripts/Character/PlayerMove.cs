@@ -44,13 +44,13 @@ public class PlayerMove : MonoBehaviour, ISavable
 
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            Interact();
+            StartCoroutine(Interact());
         }
 
     }
 
 
-    void Interact()
+    IEnumerator Interact()
     {
         var x = character.Animator.MoveX;
         var y = character.Animator.MoveY;
@@ -62,7 +62,7 @@ public class PlayerMove : MonoBehaviour, ISavable
         var collider = Physics2D.OverlapCircle(interactPos, 0.3f, GameLayers.i.InteractableLayer);
         if (collider != null)
         {
-            collider.GetComponent<Interactable>()?.Interact(transform);
+            yield return collider.GetComponent<Interactable>()?.Interact(transform);
         }
     }
 

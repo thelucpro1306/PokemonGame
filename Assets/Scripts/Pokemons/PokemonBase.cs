@@ -3,13 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Pokemon", menuName = "Pokemon/Create New Pokemon")] 
+[CreateAssetMenu(fileName = "Pokemon", menuName = "Pokemon/Create New Pokemon")]
 public class PokemonBase : ScriptableObject
 {
     [SerializeField] string name;
 
     [TextArea]
-    [SerializeField] string decsription;    
+    [SerializeField] string decsription;
 
     [SerializeField] Sprite frontSprite;
     [SerializeField] Sprite backSprite;
@@ -29,44 +29,45 @@ public class PokemonBase : ScriptableObject
     [SerializeField] int catchRate = 255;
 
     [SerializeField] List<LearnableMove> learnableMoves;
+    [SerializeField] List<MoveBase> learnableByItems;
 
     public static int MaxNumOfMoves { get; private set; } = 4;
     public int GetExpForLevel(int level)
     {
         int n3 = level * level * level;
-        if(growthRate == GrowthRate.Fast)
+        if (growthRate == GrowthRate.Fast)
         {
-            return (4 * n3)/5;
+            return (4 * n3) / 5;
         }
         else
         {
-            if(growthRate == GrowthRate.MediumFast)
+            if (growthRate == GrowthRate.MediumFast)
             {
                 return n3;
             }
             else
             {
-                if(growthRate == GrowthRate.Erratic)
+                if (growthRate == GrowthRate.Erratic)
                 {
-                    if(level < 50)
+                    if (level < 50)
                     {
                         return Mathf.FloorToInt((n3 * (100 - level)) / 50);
                     }
                     else
                     {
-                        if(level >= 50 && level < 68)
+                        if (level >= 50 && level < 68)
                         {
                             return Mathf.FloorToInt((n3 * (150 - level)) / 100);
                         }
                         else
                         {
-                            if(level >= 68 && level < 98)
+                            if (level >= 68 && level < 98)
                             {
                                 return Mathf.FloorToInt((n3 * (((1911 - 10 * level)) / 3)) / 500);
                             }
                             else
                             {
-                                if(level >= 68 && level < 100)
+                                if (level >= 68 && level < 100)
                                 {
                                     return Mathf.FloorToInt((n3 * (160 - level)) / 100);
                                 }
@@ -76,15 +77,15 @@ public class PokemonBase : ScriptableObject
                 }
                 else
                 {
-                    if(growthRate == GrowthRate.MediumSlow)
+                    if (growthRate == GrowthRate.MediumSlow)
                     {
-                        return Mathf.FloorToInt((6/5)* n3 - 15*Mathf.Pow(level,2) + 100*level - 140 );
+                        return Mathf.FloorToInt((6 / 5) * n3 - 15 * Mathf.Pow(level, 2) + 100 * level - 140);
                     }
                     else
                     {
-                        if(growthRate == GrowthRate.Slow)
+                        if (growthRate == GrowthRate.Slow)
                         {
-                            return Mathf.FloorToInt((5 * n3) /4);
+                            return Mathf.FloorToInt((5 * n3) / 4);
                         }
                         else
                         {
@@ -92,21 +93,21 @@ public class PokemonBase : ScriptableObject
                             {
                                 if (level < 15)
                                 {
-                                    return Mathf.FloorToInt(n3 * ((level +1 )/3) + 24 );
+                                    return Mathf.FloorToInt(n3 * ((level + 1) / 3) + 24);
                                 }
                                 else
                                 {
                                     if (level >= 15 && level < 36)
                                     {
-                                        return Mathf.FloorToInt( (n3*(level + 14))/50 );
+                                        return Mathf.FloorToInt((n3 * (level + 14)) / 50);
                                     }
                                     else
                                     {
                                         if (level >= 36 && level < 100)
                                         {
-                                            return Mathf.FloorToInt( (n3*((level / 2) + 32)) /50 );
+                                            return Mathf.FloorToInt((n3 * ((level / 2) + 32)) / 50);
                                         }
-                                        
+
                                     }
                                 }
                             }
@@ -134,6 +135,8 @@ public class PokemonBase : ScriptableObject
     {
         get { return frontSprite; }
     }
+
+    public List<MoveBase> LearnableByItems => learnableByItems;
 
     public Sprite BackSprite
     {
@@ -180,10 +183,10 @@ public class PokemonBase : ScriptableObject
     }
 
     public int CatchRate => catchRate;
-    
+
     public int ExpYield => expYield;
 
-    public GrowthRate GrowthRate => growthRate; 
+    public GrowthRate GrowthRate => growthRate;
 
     public List<LearnableMove> LearnableMoves
     {
@@ -280,7 +283,7 @@ public class TypeChart
         return chart[row][col];
     }
 
-    
+
 
 }
 public enum GrowthRate { Erratic, Fast, MediumFast, MediumSlow, Slow, Fluctuating }
