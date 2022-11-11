@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemGiver : MonoBehaviour
+public class ItemGiver : MonoBehaviour, ISavable
 {
     [SerializeField] ItemBase item;
     [SerializeField] int count = 1;
@@ -32,5 +32,13 @@ public class ItemGiver : MonoBehaviour
         return item != null && !used && count >0;
     }
 
+    public object CaptureState()
+    {
+        return used;
+    }
 
+    public void RestoreState(object state)
+    {
+        used = (bool) state;
+    }
 }

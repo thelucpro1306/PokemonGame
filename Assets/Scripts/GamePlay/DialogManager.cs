@@ -14,7 +14,7 @@ public class DialogManager : MonoBehaviour
     public static DialogManager Instance { get; private set; }
 
     public event Action OnShowDialog;
-    public event Action OnCloseDialog;
+    public event Action onDialogFinish;
 
     public bool isShowing { get; private set; } 
     private void Awake()
@@ -32,11 +32,12 @@ public class DialogManager : MonoBehaviour
         {
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
         }
+
         if (autoClose)
         {
             CloseDialog();
         }
-        OnCloseDialog?.Invoke();
+        onDialogFinish?.Invoke();
     }
 
     public void CloseDialog()
@@ -59,7 +60,7 @@ public class DialogManager : MonoBehaviour
         }
         dialogBox.SetActive(false);
         isShowing = false;
-        OnCloseDialog?.Invoke();
+        onDialogFinish?.Invoke();
     }
 
     public void HandleUpdate()

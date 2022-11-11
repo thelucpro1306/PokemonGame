@@ -34,6 +34,7 @@ public class GameController : MonoBehaviour
         Instance = this;
         PokemonDB.Init();
         MoveDB.Init();
+        ItemDB.Init();
         menuController = GetComponent<MenuController>();
         ConditionsDB.Init();
 
@@ -54,7 +55,7 @@ public class GameController : MonoBehaviour
         };
 
 
-        DialogManager.Instance.OnCloseDialog += () =>
+        DialogManager.Instance.onDialogFinish += () =>
         {
             if (state == GameState.Dialog)
             {
