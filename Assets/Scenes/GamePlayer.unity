@@ -3431,7 +3431,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5773746422873037408, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
       propertyPath: pokeballSlots.Array.size
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5773746422873037408, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
       propertyPath: tmSlots.Array.data[0].item
