@@ -8,6 +8,7 @@ public class PartyMemberUI : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField] Text nameText;
     [SerializeField] Text levelText;
+    [SerializeField] Text messageText;
     [SerializeField] HpBar hpbar;
     
     Pokemon _pokemon;
@@ -17,7 +18,7 @@ public class PartyMemberUI : MonoBehaviour
         _pokemon = pokemon;
         UpdateData();
         _pokemon.OnHpChanged += UpdateData;
-
+        setMessage("");
     }
 
     void UpdateData()
@@ -46,5 +47,11 @@ public class PartyMemberUI : MonoBehaviour
             nameText.color = Color.black;
         }
     }
+
+    public void setMessage(string message)
+    {
+        messageText.text = message;
+    }
+
 
 }

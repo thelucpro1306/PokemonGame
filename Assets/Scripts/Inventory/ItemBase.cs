@@ -8,7 +8,7 @@ public class ItemBase : ScriptableObject
     [SerializeField] string description;
     [SerializeField] Sprite icon;
 
-    public string Name => name;
+    public virtual string Name => name;
     public string Description => description;
     public Sprite Icon => icon;
 
@@ -17,5 +17,9 @@ public class ItemBase : ScriptableObject
         return false;
     }
 
+    public virtual bool canUsedInBattle => true;
+    public virtual bool canUsedOutSideBattle => true;
+
+    public virtual bool isReuseable => false;
 
 }

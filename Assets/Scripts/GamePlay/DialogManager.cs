@@ -18,11 +18,7 @@ public class DialogManager : MonoBehaviour
 
     public bool isShowing { get; private set; } 
 
-    int currentLine = 0;
-    bool isTyping;
 
-    Dialog dialog;
-    Action onDialogFinished;
 
     private void Awake()
     {
@@ -50,52 +46,38 @@ public class DialogManager : MonoBehaviour
         isShowing = false;
     }
 
-    public IEnumerator ShowDialog(Dialog dialog, Action onFinished = null)
+    public IEnumerator ShowDialog(Dialog dialog)
     {
         yield return new WaitForEndOfFrame();
 
         isShowing = true;
         OnShowDialog?.Invoke();
-        
-        this.dialog = dialog;
-        onDialogFinished = onFinished;
-
         dialogBox.SetActive(true);
-        StartCoroutine(TypeDialog(dialog.Lines[0]));
-
+        foreach(var line in dialog.Lines)
+        {
+            yield return TypeDialog(line);
+            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
+        }
+        dialogBox.SetActive(false);
+        isShowing = false;
+        OnCloseDialog?.Invoke();
     }
 
     public void HandleUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.Return) && !isTyping)
-        {
-            ++currentLine;
-            if (currentLine < dialog.Lines.Count)
-            {
-                StartCoroutine(TypeDialog(dialog.Lines[currentLine]));
-            }
-            else
-            {
-
-                currentLine = 0;
-                isShowing = false;
-                dialogBox.SetActive(false);
-                onDialogFinished?.Invoke(); 
-                OnCloseDialog?.Invoke();
-            }
-        }
+        
     }
 
     public IEnumerator TypeDialog(string line)
     {
         dialogText.text = "";
-        isTyping = true;
+
         foreach (var item in line.ToCharArray())
         {
             dialogText.text += item;
             yield return new WaitForSeconds(1f / lettersPerSecond);
         }
-        isTyping = false;
+
     }
 
 }

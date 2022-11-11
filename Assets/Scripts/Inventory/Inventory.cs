@@ -41,6 +41,49 @@ public class Inventory : MonoBehaviour
         return FindObjectOfType<PlayerMove>().GetComponent<Inventory>();
     }
 
+    public void AddItem(ItemBase item, int count = 1)
+    {
+        int category = (int)GetCategoryFromItem(item);
+        var currentSlot = GetSlotByCategory(category);
+
+
+        var itemSlot = currentSlot.FirstOrDefault(slot => slot.Item == item);
+        if(itemSlot != null)
+        {
+            itemSlot.Count += count;
+        }
+        else
+        {
+            currentSlot.Add(new ItemSlot()
+            {
+                Item = item,
+                Count = count
+            });
+        }
+
+        onUpdated?.Invoke();
+
+    }
+
+    public ItemCategory GetCategoryFromItem(ItemBase item)
+    {
+        if(item is RecoveryItem)
+        {
+            return ItemCategory.Items;
+        }
+        else
+        {
+            if(item is PokeballItem)
+            {
+                return ItemCategory.Pokeballs;
+            }
+            else
+            {
+                return ItemCategory.Tms;
+            }
+        }
+    }
+
     public ItemBase GetItem(int itemIndex, int categoryIndex)
     {
         var currentSlot = GetSlotByCategory(categoryIndex);
@@ -54,7 +97,8 @@ public class Inventory : MonoBehaviour
         bool itemUsed = item.Use(selectedPokemon);
         if (itemUsed)
         {
-            RemoveItem(item,selectedCategory);
+            if(!item.isReuseable)
+                RemoveItem(item,selectedCategory);
             return item;
         }
         return null;
@@ -82,7 +126,7 @@ public class ItemSlot
     [SerializeField] ItemBase item;
     [SerializeField] int count;
 
-    public ItemBase Item => item;
+    public ItemBase Item { get =>item; set=>item = value; }
     public int Count
     {
         get => count;

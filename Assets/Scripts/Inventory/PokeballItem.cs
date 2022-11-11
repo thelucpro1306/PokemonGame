@@ -19,6 +19,7 @@ public class PokeballItem : ItemBase
         return false;
     }
 
+    public override bool canUsedOutSideBattle => false;
 
 
 }
