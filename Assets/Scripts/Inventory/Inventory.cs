@@ -173,7 +173,7 @@ public class ItemSlot
 
     public ItemSlot(ItemSavaData savaData)
     {
-        this.item = ItemDB.GetItemByName(savaData.name);
+        this.item = ItemDB.GetObjectByName(savaData.name);
         count = savaData.count;
     }
 
@@ -181,7 +181,7 @@ public class ItemSlot
     {
         var saveData = new ItemSavaData()
         {
-            name = item.Name,
+            name = item.name,
             count = count
         };
         return saveData;

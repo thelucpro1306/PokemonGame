@@ -15,6 +15,22 @@ public class Quest
         Base = _quest;
     }
 
+    public Quest(QuestSaveData SaveData)
+    {
+        Base = QuestDB.GetObjectByName(SaveData.name);
+        Status = SaveData.status;   
+    }
+
+    public QuestSaveData GetSaveData()
+    {
+        var saveData = new QuestSaveData()
+        {
+            name =Base.name,
+            status = Status
+        };
+        return saveData;
+    }
+
     public IEnumerator StartQuest()
     {
         Status = QuestStatus.Started;
@@ -65,3 +81,10 @@ public class Quest
 }
 
 public enum QuestStatus { None, Started,Completed}
+
+[System.Serializable]
+public class QuestSaveData
+{
+    public string name;
+    public QuestStatus status;  
+}
