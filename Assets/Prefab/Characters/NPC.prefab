@@ -166,6 +166,8 @@ MonoBehaviour:
   - {x: -2, y: 0}
   - {x: 0, y: 2}
   timeBetweenPattern: 1
+  questToStart: {fileID: 0}
+  questToComplete: {fileID: 0}
 --- !u!114 &3648624697420404586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -237,11 +239,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bc658d7b0e73064dbe57cfd5bf83c98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: cf50ee42b52a622498af81cfe0dd6384, type: 2}
-  count: 2
+  item: {fileID: 0}
+  count: 0
   dialog:
-    lines:
-    - "C\u1EA7m m\xE0 ch\u01A1i \u0111i con"
+    lines: []
 --- !u!114 &1010528085970301486
 MonoBehaviour:
   m_ObjectHideFlags: 0

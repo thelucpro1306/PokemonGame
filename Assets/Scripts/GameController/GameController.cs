@@ -35,6 +35,7 @@ public class GameController : MonoBehaviour
         PokemonDB.Init();
         MoveDB.Init();
         ItemDB.Init();
+        QuestDB.Init();
         menuController = GetComponent<MenuController>();
         ConditionsDB.Init();
 
@@ -45,8 +46,6 @@ public class GameController : MonoBehaviour
         battleSystem.OnBattleOver += EndBattle;
 
         //Bat su kien 
-
-
 
         DialogManager.Instance.OnShowDialog += () =>
         {

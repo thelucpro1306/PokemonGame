@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 678b7ae4afabfaa4488831f5932bf100, type: 3}
+  m_Name: GetItem
+  m_EditorClassIdentifier: 
+  questName: GetItem
+  description: 
+  startDialog:
+    lines:
+    - "B\u1EA1n c\xF3 th\u1EC3 nh\u1EB7t gi\xFAp t\xF4i c\xE1i Pokeball g\u1EA7n
+      v\u01B0\u1EDDn hoa kh\xF4ng"
+    - "T\xF4i s\u1EBD t\u1EB7ng b\u1EA1n m\u1ED9t c\xE1i Pokeball"
+  inProgressDialog:
+    lines:
+    - "B\u1EA1n t\xECm th\u1EA5y n\xF3 ch\u01B0a"
+  completeDialog:
+    lines:
+    - "C\u1EA3m \u01A1n b\u1EA1n, \u0111\xE2y l\xE0 m\xF3n qu\xE0 c\u1EE7a b\u1EA1n"
+  requiredItem: {fileID: 11400000, guid: 98ded87a555e3664fa73b94f9dc48ba7, type: 2}
+  rewardItem: {fileID: 11400000, guid: 98ded87a555e3664fa73b94f9dc48ba7, type: 2}
