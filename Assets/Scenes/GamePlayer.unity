@@ -1916,7 +1916,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2774444430599451569, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
       propertyPath: pokemons.Array.size
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2774444430599451569, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
       propertyPath: pokemons.Array.data[0]._base
@@ -1941,6 +1941,10 @@ PrefabInstance:
     - target: {fileID: 2774444430599451569, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
       propertyPath: pokemons.Array.data[2].level
       value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2774444430599451572, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
+      propertyPath: moveSpeed
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2774444430772789709, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
       propertyPath: m_RootOrder
@@ -3588,15 +3592,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5773746422873037408, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
       propertyPath: slots.Array.size
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5773746422873037408, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
       propertyPath: tmSlots.Array.size
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5773746422873037408, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
       propertyPath: pokeballSlots.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5773746422873037408, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
       propertyPath: tmSlots.Array.data[0].item
@@ -5808,8 +5812,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wildPokemons:
+  - _base: {fileID: 11400000, guid: cc7e1ef99670bf148ba15982a6ae0143, type: 2}
+    level: 2
+    dmgTake: 0
+    isCritical: 0
+  - _base: {fileID: 11400000, guid: cc7e1ef99670bf148ba15982a6ae0143, type: 2}
+    level: 3
+    dmgTake: 0
+    isCritical: 0
   - _base: {fileID: 11400000, guid: 9605aa5dc7c8b0b40ace0a8a2d62f5c7, type: 2}
-    level: 1
+    level: 3
     dmgTake: 0
     isCritical: 0
 --- !u!1001 &2116876838

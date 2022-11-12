@@ -19,6 +19,15 @@ MonoBehaviour:
   inProgressDialog:
     lines: []
   completeDialog:
-    lines: []
+    lines:
+    - "Ch\xE0o bu\u1ED5i s\xE1ng con trai"
+    - "Ch\xFAc m\u1EEBng sinh nh\u1EADt con"
+    - "H\xF4m nay l\xE0 ng\xE0y con quy\u1EBFt \u0111\u1ECBnh \u0111i phi\xEAu l\u01B0u
+      \u0111\xFAng kh\xF4ng"
+    - "Ch\xFAc con may m\u1EAFn trong chuy\u1EBFn h\xE0nh tr\xECnh nh\xE9"
+    - "\u0110\xE2y l\xE0 b\xECnh thu\u1ED1c, n\xF3 c\xF3 th\u1EC3 gi\xFAp con h\u1ED3i
+      s\u1EE9c cho Pokemon c\u1EE7a m\xECnh."
+    - "H\xE3y qua nh\xE0 gi\xE1o s\u01B0 \xF4ng \u1EA5y c\xF3 m\xF3n qu\xE0 cho con
+      \u0111\u1EA5y"
   requiredItem: {fileID: 0}
-  rewardItem: {fileID: 0}
+  rewardItem: {fileID: 11400000, guid: cf50ee42b52a622498af81cfe0dd6384, type: 2}

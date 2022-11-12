@@ -16,19 +16,16 @@ MonoBehaviour:
   description: 
   startDialog:
     lines:
-    - "Pokemon c\u1EE7a t\xF4i \u0111ang b\u1ECB ki\u1EC7t s\u1EE9c"
-    - "B\u1EA1n c\xF3 th\u1EC3 mang cho t\xF4i 1 v\u1EADt ph\u1EA9m h\u1ED3i s\u1EE9c
-      kh\xF4ng"
-    - "T\xF4i s\u1EBD t\u1EB7ng b\u1EA1n 1 c\xE1i Greatball"
+    - "Ch\xE0o ch\xE1u"
+    - "Ch\xFAc m\xECnh sinh nh\u1EADt"
+    - "H\xE3y ch\u1ECDn m\u1ED9t pokemon tr\xEAn b\xE0n l\xE0m m\xF3n qu\xE0"
+    - "V\xE0 nh\u1EB7t h\u1ED9 b\xE1c c\xE1i Pokeball \u0111ang r\u01A1i "
   inProgressDialog:
     lines:
-    - "B\u1EA1n \u0111\xE3 t\xECm \u0111\u01B0\u1EE3c v\u1EADt ph\u1EA9m t\xF4i y\xEAu
-      c\u1EA7u ch\u01B0a"
+    - "Ch\xE1u \u0111\xE3 ch\u1ECDn \u0111\u01B0\u1EE3c pokemon ch\u01B0a"
   completeDialog:
     lines:
-    - "C\u1EA3m \u01A1n,"
-    - "C\u1EA3m \u01A1n, Pokemon c\u1EE7a t\xF4i c\xF3 th\u1EC3 ti\u1EBFp t\u1EE5c
-      chi\u1EBFn \u0111\u1EA5u r\u1ED3i"
-    - "\u0110\xE2y l\xE0 m\xF3n qu\xE0 c\u1EE7a b\u1EA1n"
-  requiredItem: {fileID: 11400000, guid: a4dddf9ab8fa2db47baba21e670d45c8, type: 2}
-  rewardItem: {fileID: 11400000, guid: 9caf49dce136f4d42a0590c691e6a8b1, type: 2}
+    - "Ch\xE1u h\xE3y t\xECm \u0111\u01B0\u1EDDng \u0111i t\u1EDBi ViridianCity \u0111\u1EC3
+      tr\u1EDF th\xE0nh trainer t\xE0i gi\u1ECFi nh\u1EA5t"
+  requiredItem: {fileID: 11400000, guid: 98ded87a555e3664fa73b94f9dc48ba7, type: 2}
+  rewardItem: {fileID: 11400000, guid: 98ded87a555e3664fa73b94f9dc48ba7, type: 2}
