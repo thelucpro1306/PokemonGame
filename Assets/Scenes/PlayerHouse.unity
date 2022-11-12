@@ -10001,10 +10001,16 @@ MonoBehaviour:
   wildPokemons:
   - _base: {fileID: 11400000, guid: 26cd4c186ae76bb4980e77a32c042c08, type: 2}
     level: 5
+    dmgTake: 0
+    isCritical: 0
   - _base: {fileID: 11400000, guid: cc7e1ef99670bf148ba15982a6ae0143, type: 2}
     level: 7
+    dmgTake: 0
+    isCritical: 0
   - _base: {fileID: 11400000, guid: 2e732baff0b49e7489e3992475fc0e4e, type: 2}
     level: 7
+    dmgTake: 0
+    isCritical: 0
 --- !u!82 &1040046220
 AudioSource:
   m_ObjectHideFlags: 0
@@ -13036,3 +13042,131 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 596cb11e36affc4428776ae512323ae2, type: 3}
+--- !u!1001 &1692232512
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1010528085970301486, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
+      propertyPath: uniqueId
+      value: e9dd4bce-75c1-42bf-b546-810644fb0b7b
+      objectReference: {fileID: 0}
+    - target: {fileID: 2706476405899777100, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
+      propertyPath: item
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2706476405899777100, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
+      propertyPath: count
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2706476405899777100, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
+      propertyPath: dialog.lines.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3648624697420404588, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3648624697420404588, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -152
+      objectReference: {fileID: 0}
+    - target: {fileID: 3648624697420404588, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 28
+      objectReference: {fileID: 0}
+    - target: {fileID: 3648624697420404588, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3648624697420404588, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3648624697420404588, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3648624697420404588, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3648624697420404588, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3648624697420404588, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3648624697420404588, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3648624697420404588, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3648624697420404591, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
+      propertyPath: questToComplete
+      value: 
+      objectReference: {fileID: 11400000, guid: 5b028ddb3d4f5084fb5ca475cf10dd44, type: 2}
+    - target: {fileID: 3648624697420404591, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
+      propertyPath: timeBetweenPattern
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3648624697420404591, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
+      propertyPath: dialog.lines.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3648624697420404591, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
+      propertyPath: dialog.lines.Array.data[0]
+      value: "N\u1EBFu \u0111i qua nh\u1EEFng b\u1EE5i c\u1ECF,"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3648624697420404591, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
+      propertyPath: dialog.lines.Array.data[1]
+      value: "con c\xF3 th\u1EC3 b\u1EAFt g\u1EB7p nh\u1EEFng Pokemon hoang d\xE3"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3648624697420404591, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
+      propertyPath: dialog.lines.Array.data[2]
+      value: "Ch\xFAng c\xF3 th\u1EC3 t\u1EA5n c\xF4ng con"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3648624697420404591, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
+      propertyPath: movementPattern.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3648624697420404594, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
+      propertyPath: m_Name
+      value: NPC
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
+--- !u!1 &1692232513 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3648624697420404594, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
+  m_PrefabInstance: {fileID: 1692232512}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1692232514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1692232513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23af4bb1bc8d8a74993f3bcbc6076cd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pokemonToGive:
+    _base: {fileID: 11400000, guid: f469603d34ec5334e85ba63ad75e2183, type: 2}
+    level: 5
+    dmgTake: 0
+    isCritical: 0
+  dialog:
+    lines:
+    - "B\xEAn ngo\xE0i r\u1EA5t nguy hi\u1EC3m"
+    - "H\xE3y c\xF9ng Charmander tr\u1EDF th\xE0nh nh\xE0 hu\u1EA5n luy\u1EC7n t\xE0i
+      ba nh\u1EA5t"

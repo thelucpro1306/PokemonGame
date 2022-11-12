@@ -80,6 +80,17 @@ public class Inventory : MonoBehaviour, ISavable
         }
     }
 
+    public bool HasItem(ItemBase item)
+    {
+        int category = (int)GetCategoryFromItem(item);
+        var currentSlot = GetSlotByCategory(category);
+
+        //kiem tra vat pham co ton tai trong inventory khong
+        return currentSlot.Exists(p=>p.Item == item);
+
+    }
+
+
     public ItemBase GetItem(int itemIndex, int categoryIndex)
     {
         var currentSlot = GetSlotByCategory(categoryIndex);
@@ -94,15 +105,18 @@ public class Inventory : MonoBehaviour, ISavable
         if (itemUsed)
         {
             if (!item.isReuseable)
-                RemoveItem(item, selectedCategory);
+                RemoveItem(item);
             return item;
         }
         return null;
     }
 
-    public void RemoveItem(ItemBase item, int category)
+    public void RemoveItem(ItemBase item)
     {
+        // tìm vật phẩm từ danh mục và lấy slot của vật phẩm đó
+        int category = (int)GetCategoryFromItem(item);
         var currentSlot = GetSlotByCategory(category);
+
         var itemSlot = currentSlot.First(slot => slot.Item == item);
         itemSlot.Count--;
         if (itemSlot.Count == 0)

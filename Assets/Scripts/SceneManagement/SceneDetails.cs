@@ -20,8 +20,6 @@ public class SceneDetails : MonoBehaviour
             LoadScene();
 
             GameController.Instance.SetCurrentScene(this);
-
-
             //load cac map co ket noi
             foreach (var item in connectedScene)
             {

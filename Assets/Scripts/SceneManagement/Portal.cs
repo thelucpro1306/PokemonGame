@@ -50,6 +50,8 @@ public class Portal : MonoBehaviour, IPlayerTriggerable
     }
 
     public Transform SpawnPoint => spawnPoint;
+
+    public bool TriggerRepeatly => false;
 }
 
 public enum DestinationIdentifier { A, B ,C ,D , E }

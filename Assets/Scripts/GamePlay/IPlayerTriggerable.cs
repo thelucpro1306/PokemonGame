@@ -5,4 +5,6 @@ using UnityEngine;
 public interface IPlayerTriggerable
 {
     void onPlayerTriggered(PlayerMove player);
+
+    bool TriggerRepeatly { get;}
 }
