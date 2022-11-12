@@ -44,7 +44,8 @@ public class Quest
             var playerName = player.GetComponent<PlayerMove>().Name;
             yield return DialogManager.Instance.ShowDialogText($"{playerName} đã nhận được {Base.RewardItem.Name}");
         }
-
+        var questList = QuestList.GetQuestList();
+        questList.AddQuest(this);
     }
 
     public bool CanBeCompleted()

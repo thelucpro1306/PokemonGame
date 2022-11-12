@@ -16,7 +16,7 @@ MonoBehaviour:
   decsription: 
   type: 1
   power: 0
-  accuracy: 100
+  accuracy: 0
   alwaysHits: 0
   pp: 30
   priority: 0

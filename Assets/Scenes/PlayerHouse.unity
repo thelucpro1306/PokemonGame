@@ -13112,7 +13112,7 @@ PrefabInstance:
     - target: {fileID: 3648624697420404591, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
       propertyPath: questToComplete
       value: 
-      objectReference: {fileID: 11400000, guid: 5b028ddb3d4f5084fb5ca475cf10dd44, type: 2}
+      objectReference: {fileID: 11400000, guid: a070cea514375aa408896e3a996afe60, type: 2}
     - target: {fileID: 3648624697420404591, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
       propertyPath: timeBetweenPattern
       value: 0
@@ -13143,30 +13143,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
---- !u!1 &1692232513 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3648624697420404594, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
-  m_PrefabInstance: {fileID: 1692232512}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1692232514
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1692232513}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23af4bb1bc8d8a74993f3bcbc6076cd4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pokemonToGive:
-    _base: {fileID: 11400000, guid: f469603d34ec5334e85ba63ad75e2183, type: 2}
-    level: 5
-    dmgTake: 0
-    isCritical: 0
-  dialog:
-    lines:
-    - "B\xEAn ngo\xE0i r\u1EA5t nguy hi\u1EC3m"
-    - "H\xE3y c\xF9ng Charmander tr\u1EDF th\xE0nh nh\xE0 hu\u1EA5n luy\u1EC7n t\xE0i
-      ba nh\u1EA5t"
