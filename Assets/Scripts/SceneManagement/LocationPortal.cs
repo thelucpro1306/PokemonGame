@@ -49,4 +49,6 @@ public class LocationPortal : MonoBehaviour,IPlayerTriggerable
     }
 
     public Transform SpawnPoint => spawnPoint;
+
+    public bool TriggerRepeatly => false;
 }

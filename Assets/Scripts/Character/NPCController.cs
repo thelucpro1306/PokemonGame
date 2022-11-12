@@ -8,7 +8,7 @@ public class NPCController : MonoBehaviour,Interactable
     [SerializeField] List<Sprite> sprites;
     [SerializeField] List<Vector2> movementPattern;
     [SerializeField] float timeBetweenPattern;
-
+    [SerializeField] QuestBase questToStart;
     
     Character character;
 
@@ -16,6 +16,9 @@ public class NPCController : MonoBehaviour,Interactable
     float idleTimer = 0f;
     int currentPattern = 0;
     ItemGiver itemGiver;
+    Quest activeQuest;
+
+
     private void Awake()
     {
         character = GetComponent<Character>();
@@ -33,17 +36,39 @@ public class NPCController : MonoBehaviour,Interactable
             {
                 yield return itemGiver.GiveItem(initiator.GetComponent<PlayerMove>());
             }
+
             else
             { 
-                yield return DialogManager.Instance.ShowDialog(dialog);
+                if(questToStart != null)
+                {
+                    activeQuest = new Quest(questToStart);
+                    yield return activeQuest.StartQuest();
+                    questToStart = null;
+                }
+                else
+                {
+                    if(activeQuest != null)
+                    {
+                        if (activeQuest.CanBeCompleted())
+                        {
+                            yield return activeQuest.CompletedQuest(initiator);
+                            activeQuest = null;
+                        }
+                        else
+                        {
+                            yield return DialogManager.Instance.ShowDialog(activeQuest.Base.InProgressDialog);
+                        }
+                    }
+                    else
+                    {
+                        yield return DialogManager.Instance.ShowDialog(dialog);
+                    }
+                    
+                }
+                
             }
-
-            
-
             idleTimer = 0f;
             state = NPCState.Idle;
-            
-
         }
     }
 
