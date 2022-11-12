@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,10 +6,15 @@ public class NPCController : MonoBehaviour,Interactable
 {
     [SerializeField] Dialog dialog;
     [SerializeField] List<Sprite> sprites;
+
+    [Header("Movement")]
     [SerializeField] List<Vector2> movementPattern;
     [SerializeField] float timeBetweenPattern;
+
+    [Header("Quests")]
     [SerializeField] QuestBase questToStart;
-    
+    [SerializeField] QuestBase questToComplete;
+
     Character character;
 
     NPCState state;
@@ -17,12 +22,13 @@ public class NPCController : MonoBehaviour,Interactable
     int currentPattern = 0;
     ItemGiver itemGiver;
     Quest activeQuest;
-
+    PokemonGiver pokemonGiver;
 
     private void Awake()
     {
         character = GetComponent<Character>();
         itemGiver = GetComponent<ItemGiver>();
+        pokemonGiver = GetComponent<PokemonGiver>();
     }
 
     public IEnumerator Interact(Transform initiator)
@@ -32,38 +38,65 @@ public class NPCController : MonoBehaviour,Interactable
             state = NPCState.Dialog;
             character.LookTowards(initiator.position);
 
-            if(itemGiver != null && itemGiver.CanbeGiven())
+            if(questToComplete != null)
+            {
+                var quest = new Quest(questToComplete);
+                yield return quest.CompletedQuest(initiator);
+                questToComplete = null;
+
+
+                Debug.Log($"{quest.Base.QuestName} ");
+            }
+
+
+            if (itemGiver != null && itemGiver.CanbeGiven())
             {
                 yield return itemGiver.GiveItem(initiator.GetComponent<PlayerMove>());
             }
-
             else
-            { 
-                if(questToStart != null)
+            {
+                if (pokemonGiver != null && pokemonGiver.CanbeGiven())
                 {
-                    activeQuest = new Quest(questToStart);
-                    yield return activeQuest.StartQuest();
-                    questToStart = null;
+                    yield return pokemonGiver.GivePokemon(initiator.GetComponent<PlayerMove>());
+                    
                 }
                 else
                 {
-                    if(activeQuest != null)
+                    if (questToStart != null)
                     {
-                        if (activeQuest.CanBeCompleted())
-                        {
-                            yield return activeQuest.CompletedQuest(initiator);
-                            activeQuest = null;
-                        }
-                        else
-                        {
-                            yield return DialogManager.Instance.ShowDialog(activeQuest.Base.InProgressDialog);
-                        }
+                        activeQuest = new Quest(questToStart);
+                        yield return activeQuest.StartQuest();
+                        questToStart = null;
+
+
+                        // uncomment hoàn thành quest ngay lập tức khi có vật phẩm
+                        //if (activeQuest.CanBeCompleted())
+                        //{
+                        //    yield return activeQuest.CompletedQuest(initiator);
+                        //    activeQuest = null;
+                        //}
+
                     }
                     else
                     {
-                        yield return DialogManager.Instance.ShowDialog(dialog);
+                        if (activeQuest != null)
+                        {
+                            if (activeQuest.CanBeCompleted())
+                            {
+                                yield return activeQuest.CompletedQuest(initiator);
+                                activeQuest = null;
+                            }
+                            else
+                            {
+                                yield return DialogManager.Instance.ShowDialog(activeQuest.Base.InProgressDialog);
+                            }
+                        }
+                        else
+                        {
+                            yield return DialogManager.Instance.ShowDialog(dialog);
+                        }
+
                     }
-                    
                 }
                 
             }
