@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+[System.Serializable]
 public class Quest 
 {
-
-    
-
     public QuestBase Base { get; private set; }
 
     public QuestStatus Status { get; private set; }
@@ -21,6 +20,9 @@ public class Quest
         Status = QuestStatus.Started;
 
         yield return DialogManager.Instance.ShowDialog(Base.StartDialog);
+
+        var questList = QuestList.GetQuestList();
+        questList.AddQuest(this);
     }
 
     //hoan thanh quest
