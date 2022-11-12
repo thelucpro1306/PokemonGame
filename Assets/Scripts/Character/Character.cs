@@ -17,9 +17,7 @@ public class Character : MonoBehaviour
     private void Awake()
     {
         animator = GetComponent<CharacterAnimator>();
-        SetPositionAndSnapToTile(transform.position);
-
-        
+        SetPositionAndSnapToTile(transform.position);       
     }
 
 

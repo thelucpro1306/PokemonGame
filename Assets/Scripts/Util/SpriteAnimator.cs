@@ -20,9 +20,6 @@ public class SpriteAnimator : MonoBehaviour
         this.spriteRenderer = spriteRenderer;
         this.frameRate = frameRate;
     }
-
-    
-
     public void Start()
     {
         currentFrame = 1;

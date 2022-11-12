@@ -9,7 +9,7 @@ public class BattleUnit : MonoBehaviour
     
     [SerializeField] bool isPlayerUnit;
     [SerializeField] BattleHud hud;
-
+    [SerializeField] GameObject moveAnimation;
     public bool IsPlayerUnit
     {
         get { return isPlayerUnit; }
@@ -24,10 +24,14 @@ public class BattleUnit : MonoBehaviour
     Image image;
     Vector3 originalPos;
     Color originalColor;
+    
+
+
     private void Awake()
     {
         image = GetComponent<Image>();  
-        originalPos =image.transform.localPosition;
+       
+        originalPos = image.transform.localPosition;
         originalColor = image.color;
     }
 
@@ -47,6 +51,30 @@ public class BattleUnit : MonoBehaviour
         transform.localScale = new Vector3(1, 1, 1);
         image.color = originalColor;    
         PlayerEnterAnimation();
+    }
+
+
+    public IEnumerator MoveEffectsAnimation(Move move,Vector3 targetPos)
+    {
+        
+        var image = moveAnimation.GetComponentInChildren<Image>();
+        image.sprite = move.Base.Sprite;
+        
+        if (image.sprite != null)
+        {
+            moveAnimation.gameObject.SetActive(true);
+            Debug.Log(image.sprite.name);
+            moveAnimation.transform.localPosition = originalPos;//-116 56         
+            yield return moveAnimation.transform.DOLocalMove(targetPos + new Vector3(1.5f,0,0), 0.85f).WaitForCompletion();//224 85
+            moveAnimation.gameObject.SetActive(false);
+        }
+        else
+        {
+            Debug.Log("Fail");
+            moveAnimation.gameObject.SetActive(false);
+            yield break;
+        }
+        
     }
 
     public void Clear()
@@ -83,6 +111,8 @@ public class BattleUnit : MonoBehaviour
         sequence.Append(image.transform.DOLocalMoveX(originalPos.x, 0.5f));
     }
 
+    
+
     public void PlayerHitAnimation()
     {
         var sequence = DOTween.Sequence();
@@ -107,14 +137,7 @@ public class BattleUnit : MonoBehaviour
         yield return sequence.WaitForCompletion();
     }
 
-    public IEnumerator ShowDmgAnimation()
-    {
-        var sequence = DOTween.Sequence();
-        sequence.Append(image.DOFade(0, 0.5f));
-        sequence.Join(transform.DOLocalMoveY(originalPos.y, 0.5f));
-        
-        yield return sequence.WaitForCompletion();
-    }
+
 
     public IEnumerator PlayBreakOutAnimation()
     {

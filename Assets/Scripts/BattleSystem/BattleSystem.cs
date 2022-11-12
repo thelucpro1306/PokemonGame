@@ -23,7 +23,8 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] MoveSelectionUI moveSelectionUI;
     [SerializeField] GameObject dmgUI;
     [SerializeField] InventoryUI inventoryUI;
-
+    
+ 
 
     BattleState state;
 
@@ -122,7 +123,7 @@ public class BattleSystem : MonoBehaviour
 
 
 
-            yield return dialogBox.TypeDialog($"{trainer.Name} đã xuất {enemyPokemon.Base.Name} ra trận chiến");
+            yield return dialogBox.TypeDialog($"{trainer.Name} đã chọn {enemyPokemon.Base.Name} để chiến đấu");
 
 
 
@@ -175,10 +176,10 @@ public class BattleSystem : MonoBehaviour
 
 
 
-        yield return dialogBox.TypeDialog($"{ trainer.Name} chuẩn bị xuất " +
-            $"{newPokemon.Base.Name} ra trận chiến. Bạn có muốn đổi Pokemon ko?");
+        yield return dialogBox.TypeDialog($"{ trainer.Name} chuẩn bị đưa " +
+            $"{newPokemon.Base.Name} ra trận chiến.");
 
-
+        yield return dialogBox.TypeDialog($"Bạn có muốn đổi Pokemon không?");
 
 
         state = BattleState.AboutToUse;
@@ -336,7 +337,7 @@ public class BattleSystem : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.UpArrow))
             currentMove -= 2;
 
-        currentAction = Mathf.Clamp(currentMove, 0, playerUnit.pokemon.Moves.Count - 1);
+        currentAction = Mathf.Clamp(currentMove, 0, 4);
 
         dialogBox.updateMoveSelection(currentMove, playerUnit.pokemon.Moves[currentMove]);
 
@@ -533,10 +534,6 @@ public class BattleSystem : MonoBehaviour
 
         move.PP--;
 
-
-
-
-
         yield return dialogBox.TypeDialog($"{sourceUnit.pokemon.Base.Name} đã sử dụng {move.Base.Name}");
 
 
@@ -545,9 +542,9 @@ public class BattleSystem : MonoBehaviour
 
         if (CheckIfMoveHits(move, sourceUnit.pokemon, targetUnit.pokemon))
         {
-            sourceUnit.PlayerAttackAnimation();
+            sourceUnit.PlayerAttackAnimation();          
+            yield return sourceUnit.MoveEffectsAnimation(move, targetUnit.transform.localPosition);
             yield return new WaitForSeconds(1f);
-
             targetUnit.PlayerHitAnimation();
 
             if (move.Base.Category == MoveCategory.Status)
@@ -581,20 +578,11 @@ public class BattleSystem : MonoBehaviour
         }
         else
         {
-
-
-
-
-            yield return dialogBox.TypeDialog($"đòn tấn công của {sourceUnit.pokemon.Base.Name} đã bị trượt !!!");
-
-
-
-
+            yield return dialogBox.TypeDialog($"Đòn tấn công của {sourceUnit.pokemon.Base.Name} đã bị trượt !!!");
         }
-
-
-
     }
+
+   
 
     IEnumerator RunAfterTurn(BattleUnit sourceUnit)
     {

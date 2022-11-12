@@ -1,10 +1,9 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-
-
-[CreateAssetMenu(fileName = "Move", menuName = "Pokemon/Create New Move")]
+[CreateAssetMenu(fileName = "Move", menuName = "Pokemon/Tạo skill mới")]
 public class MoveBase : ScriptableObject
 {
     [SerializeField] string name;
@@ -22,6 +21,7 @@ public class MoveBase : ScriptableObject
     [SerializeField] MoveEffects effects;
     [SerializeField] List<SencondaryEffects> secondaries;
     [SerializeField] MoveTarget target;
+    [SerializeField] Sprite sprite;
 
 
     public string Name
@@ -82,6 +82,9 @@ public class MoveBase : ScriptableObject
     {
         get { return secondaries; }
     }
+
+    public Sprite Sprite => sprite; 
+
 }
 
 [System.Serializable]   

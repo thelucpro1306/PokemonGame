@@ -369,6 +369,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hightlightColor: {r: 0.08612371, g: 0.049439307, b: 0.9528302, a: 1}
+--- !u!1 &594312568
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 594312569}
+  m_Layer: 0
+  m_Name: MoveAnimation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &594312569
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 594312568}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -54.028553, y: 20.892925, z: -0.49919555}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &764365417 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2774444431542419276, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
@@ -680,6 +711,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 690252379592438215, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 713876605636109749, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 713876605636109749, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 722905584652868803, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
@@ -2038,6 +2077,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EssentialObjects
       objectReference: {fileID: 0}
+    - target: {fileID: 2774444431553724259, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
+      propertyPath: MoveAnimation
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2774444431666825274, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2065,6 +2108,10 @@ PrefabInstance:
     - target: {fileID: 2774444432171284278, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
       propertyPath: m_Name
       value: UI Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 2774444432187638782, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
+      propertyPath: MoveAnimation
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2822880880566153925, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
       propertyPath: m_AnchorMax.y
@@ -3542,6 +3589,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5647523021914225053, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 42.299988
+      objectReference: {fileID: 0}
     - target: {fileID: 5678591064852106173, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -3600,7 +3651,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5773746422873037408, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
       propertyPath: pokeballSlots.Array.size
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5773746422873037408, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
       propertyPath: tmSlots.Array.data[0].item
@@ -3639,12 +3690,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 98ded87a555e3664fa73b94f9dc48ba7, type: 2}
     - target: {fileID: 5773746422873037408, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
+      propertyPath: pokeballSlots.Array.data[1].item
+      value: 
+      objectReference: {fileID: 11400000, guid: 833e7a06760bf554c9568a497d7db4ed, type: 2}
+    - target: {fileID: 5773746422873037408, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
       propertyPath: pokeballSlots.Array.data[2].item
       value: 
       objectReference: {fileID: 11400000, guid: dc5a6ae955e9c3644ae100580815ffa0, type: 2}
     - target: {fileID: 5773746422873037408, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
       propertyPath: pokeballSlots.Array.data[0].count
-      value: 1
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5773746422873037408, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
+      propertyPath: pokeballSlots.Array.data[1].count
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5773746422873037408, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
       propertyPath: pokeballSlots.Array.data[2].count
@@ -4413,6 +4472,10 @@ PrefabInstance:
     - target: {fileID: 7161648183486573752, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7253145714920514433, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -68.774994
       objectReference: {fileID: 0}
     - target: {fileID: 7340701698191671873, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
       propertyPath: m_AnchorMax.y
@@ -5234,6 +5297,10 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8799150115104408428, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -2051248975, guid: 15b2dad42ac0c06479a5410354e72c9a, type: 3}
     - target: {fileID: 8845457629324266629, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -5813,14 +5880,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wildPokemons:
   - _base: {fileID: 11400000, guid: cc7e1ef99670bf148ba15982a6ae0143, type: 2}
-    level: 2
-    dmgTake: 0
-    isCritical: 0
-  - _base: {fileID: 11400000, guid: cc7e1ef99670bf148ba15982a6ae0143, type: 2}
-    level: 3
-    dmgTake: 0
-    isCritical: 0
-  - _base: {fileID: 11400000, guid: 9605aa5dc7c8b0b40ace0a8a2d62f5c7, type: 2}
     level: 3
     dmgTake: 0
     isCritical: 0
