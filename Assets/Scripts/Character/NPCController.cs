@@ -64,11 +64,11 @@ public class NPCController : MonoBehaviour,Interactable ,ISavable
                 {
                     if (questToStart != null)
                     {
-                        activeQuest = new Quest(questToStart);
-                        yield return activeQuest.StartQuest();
-                        questToStart = null;
-
-
+                        
+                        
+                            activeQuest = new Quest(questToStart);
+                            yield return activeQuest.StartQuest();
+                            questToStart = null;
                         // uncomment hoàn thành quest ngay lập tức khi có vật phẩm
                         //if (activeQuest.CanBeCompleted())
                         //{
@@ -171,7 +171,7 @@ public class NPCController : MonoBehaviour,Interactable ,ISavable
         var saveData = state as NPCQuestSaveData;
         if(saveData!= null)
         {
-            activeQuest = (saveData.activeQuest != null)? new Quest(saveData.activeQuest) : null;
+            activeQuest = (saveData.activeQuest != null) ? new Quest(saveData.activeQuest) : null;
             questToStart = (saveData.questToStart != null) ? new Quest(saveData.questToStart).Base : null;
             questToComplete = (saveData.questToComplete != null) ? new Quest(saveData.questToComplete).Base : null;
 

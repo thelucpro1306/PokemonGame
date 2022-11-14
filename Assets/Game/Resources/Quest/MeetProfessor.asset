@@ -15,10 +15,22 @@ MonoBehaviour:
   questName: MeetProfessor
   description: 
   startDialog:
-    lines: []
+    lines:
+    - "Ch\xE1u h\xE3y ch\u1ECDn Pokemon n\xE0o m\xE0 ch\xE1u th\u1EA5y h\u1EE3p v\u1EDBi
+      b\u1EA3n th\xE2n nh\u1EA5t!"
   inProgressDialog:
     lines: []
   completeDialog:
-    lines: []
+    lines:
+    - "N\xF3 h\u1EE3p v\u1EDBi ch\xE1u \u0111\u1EA5y!"
+    - "H\xE3y c\xF9ng n\xF3 v\xE0 tr\u1EDF th\xE0nh nh\xE0 hu\u1EA5n luy\u1EC7n Pokemon
+      t\xE0i ba nh\u1EA5t !"
+    - "H\xE3y t\xECm \u0111\u01B0\u1EDDng t\u1EDBi th\xE0nh ph\u1ED1 Viridian City!"
+    - "\u1EDE \u0111\xF3 c\xF3 m\u1ED9t trainer r\u1EA5t m\u1EA1nh"
+    - "H\xE3y c\u1EA9n th\u1EADn"
+    - "Tr\xEAn \u0111\u01B0\u1EDDng \u0111i c\u0169ng c\xF3 r\u1EA5t nhi\u1EC1u pokemon
+      hoang d\xE3 s\u1EBD t\u1EA5n c\xF4ng ch\xE1u"
+    - "Nh\u01B0ng b\xE1c tin ch\xE1u s\u1EBD l\xE0m \u0111\u01B0\u1EE3c"
+    - "(\u0E07'\u0300-'\u0301)\u0E07"
   requiredItem: {fileID: 0}
   rewardItem: {fileID: 0}

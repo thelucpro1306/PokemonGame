@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -176,11 +176,11 @@ public class Pokemon
             
             if(boost > 0)
             {
-                StatusChanges.Enqueue($"Pokemon {Base.Name} t?ng {stat} !");
+                StatusChanges.Enqueue($"Pokemon {Base.Name} Tăng {stat} !");
             }
             else
             {
-                StatusChanges.Enqueue($"Pokemon {Base.Name} gi?m {stat} !");
+                StatusChanges.Enqueue($"Pokemon {Base.Name} giảm {stat} !");
             }
 
         }

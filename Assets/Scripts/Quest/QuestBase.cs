@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName ="Quest/Creat a new quest")]
+
 public class QuestBase : ScriptableObject
 {
     [SerializeField] string questName;
@@ -14,6 +15,8 @@ public class QuestBase : ScriptableObject
 
     [SerializeField] ItemBase requiredItem;
     [SerializeField] ItemBase rewardItem;
+    [SerializeField] Pokemon requiredPokemon;
+    [SerializeField] Pokemon rewardPokemon;
 
     public string QuestName => questName;
     public string Description => description;
@@ -23,6 +26,10 @@ public class QuestBase : ScriptableObject
     
     public ItemBase RequiredItem => requiredItem;
     public ItemBase RewardItem => rewardItem;
+    public Pokemon RequiredPokemon => requiredPokemon;
+    public Pokemon RewardPokemon => rewardPokemon;
+
+    
         
 
 

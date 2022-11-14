@@ -27,3 +27,13 @@ MonoBehaviour:
     - "C\u1EA3m \u01A1n b\u1EA1n, \u0111\xE2y l\xE0 m\xF3n qu\xE0 c\u1EE7a b\u1EA1n"
   requiredItem: {fileID: 11400000, guid: 98ded87a555e3664fa73b94f9dc48ba7, type: 2}
   rewardItem: {fileID: 11400000, guid: 98ded87a555e3664fa73b94f9dc48ba7, type: 2}
+  requiredPokemon:
+    _base: {fileID: 0}
+    level: 0
+    dmgTake: 0
+    isCritical: 0
+  rewardPokemon:
+    _base: {fileID: 0}
+    level: 0
+    dmgTake: 0
+    isCritical: 0

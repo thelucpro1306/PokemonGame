@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 678b7ae4afabfaa4488831f5932bf100, type: 3}
+  m_Name: Gs2
+  m_EditorClassIdentifier: 
+  questName: 
+  description: 
+  startDialog:
+    lines:
+    - "H\xF4m nay l\xE0 ng\xE0y ch\xE1u \u0111i phi\xEAu l\u01B0u \u0111\xFAng kh\xF4ng?"
+    - "H\xE3y mang theo m\u1ED9t Pokemon l\xE0m ng\u01B0\u1EDDi b\u1EA1n \u0111\u1ED3ng
+      h\xE0nh."
+  inProgressDialog:
+    lines: []
+  completeDialog:
+    lines: []
+  requiredItem: {fileID: 0}
+  rewardItem: {fileID: 0}

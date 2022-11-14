@@ -4,11 +4,13 @@ using UnityEngine;
 
 
 [System.Serializable]
-public class Quest 
+public class Quest
 {
     public QuestBase Base { get; private set; }
 
     public QuestStatus Status { get; private set; }
+
+
 
     public Quest(QuestBase _quest)
     {
@@ -18,14 +20,14 @@ public class Quest
     public Quest(QuestSaveData SaveData)
     {
         Base = QuestDB.GetObjectByName(SaveData.name);
-        Status = SaveData.status;   
+        Status = SaveData.status;
     }
 
     public QuestSaveData GetSaveData()
     {
         var saveData = new QuestSaveData()
         {
-            name =Base.name,
+            name = Base.name,
             status = Status
         };
         return saveData;
@@ -48,18 +50,22 @@ public class Quest
         yield return DialogManager.Instance.ShowDialog(Base.CompleteDialog);
 
         var inventory = Inventory.GetInventory();
-
-        if(Base.RequiredItem != null)
+        var pokemon = PokemonParty.GetPlayerParty();
+        if (Base.RequiredItem != null)
         {
             inventory.RemoveItem(Base.RequiredItem);
+            pokemon.RemovePokemon(Base.RequiredPokemon);
         }
 
-        if(Base.RewardItem != null)
+        if (Base.RewardItem != null)
         {
             inventory.AddItem(Base.RewardItem);
             var playerName = player.GetComponent<PlayerMove>().Name;
+            Base.RewardPokemon.Init();
+            pokemon.AddPokemon(Base.RewardPokemon);
             yield return DialogManager.Instance.ShowDialogText($"{playerName} đã nhận được {Base.RewardItem.Name}");
         }
+
         var questList = QuestList.GetQuestList();
         questList.AddQuest(this);
     }
@@ -67,24 +73,25 @@ public class Quest
     public bool CanBeCompleted()
     {
         var inventory = Inventory.GetInventory();
-        if(Base.RequiredItem != null)
+        var pokemon = PokemonParty.GetPlayerParty();
+        if (Base.RequiredItem != null || Base.RequiredPokemon != null)
         {
-            if (!inventory.HasItem(Base.RequiredItem))
+            if (!inventory.HasItem(Base.RequiredItem) || !pokemon.IsInParty(Base.RequiredPokemon))
             {
                 return false;
             }
-            
+
         }
         return true;
     }
 
 }
 
-public enum QuestStatus { None, Started,Completed}
+public enum QuestStatus { None, Started, Completed }
 
 [System.Serializable]
 public class QuestSaveData
 {
     public string name;
-    public QuestStatus status;  
+    public QuestStatus status;
 }

@@ -10,22 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 678b7ae4afabfaa4488831f5932bf100, type: 3}
-  m_Name: FaintedPokemon
+  m_Name: Gs1
   m_EditorClassIdentifier: 
-  questName: FaintedPokemon
+  questName: Gs1
   description: 
   startDialog:
     lines:
     - "Ch\xE0o ch\xE1u"
     - "Ch\xFAc m\xECnh sinh nh\u1EADt"
-    - "H\xE3y ch\u1ECDn m\u1ED9t pokemon tr\xEAn b\xE0n l\xE0m m\xF3n qu\xE0"
-    - "V\xE0 nh\u1EB7t h\u1ED9 b\xE1c c\xE1i Pokeball \u0111ang r\u01A1i "
+    - "B\xE1c \u0111ang b\u1EADn qu\xE1"
+    - "Nh\u1EB7t h\u1ED9 b\xE1c c\xE1i Pokeball r\u01A1i \u1EDF g\xF3c nh\xE0 "
+    - "Xong th\xEC quay l\u1EA1i \u0111\xE2y"
   inProgressDialog:
     lines:
-    - "Ch\xE1u \u0111\xE3 ch\u1ECDn \u0111\u01B0\u1EE3c pokemon ch\u01B0a"
+    - "Ch\xE1u nh\u1EB7t xong ch\u01B0a"
   completeDialog:
     lines:
-    - "Ch\xE1u h\xE3y t\xECm \u0111\u01B0\u1EDDng \u0111i t\u1EDBi ViridianCity \u0111\u1EC3
-      tr\u1EDF th\xE0nh trainer t\xE0i gi\u1ECFi nh\u1EA5t"
+    - "C\u1EA3m \u01A1n ch\xE1u"
   requiredItem: {fileID: 11400000, guid: 98ded87a555e3664fa73b94f9dc48ba7, type: 2}
   rewardItem: {fileID: 11400000, guid: 98ded87a555e3664fa73b94f9dc48ba7, type: 2}

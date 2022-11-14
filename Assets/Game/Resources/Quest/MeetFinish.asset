@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 678b7ae4afabfaa4488831f5932bf100, type: 3}
+  m_Name: MeetFinish
+  m_EditorClassIdentifier: 
+  questName: 
+  description: 
+  startDialog:
+    lines: []
+  inProgressDialog:
+    lines: []
+  completeDialog:
+    lines:
+    - "B\u1EA1n \u0111\xE3 ch\u1ECDn \u0111\u01B0\u1EE3c Pokemon, h\xE3y qua n\xF3i
+      chuy\u1EC7n v\u1EDBi gi\xE1o s\u01B0"
+  requiredItem: {fileID: 0}
+  rewardItem: {fileID: 0}

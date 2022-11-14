@@ -42,11 +42,36 @@ public class PokemonParty : MonoBehaviour
         return pokemons.Where(x => x.HP > 0).FirstOrDefault();
     }
 
+    public bool IsInParty(Pokemon pokemon)
+    {
+        if(pokemons.Where(p => p == pokemon ).Count() > 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     public void AddPokemon(Pokemon newPokemon)
     {
         if (pokemons.Count < 6)
         {
             pokemons.Add(newPokemon);
+            onUpdated?.Invoke();
+        }
+        else
+        {
+            //
+        }
+    }
+
+    public void RemovePokemon(Pokemon newPokemon)
+    {
+        if (pokemons.Count < 6)
+        {
+            pokemons.Remove(newPokemon);
             onUpdated?.Invoke();
         }
         else

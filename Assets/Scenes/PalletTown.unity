@@ -123,6 +123,92 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &183241067
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1010528085970301486, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
+      propertyPath: uniqueId
+      value: 502cc189-ae82-40d3-a583-1d032094bdfd
+      objectReference: {fileID: 0}
+    - target: {fileID: 3648624697420404588, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3648624697420404588, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -16.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 3648624697420404588, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -25.91
+      objectReference: {fileID: 0}
+    - target: {fileID: 3648624697420404588, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3648624697420404588, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3648624697420404588, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3648624697420404588, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3648624697420404588, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3648624697420404588, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3648624697420404588, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3648624697420404588, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3648624697420404591, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
+      propertyPath: questToStart
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3648624697420404591, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
+      propertyPath: questToComplete
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3648624697420404591, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
+      propertyPath: timeBetweenPattern
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3648624697420404591, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
+      propertyPath: dialog.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3648624697420404591, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
+      propertyPath: dialog.lines.Array.data[0]
+      value: "Ch\xE0o b\u1EA1n"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3648624697420404591, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
+      propertyPath: movementPattern.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3648624697420404594, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
+      propertyPath: m_Name
+      value: NPC (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3648624697420404586, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
 --- !u!1 &259771829
 GameObject:
   m_ObjectHideFlags: 0
@@ -21707,6 +21793,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3648624697420404591, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
+      propertyPath: questToStart.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3648624697420404591, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
       propertyPath: dialog.lines.Array.data[0]
       value: "Ch\xE0o b\u1EA1n"
       objectReference: {fileID: 0}
@@ -21714,6 +21804,22 @@ PrefabInstance:
       propertyPath: movementPattern.Array.size
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3648624697420404591, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
+      propertyPath: questToStart.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 4e55780fe72e0574daab3b3ad141a38f, type: 2}
+    - target: {fileID: 3648624697420404591, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
+      propertyPath: questToStart.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 1d2f5a5c0cb33a8429dec8cc7d8c6974, type: 2}
+    - target: {fileID: 3648624697420404591, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
+      propertyPath: questToStart.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 5b028ddb3d4f5084fb5ca475cf10dd44, type: 2}
+    - target: {fileID: 3648624697420404591, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
+      propertyPath: questToStart.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 5b028ddb3d4f5084fb5ca475cf10dd44, type: 2}
     - target: {fileID: 3648624697420404594, guid: 1780dc92cc6e8704e9259f673f3abe9c, type: 3}
       propertyPath: m_Name
       value: NPC
