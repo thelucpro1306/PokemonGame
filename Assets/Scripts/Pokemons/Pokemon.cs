@@ -366,6 +366,7 @@ public class Pokemon
     {
         HP = MaxHP;
         OnHpChanged?.Invoke();
+        CureStatus();
     }
 
     public void CureStatus()

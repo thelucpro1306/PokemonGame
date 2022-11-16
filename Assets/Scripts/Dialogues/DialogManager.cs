@@ -10,6 +10,8 @@ public class DialogManager : MonoBehaviour
     [SerializeField] GameObject dialogBox;
     [SerializeField] Text dialogText;
     [SerializeField] int lettersPerSecond;
+    [SerializeField] ChoiceBox choiceBox;
+
 
     public static DialogManager Instance { get; private set; }
 
@@ -22,7 +24,8 @@ public class DialogManager : MonoBehaviour
         Instance = this;
     }
 
-    public IEnumerator ShowDialogText(string text,bool waitForInput = true, bool autoClose = true)
+    public IEnumerator ShowDialogText(string text,bool waitForInput = true, bool autoClose = true
+                , List<string> choices = null, Action<int> onChoiceSelected = null)
     {
         OnShowDialog?.Invoke();
         isShowing = true;
@@ -31,6 +34,11 @@ public class DialogManager : MonoBehaviour
         if (waitForInput)
         {
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
+        }
+
+        if (choices != null && choices.Count > 1)
+        {
+            yield return choiceBox.ShowChoices(choices, onChoiceSelected);
         }
 
         if (autoClose)
@@ -46,7 +54,7 @@ public class DialogManager : MonoBehaviour
         isShowing = false;
     }
 
-    public IEnumerator ShowDialog(Dialog dialog)
+    public IEnumerator ShowDialog(Dialog dialog, List<string> choices = null,Action<int> onChoiceSelected = null)
     {
         yield return new WaitForEndOfFrame();
 
@@ -58,10 +66,19 @@ public class DialogManager : MonoBehaviour
             yield return TypeDialog(line);
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
         }
+
+        if(choices != null && choices.Count > 1)
+        {
+            yield return choiceBox.ShowChoices(choices, onChoiceSelected);
+        }
+
         dialogBox.SetActive(false);
         isShowing = false;
         onDialogFinish?.Invoke();
     }
+
+
+
 
     public void HandleUpdate()
     {

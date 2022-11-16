@@ -4,19 +4,42 @@ using UnityEngine;
 
 public class Healer : MonoBehaviour
 {
+    [SerializeField] Dialog yesDialog;
+    [SerializeField] Dialog NoDialog;
+
     public IEnumerator Heal(Transform player, Dialog dialog)
     {
         
-        yield return DialogManager.Instance.ShowDialog(dialog);
-        yield return Fader.Instance.FaderIn(0.5f);
-        var playerParty = player.GetComponent<PokemonParty>();
+        int selectedChoice = 0;
 
-        playerParty.Pokemons.ForEach(p => p.Heal());
-        playerParty.PartyUpdated();
+        yield return DialogManager.Instance.ShowDialogText($"Tôi sẽ hồi phục cho Pokemon của bạn !"
+            ,choices: new List<string>() { "Có", "Không" }
+            ,onChoiceSelected: (choiceIndex) => selectedChoice = choiceIndex);
 
-        yield return Fader.Instance.FaderOut(0.5f);
+        if(selectedChoice == 0)
+        {
+            //Yes 
+            yield return Fader.Instance.FaderIn(0.5f);
+            var playerParty = player.GetComponent<PokemonParty>();
 
-        yield return DialogManager.Instance.ShowDialogText($"Pokemon của bạn đã hoàn toàn khoẻ mạnh");
+            playerParty.Pokemons.ForEach(p => p.Heal());
+            playerParty.PartyUpdated();
+
+            yield return Fader.Instance.FaderOut(0.5f);
+
+            yield return DialogManager.Instance.ShowDialog(yesDialog);
+        }
+        else
+        {
+            if (selectedChoice == 1)
+            {
+                //No
+                yield return DialogManager.Instance.ShowDialog(NoDialog);
+            }
+        }
+
+
+        
     }
 
 }

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum GameState { FreeRoam, Battle, Dialog, CutScene, Paused, Menu, PartyScreen, Bag, Evolution }
+public enum GameState { FreeRoam, Battle, Dialog, CutScene, Paused, Menu, PartyScreen, Bag, Evolution,Shop }
 
 public class GameController : MonoBehaviour
 {
@@ -84,6 +84,17 @@ public class GameController : MonoBehaviour
             partyScreen.SetPartyData();
             state = stateForEvolution;
         };
+
+        ShopController.instance.onStart += () =>
+        {
+            state = GameState.Shop;
+        };
+
+        ShopController.instance.onFinnsh += () =>
+        {
+            state = GameState.FreeRoam;
+        };
+
 
     }
 
@@ -214,6 +225,13 @@ public class GameController : MonoBehaviour
                                 };
 
                                 inventoryUI.HandleUpdate(onBack);
+                            }
+                            else
+                            {
+                                if(state == GameState.Shop)
+                                {
+                                    ShopController.instance.HandleUpdate();
+                                }
                             }
                         }
                     }
