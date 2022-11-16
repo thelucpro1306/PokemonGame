@@ -10,9 +10,6 @@ public class Pokemon
 
     [SerializeField] PokemonBase _base;
     [SerializeField] int level;
-
-    
-
     public Pokemon(PokemonBase pBase, int pLevel)
     {
         _base = pBase;
@@ -129,7 +126,14 @@ public class Pokemon
         Stats.Add(Stat.SpDefense, Mathf.FloorToInt((Base.SpDefense * Level) / 100f) + 5);
         Stats.Add(Stat.Speed, Mathf.FloorToInt((Base.Speed * Level) / 100f) + 5);
 
+        int oldMaxHp = MaxHP;
         MaxHP = Mathf.FloorToInt((Base.MaxHP * Level) / 100f) + 10 + Level;
+
+        if(oldMaxHp != 0)
+        {
+            HP += MaxHP - oldMaxHp;
+        }
+
     }
 
     void ResetStatBoost()
@@ -186,11 +190,28 @@ public class Pokemon
         }
     }
 
+    public Evolution CheckForEvolution()
+    {
+        return Base.Evolutions.FirstOrDefault(e => e.RequiredLevel <= level);
+    }
+
+    public Evolution CheckForEvolution(ItemBase item)
+    {
+        return Base.Evolutions.FirstOrDefault(e => e.RequiredItem == item);
+    }
+
+    public void Evolve(Evolution evolution)
+    {
+        _base = evolution.EvolvesInto;
+        CaculateStats();
+    }
+
     public bool CheckForLevelUp()
     {
         if(Exp > Base.GetExpForLevel(level + 1))
         {
             ++level;
+            CaculateStats();
             return true;
         }
 
@@ -341,6 +362,12 @@ public class Pokemon
 
     }
 
+    public void Heal()
+    {
+        HP = MaxHP;
+        OnHpChanged?.Invoke();
+        CureStatus();
+    }
 
     public void CureStatus()
     {

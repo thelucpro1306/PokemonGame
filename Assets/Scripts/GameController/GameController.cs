@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum GameState { FreeRoam, Battle, Dialog, CutScene, Paused, Menu, PartyScreen, Bag }
+public enum GameState { FreeRoam, Battle, Dialog, CutScene, Paused, Menu, PartyScreen, Bag, Evolution,Shop }
 
 public class GameController : MonoBehaviour
 {
@@ -18,6 +18,7 @@ public class GameController : MonoBehaviour
     TrainerController trainer;
 
     GameState prevState;
+    GameState stateForEvolution;
     public SceneDetails CurrentScene { get; private set; }
     public SceneDetails PrevScene { get; private set; }
 
@@ -72,6 +73,28 @@ public class GameController : MonoBehaviour
 
         partyScreen.Init();
 
+        EvolutionManager.Instance.OnStartEvolution += () =>
+        {
+            stateForEvolution = state;
+            state = GameState.Evolution;
+        };
+
+        EvolutionManager.Instance.OnCompletedEvolution += () =>
+        {
+            partyScreen.SetPartyData();
+            state = stateForEvolution;
+        };
+
+        ShopController.instance.onStart += () =>
+        {
+            state = GameState.Shop;
+        };
+
+        ShopController.instance.onFinnsh += () =>
+        {
+            state = GameState.FreeRoam;
+        };
+
 
     }
 
@@ -96,10 +119,12 @@ public class GameController : MonoBehaviour
             trainer.BattleLost();
             trainer = null;
         }
-
+        partyScreen.SetPartyData();
         state = GameState.FreeRoam;
         battleSystem.gameObject.SetActive(false);
         worldCamera.gameObject.SetActive(true);
+        var playerParty = playerController.GetComponent<PokemonParty>();
+        StartCoroutine(playerParty.CheckForEvolution());
     }
 
     public void StartBattle()
@@ -200,6 +225,13 @@ public class GameController : MonoBehaviour
                                 };
 
                                 inventoryUI.HandleUpdate(onBack);
+                            }
+                            else
+                            {
+                                if(state == GameState.Shop)
+                                {
+                                    ShopController.instance.HandleUpdate();
+                                }
                             }
                         }
                     }

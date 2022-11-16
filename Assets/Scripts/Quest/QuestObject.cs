@@ -35,7 +35,11 @@ public class QuestObject : MonoBehaviour
                 {
                     child.gameObject.SetActive(true);
 
-
+                    var saveable = child.GetComponent<SavableEntity>();
+                    if (saveable != null)
+                    {
+                        SavingSystem.i.RestoreEntity(saveable);
+                    }
                 }
                 else
                 {
@@ -55,6 +59,11 @@ public class QuestObject : MonoBehaviour
                 if (onComplete == ObjectAction.Enable)
                 {
                     child.gameObject.SetActive(true);
+                    var saveable = child.GetComponent<SavableEntity>();
+                    if (saveable != null)
+                    {
+                        SavingSystem.i.RestoreEntity(saveable);
+                    }
                 }
                 else
                 {

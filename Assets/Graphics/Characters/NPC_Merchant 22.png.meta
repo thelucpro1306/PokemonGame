@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2045285527504c14e89d63092461430b
+guid: b1030116d5419ca45ac1431882404b13
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -69,7 +69,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -116,337 +116,337 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: NPC 16_0_Nurse
+      name: NPC_Merchant 22_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 2
         y: 146
-        width: 32
+        width: 28
         height: 40
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3336defc31a2c9141ba9db0cf6b49540
-      internalID: -1357628114
+      spriteID: 8c62e38ee24659941ad896cfc1334217
+      internalID: -1389865537
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NPC 16_1
+      name: NPC_Merchant 22_1
       rect:
         serializedVersion: 2
-        x: 32
+        x: 34
         y: 146
-        width: 32
-        height: 38
+        width: 28
+        height: 40
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fa901501a2037294494bf19805de80cf
-      internalID: -630895619
+      spriteID: 30fc81bbe27af834a9af96d83a9d7e7e
+      internalID: -1160908544
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NPC 16_2
+      name: NPC_Merchant 22_2
       rect:
         serializedVersion: 2
-        x: 64
+        x: 66
         y: 146
-        width: 32
-        height: 38
+        width: 28
+        height: 40
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a5e3e585b04c0224f9a41ee68966d556
-      internalID: -367251318
+      spriteID: ec75cad68611d744e9d578ac41b46b43
+      internalID: -1657201108
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NPC 16_3
+      name: NPC_Merchant 22_3
       rect:
         serializedVersion: 2
-        x: 96
+        x: 98
         y: 146
-        width: 32
-        height: 38
+        width: 28
+        height: 40
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ec86a093830bf5046853d28f5cf2da97
-      internalID: -1202846603
+      spriteID: cb1b3457cc8956b46a2714d761e7494d
+      internalID: -701110344
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NPC 16_4
+      name: NPC_Merchant 22_4
       rect:
         serializedVersion: 2
-        x: 0
+        x: 4
         y: 98
-        width: 32
+        width: 26
         height: 40
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f3c07df5a4407534092ada24e75f4d6a
-      internalID: -1113314097
+      spriteID: 1b31e25a839f1f2469449d6de01a9bb9
+      internalID: -1712612315
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NPC 16_5
+      name: NPC_Merchant 22_5
       rect:
         serializedVersion: 2
-        x: 32
+        x: 36
         y: 98
-        width: 32
-        height: 39
+        width: 26
+        height: 40
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0c4ddc5fbb794d04c83172c121fa1288
-      internalID: -467797755
+      spriteID: 10e9b127826994e4da62b169307f973b
+      internalID: 623431903
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NPC 16_6
+      name: NPC_Merchant 22_6
       rect:
         serializedVersion: 2
-        x: 64
+        x: 68
         y: 98
-        width: 32
+        width: 26
         height: 40
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5083867fb971915489cadf8d966c7d6a
-      internalID: -1132731157
+      spriteID: a4e02b37a6594ac4f8be3f32147f9239
+      internalID: -1556381798
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NPC 16_7
+      name: NPC_Merchant 22_7
       rect:
         serializedVersion: 2
-        x: 96
+        x: 100
         y: 98
-        width: 32
+        width: 26
         height: 40
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dcf7f74e82366ff41a545d3990342d5f
-      internalID: 854797301
+      spriteID: ee21517e4d660dc4ba023621f6a37c31
+      internalID: 1561782866
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NPC 16_8
+      name: NPC_Merchant 22_8
       rect:
         serializedVersion: 2
-        x: 0
+        x: 2
         y: 50
-        width: 32
+        width: 26
         height: 40
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 01dce51c7ffc6774dbabf5ac1bc899a9
-      internalID: -621668417
+      spriteID: 25c5ab88c9e30a64f8f54221a334e196
+      internalID: 1799566663
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NPC 16_9
+      name: NPC_Merchant 22_9
       rect:
         serializedVersion: 2
-        x: 32
+        x: 34
         y: 50
-        width: 32
+        width: 26
         height: 40
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8d9af07d08bc83e44b3489416c2c3b0f
-      internalID: 1281250682
+      spriteID: 1533994497806cf4fbf136aaa058e58d
+      internalID: -675550811
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NPC 16_10
+      name: NPC_Merchant 22_10
       rect:
         serializedVersion: 2
-        x: 64
+        x: 66
         y: 50
-        width: 32
+        width: 26
         height: 40
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4fa5c7b65eb2ff949a177c3e1597c1af
-      internalID: 173469957
+      spriteID: 56565efcb0c73a740910451d19aacce9
+      internalID: 16790555
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NPC 16_11
+      name: NPC_Merchant 22_11
       rect:
         serializedVersion: 2
-        x: 96
+        x: 98
         y: 50
-        width: 32
+        width: 26
         height: 40
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 21793cd787f86ed48a82c967c659a0c6
-      internalID: 1404488374
+      spriteID: b188fc3915cd36c48b0faaecf8732812
+      internalID: -1546241351
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NPC 16_12
+      name: NPC_Merchant 22_12
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1
-        width: 32
-        height: 41
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a3e9beb79754c48438c0a08a8534d09b
-      internalID: -1263193916
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: NPC 16_13
-      rect:
-        serializedVersion: 2
-        x: 32
+        x: 2
         y: 2
-        width: 32
+        width: 28
         height: 40
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ac40af38caa050d48af834c9175b9570
-      internalID: 365582551
+      spriteID: 900f17ee37f858647b74d3fa81fce277
+      internalID: 1108872893
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NPC 16_14
+      name: NPC_Merchant 22_13
       rect:
         serializedVersion: 2
-        x: 64
+        x: 34
         y: 2
-        width: 32
+        width: 28
         height: 40
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b234c6f333b20f94e8a7704139f7f4a8
-      internalID: 1002285929
+      spriteID: 5d6cedc3f938e8543a3da68401d1f525
+      internalID: -1361023423
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NPC 16_15
+      name: NPC_Merchant 22_14
       rect:
         serializedVersion: 2
-        x: 96
-        y: 1
-        width: 32
-        height: 41
+        x: 66
+        y: 2
+        width: 28
+        height: 40
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9bfacd87a65756144a2b657cbe2701fe
-      internalID: -1924725680
+      spriteID: 6b2e030ee85fd2d459efa2c8bd8bbbf1
+      internalID: 1995537274
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NPC_Merchant 22_15
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 2
+        width: 28
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8175fdda6e0bd924eb31d5a53c645505
+      internalID: 600411
       vertices: []
       indices: 
       edges: []
@@ -462,22 +462,22 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      NPC 16_13: 365582551
-      NPC 16_9: 1281250682
-      NPC 16_1: -630895619
-      NPC 16_10: 173469957
-      NPC 16_12: -1263193916
-      NPC 16_2: -367251318
-      NPC 16_11: 1404488374
-      NPC 16_6: -1132731157
-      NPC 16_3: -1202846603
-      NPC 16_14: 1002285929
-      NPC 16_7: 854797301
-      NPC 16_8: -621668417
-      NPC 16_0_Nurse: -1357628114
-      NPC 16_4: -1113314097
-      NPC 16_5: -467797755
-      NPC 16_15: -1924725680
+      NPC_Merchant 22_5: 623431903
+      NPC_Merchant 22_10: 16790555
+      NPC_Merchant 22_9: -675550811
+      NPC_Merchant 22_13: -1361023423
+      NPC_Merchant 22_11: -1546241351
+      NPC_Merchant 22_6: -1556381798
+      NPC_Merchant 22_14: 1995537274
+      NPC_Merchant 22_0: -1389865537
+      NPC_Merchant 22_1: -1160908544
+      NPC_Merchant 22_15: 600411
+      NPC_Merchant 22_4: -1712612315
+      NPC_Merchant 22_3: -701110344
+      NPC_Merchant 22_7: 1561782866
+      NPC_Merchant 22_8: 1799566663
+      NPC_Merchant 22_12: 1108872893
+      NPC_Merchant 22_2: -1657201108
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

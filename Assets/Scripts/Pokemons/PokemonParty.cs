@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -65,6 +65,26 @@ public class PokemonParty : MonoBehaviour
         {
             //
         }
+    }
+
+    public void PartyUpdated()
+    {
+        onUpdated?.Invoke();
+    }
+
+    public IEnumerator CheckForEvolution()
+    {
+        foreach(var pokemon in pokemons)
+        {
+            var evolution = pokemon.CheckForEvolution();
+            if(evolution != null)
+            {
+                yield return EvolutionManager.Instance.Evolve(pokemon, evolution);
+            }
+        }
+        
+       
+
     }
 
     public void RemovePokemon(Pokemon newPokemon)
