@@ -16,7 +16,8 @@ public class Inventory : MonoBehaviour, ISavable
     {
         "Vật phẩm",
         "POKEBALLS", //this is vật phẩm
-        "TMs & HMs"
+        "TMs & HMs",
+
     };
 
     public event Action onUpdated;
@@ -63,7 +64,7 @@ public class Inventory : MonoBehaviour, ISavable
 
     public ItemCategory GetCategoryFromItem(ItemBase item)
     {
-        if (item is RecoveryItem)
+        if (item is RecoveryItem || item is EvolutionItem)
         {
             return ItemCategory.Items;
         }

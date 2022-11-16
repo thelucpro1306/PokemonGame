@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NPCController : MonoBehaviour,Interactable ,ISavable
+public class NPCController : MonoBehaviour, Interactable, ISavable
 {
     [SerializeField] Dialog dialog;
     [SerializeField] List<Sprite> sprites;
@@ -23,22 +23,25 @@ public class NPCController : MonoBehaviour,Interactable ,ISavable
     ItemGiver itemGiver;
     Quest activeQuest;
     PokemonGiver pokemonGiver;
+    Healer healer;
+
 
     private void Awake()
     {
         character = GetComponent<Character>();
         itemGiver = GetComponent<ItemGiver>();
         pokemonGiver = GetComponent<PokemonGiver>();
+        healer = GetComponent<Healer>();
     }
 
     public IEnumerator Interact(Transform initiator)
     {
-        if(state == NPCState.Idle)
+        if (state == NPCState.Idle)
         {
             state = NPCState.Dialog;
             character.LookTowards(initiator.position);
 
-            if(questToComplete != null)
+            if (questToComplete != null)
             {
                 var quest = new Quest(questToComplete);
                 yield return quest.CompletedQuest(initiator);
@@ -58,23 +61,21 @@ public class NPCController : MonoBehaviour,Interactable ,ISavable
                 if (pokemonGiver != null && pokemonGiver.CanbeGiven())
                 {
                     yield return pokemonGiver.GivePokemon(initiator.GetComponent<PlayerMove>());
-                    
+
                 }
                 else
                 {
                     if (questToStart != null)
                     {
-                        
-                        
-                            activeQuest = new Quest(questToStart);
-                            yield return activeQuest.StartQuest();
-                            questToStart = null;
+                        activeQuest = new Quest(questToStart);
+                        yield return activeQuest.StartQuest();
+                        questToStart = null;
                         // uncomment hoàn thành quest ngay lập tức khi có vật phẩm
-                        //if (activeQuest.CanBeCompleted())
-                        //{
-                        //    yield return activeQuest.CompletedQuest(initiator);
-                        //    activeQuest = null;
-                        //}
+                        if (activeQuest.CanBeCompleted())
+                        {
+                            yield return activeQuest.CompletedQuest(initiator);
+                            activeQuest = null;
+                        }
 
                     }
                     else
@@ -93,12 +94,19 @@ public class NPCController : MonoBehaviour,Interactable ,ISavable
                         }
                         else
                         {
-                            yield return DialogManager.Instance.ShowDialog(dialog);
+                            if (healer != null)
+                            {
+                                yield return healer.Heal(initiator, dialog);
+                            }
+                            else
+                            {
+                                yield return DialogManager.Instance.ShowDialog(dialog);
+                            }
                         }
 
                     }
                 }
-                
+
             }
             idleTimer = 0f;
             state = NPCState.Idle;
@@ -113,12 +121,12 @@ public class NPCController : MonoBehaviour,Interactable ,ISavable
 
         yield return character.Move(movementPattern[currentPattern]);
 
-        if(oldPos != transform.position)
+        if (oldPos != transform.position)
         {
             currentPattern = (currentPattern + 1) % movementPattern.Count;
         }
 
-        
+
 
         state = NPCState.Idle;
 
@@ -131,17 +139,17 @@ public class NPCController : MonoBehaviour,Interactable ,ISavable
         //    return;
         //}
 
-        if(state == NPCState.Idle)
+        if (state == NPCState.Idle)
         {
             idleTimer += Time.deltaTime;
-            if(idleTimer > timeBetweenPattern)
+            if (idleTimer > timeBetweenPattern)
             {
                 idleTimer = 0;
-                if(movementPattern.Count > 0)
+                if (movementPattern.Count > 0)
                 {
                     StartCoroutine(Walk());
                 }
-                
+
             }
         }
 
@@ -153,7 +161,7 @@ public class NPCController : MonoBehaviour,Interactable ,ISavable
         var saveData = new NPCQuestSaveData();
 
         saveData.activeQuest = activeQuest?.GetSaveData();
-        if(questToStart != null)
+        if (questToStart != null)
         {
             saveData.activeQuest = (new Quest(questToStart)).GetSaveData();
         }
@@ -169,14 +177,14 @@ public class NPCController : MonoBehaviour,Interactable ,ISavable
     public void RestoreState(object state)
     {
         var saveData = state as NPCQuestSaveData;
-        if(saveData!= null)
+        if (saveData != null)
         {
             activeQuest = (saveData.activeQuest != null) ? new Quest(saveData.activeQuest) : null;
             questToStart = (saveData.questToStart != null) ? new Quest(saveData.questToStart).Base : null;
             questToComplete = (saveData.questToComplete != null) ? new Quest(saveData.questToComplete).Base : null;
 
         }
-        
+
     }
 }
 
@@ -189,4 +197,4 @@ public class NPCQuestSaveData
 }
 
 
-public enum NPCState { Idle, Walking, Dialog}
+public enum NPCState { Idle, Walking, Dialog }

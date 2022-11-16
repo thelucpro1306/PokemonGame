@@ -337,6 +337,27 @@ public class InventoryUI : MonoBehaviour
 
         yield return HandleTmItems();
 
+        var item = inventory.GetItem(selectedItem, selectedCategory);
+        var pokemon = partyScreen.SelectedMember;
+
+
+        // Xử lý tiến hoá bằng vật phẩm
+        if (item is EvolutionItem)
+        {
+            var evolution = pokemon.CheckForEvolution(item);
+            if(evolution!= null)
+            {
+                yield return EvolutionManager.Instance.Evolve(pokemon,evolution);
+            }
+            else
+            {
+                
+                yield return DialogManager.Instance.ShowDialogText($"{pokemon.Base.Name} không muốn dùng {item.Name} để tiến hoá");
+                ClosePartyScreen();
+                yield break;
+            }
+        }
+
         var useItem = inventory.UseItem(selectedItem, partyScreen.SelectedMember, selectedCategory);
         if (useItem != null)
         {
