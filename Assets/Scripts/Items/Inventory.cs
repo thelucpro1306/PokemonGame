@@ -40,6 +40,22 @@ public class Inventory : MonoBehaviour, ISavable
         return FindObjectOfType<PlayerMove>().GetComponent<Inventory>();
     }
 
+    public int GetItemCount(ItemBase item)
+    {
+        int category = (int)GetCategoryFromItem(item);
+        var currentSlot = GetSlotByCategory(category);
+        var itemSlot = currentSlot.FirstOrDefault(slot => slot.Item == item);
+
+        if(itemSlot != null)
+        {
+            return itemSlot.Count;
+        }
+        else
+        {
+            return 0;
+        }
+
+    }
     public void AddItem(ItemBase item, int count = 1)
     {
         int category = (int)GetCategoryFromItem(item);
@@ -112,14 +128,14 @@ public class Inventory : MonoBehaviour, ISavable
         return null;
     }
 
-    public void RemoveItem(ItemBase item)
+    public void RemoveItem(ItemBase item,int countToRemove = 1)
     {
         // tìm vật phẩm từ danh mục và lấy slot của vật phẩm đó
         int category = (int)GetCategoryFromItem(item);
         var currentSlot = GetSlotByCategory(category);
 
         var itemSlot = currentSlot.First(slot => slot.Item == item);
-        itemSlot.Count--;
+        itemSlot.Count -= countToRemove;
         if (itemSlot.Count == 0)
         {
             currentSlot.Remove(itemSlot);

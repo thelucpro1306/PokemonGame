@@ -30,4 +30,12 @@ public class ItemSlotUI : MonoBehaviour
 
     }
 
+    public void SetNameAndPrice(ItemBase item)
+    {
+        rectTransform = GetComponent<RectTransform>();
+        nameText.text = item.Name;
+        countText.text = $"G {item.Price}";
+    }
+
+
 }

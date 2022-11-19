@@ -12,12 +12,18 @@ public class InventoryUI : MonoBehaviour
 {
     [SerializeField] GameObject itemList;
     [SerializeField] ItemSlotUI ItemSlotUI;
+
     [SerializeField] Image itemIcon;
     [SerializeField] Text itemDescription;
 
     [SerializeField] Text categoryText;
 
+    [SerializeField] Image upArrow;
+    [SerializeField] Image downArrow;
 
+    [SerializeField] PartyScreen partyScreen;
+    [SerializeField] MoveSelectionUI moveSelectionUI;
+    [SerializeField] WalletUI walletUI;
     Inventory inventory;
     int selectedItem = 0;
     int selectedCategory = 0;
@@ -28,13 +34,6 @@ public class InventoryUI : MonoBehaviour
 
     List<ItemSlotUI> slotUIList;
     RectTransform itemListRec;
-
-    [SerializeField] Image upArrow;
-    [SerializeField] Image downArrow;
-
-    [SerializeField] PartyScreen partyScreen;
-    [SerializeField] MoveSelectionUI moveSelectionUI;
-
     InventoryUIState state;
 
     private void Awake()
@@ -81,6 +80,7 @@ public class InventoryUI : MonoBehaviour
 
         if (state == InventoryUIState.ItemSelection)
         {
+            walletUI.Show();
             int prevSelection = selectedItem;
             int prevCategory = selectedCategory;
 

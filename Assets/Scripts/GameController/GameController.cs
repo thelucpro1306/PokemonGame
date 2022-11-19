@@ -13,6 +13,7 @@ public class GameController : MonoBehaviour
     [SerializeField] Camera worldCamera;
     [SerializeField] PartyScreen partyScreen;
     [SerializeField] InventoryUI inventoryUI;
+    [SerializeField] WalletUI walletUI;
     public static GameController Instance { get; private set; }
 
     TrainerController trainer;
@@ -85,12 +86,12 @@ public class GameController : MonoBehaviour
             state = stateForEvolution;
         };
 
-        ShopController.instance.onStart += () =>
+        ShopController.Instance.onStart += () =>
         {
             state = GameState.Shop;
         };
 
-        ShopController.instance.onFinnsh += () =>
+        ShopController.Instance.onFinnsh += () =>
         {
             state = GameState.FreeRoam;
         };
@@ -204,6 +205,9 @@ public class GameController : MonoBehaviour
                             Action onSelected = () =>
                             {
                                 // lam man hinh tom tat thong tin cua pokemon
+
+
+
                             };
 
                             Action onBack = () =>
@@ -221,6 +225,7 @@ public class GameController : MonoBehaviour
                                 Action onBack = () =>
                                 {
                                     inventoryUI.gameObject.SetActive(false);
+                                    walletUI.Close();
                                     state = GameState.FreeRoam;
                                 };
 
@@ -230,7 +235,7 @@ public class GameController : MonoBehaviour
                             {
                                 if(state == GameState.Shop)
                                 {
-                                    ShopController.instance.HandleUpdate();
+                                    ShopController.Instance.HandleUpdate();
                                 }
                             }
                         }
@@ -238,9 +243,20 @@ public class GameController : MonoBehaviour
                 }
             }
         }
+    }
 
-
-
+    public IEnumerator MoveCamera(Vector2 moveOffset, bool waitForFadeOut = false)
+    {
+        yield return Fader.Instance.FaderIn(0.5f);       
+        worldCamera.transform.position += new Vector3(moveOffset.x,moveOffset.y);
+        if (waitForFadeOut)
+        {
+            yield return Fader.Instance.FaderOut(0.5f);
+        }
+        else
+        {
+            StartCoroutine(Fader.Instance.FaderOut(0.5f));
+        }
     }
 
     void OnMenuSelected(int slectedItem)
@@ -258,6 +274,7 @@ public class GameController : MonoBehaviour
             {
                 //bag
                 inventoryUI.gameObject.SetActive(true);
+                
                 state = GameState.Bag;
             }
             else
