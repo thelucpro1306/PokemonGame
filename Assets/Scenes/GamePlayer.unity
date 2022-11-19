@@ -3978,6 +3978,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5186740960743783732, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
+      propertyPath: walletUI
+      value: 
+      objectReference: {fileID: 892694438}
+    - target: {fileID: 5186740960743783732, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
       propertyPath: partyScreen
       value: 
       objectReference: {fileID: 892694440}
