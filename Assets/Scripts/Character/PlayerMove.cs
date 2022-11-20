@@ -11,13 +11,13 @@ public class PlayerMove : MonoBehaviour, ISavable
     [SerializeField] Sprite sprite;
 
     public Vector2 input;
-
+    public static PlayerMove instance { get; private set; }
 
     private Character character;
 
     private void Awake()
     {
-
+        instance = this;
         character = GetComponent<Character>();
     }
 

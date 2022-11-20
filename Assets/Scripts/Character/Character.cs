@@ -22,7 +22,7 @@ public class Character : MonoBehaviour
 
 
 
-    public IEnumerator Move(Vector2 moveVec, Action OnMoveOver = null)
+    public IEnumerator Move(Vector2 moveVec, Action OnMoveOver = null, bool isCheckCollisions = true )
     {
         animator.MoveX = Mathf.Clamp(moveVec.x,-1f, 1f);
         animator.MoveY = Mathf.Clamp(moveVec.y, -1f, 1f);
@@ -31,7 +31,7 @@ public class Character : MonoBehaviour
         targetPos.x += moveVec.x;
         targetPos.y += moveVec.y;
 
-        if (!IsPathClear(targetPos))
+        if ( isCheckCollisions && !IsPathClear(targetPos))
         {
             yield break;
         }
