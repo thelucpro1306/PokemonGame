@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum GameState { FreeRoam, Battle, Dialog, CutScene, Paused, Menu, PartyScreen, Bag, Evolution,Shop }
+public enum GameState { FreeRoam, Battle, Dialog, CutScene, Paused, Menu, PartyScreen, Bag, Evolution, Shop }
 
 public class GameController : MonoBehaviour
 {
@@ -112,6 +112,17 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public void StartCutSceneState()
+    {
+        state = GameState.CutScene;
+    }
+
+    public void StartFreeRoamState()
+    {
+        state = GameState.FreeRoam;
+    }
+
+
     void EndBattle(bool won)
     {
 
@@ -200,45 +211,53 @@ public class GameController : MonoBehaviour
                     }
                     else
                     {
-                        if (state == GameState.PartyScreen)
+                        if (state == GameState.CutScene)
                         {
-                            Action onSelected = () =>
-                            {
-                                // lam man hinh tom tat thong tin cua pokemon
-
-
-
-                            };
-
-                            Action onBack = () =>
-                            {
-                                partyScreen.gameObject.SetActive(false);
-                                state = GameState.FreeRoam;
-                            };
-
-                            partyScreen.HandleUpdate(onSelected, onBack);
+                            playerController.Character.HandleUpdate();
                         }
                         else
                         {
-                            if (state == GameState.Bag)
+                            if (state == GameState.PartyScreen)
                             {
+                                Action onSelected = () =>
+                                {
+                                    // lam man hinh tom tat thong tin cua pokemon
+
+
+
+                                };
+
                                 Action onBack = () =>
                                 {
-                                    inventoryUI.gameObject.SetActive(false);
-                                    walletUI.Close();
+                                    partyScreen.gameObject.SetActive(false);
                                     state = GameState.FreeRoam;
                                 };
 
-                                inventoryUI.HandleUpdate(onBack);
+                                partyScreen.HandleUpdate(onSelected, onBack);
                             }
                             else
                             {
-                                if(state == GameState.Shop)
+                                if (state == GameState.Bag)
                                 {
-                                    ShopController.Instance.HandleUpdate();
+                                    Action onBack = () =>
+                                    {
+                                        inventoryUI.gameObject.SetActive(false);
+                                        walletUI.Close();
+                                        state = GameState.FreeRoam;
+                                    };
+
+                                    inventoryUI.HandleUpdate(onBack);
+                                }
+                                else
+                                {
+                                    if (state == GameState.Shop)
+                                    {
+                                        ShopController.Instance.HandleUpdate();
+                                    }
                                 }
                             }
                         }
+                        //
                     }
                 }
             }
@@ -247,8 +266,8 @@ public class GameController : MonoBehaviour
 
     public IEnumerator MoveCamera(Vector2 moveOffset, bool waitForFadeOut = false)
     {
-        yield return Fader.Instance.FaderIn(0.5f);       
-        worldCamera.transform.position += new Vector3(moveOffset.x,moveOffset.y);
+        yield return Fader.Instance.FaderIn(0.5f);
+        worldCamera.transform.position += new Vector3(moveOffset.x, moveOffset.y);
         if (waitForFadeOut)
         {
             yield return Fader.Instance.FaderOut(0.5f);
@@ -274,7 +293,7 @@ public class GameController : MonoBehaviour
             {
                 //bag
                 inventoryUI.gameObject.SetActive(true);
-                
+
                 state = GameState.Bag;
             }
             else
