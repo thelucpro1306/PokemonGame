@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1be7dec461ce11e4787de6cf7b405d8f, type: 3}
+  m_Name: Wartortle
+  m_EditorClassIdentifier: 
+  name: Squirtle
+  decsription: 
+  frontSprite: {fileID: 21300000, guid: 2df75e7e76d711b4ea6dbcd7d4bd8288, type: 3}
+  backSprite: {fileID: 21300000, guid: a0377ed25a7138645a4afd23801aa962, type: 3}
+  type1: 3
+  type2: 0
+  maxHp: 59
+  attack: 63
+  defense: 80
+  spAttack: 65
+  spDefense: 80
+  speed: 58
+  expYield: 142
+  growthRate: 3
+  catchRate: 45
+  learnableMoves:
+  - moveBase: {fileID: 11400000, guid: f4048e6c64a9d1f468ed03a58e5fad5e, type: 2}
+    level: 1
+  - moveBase: {fileID: 11400000, guid: 66ec6de0f32640a429e01070404189f5, type: 2}
+    level: 1
+  - moveBase: {fileID: 11400000, guid: 4d576fc88431ab04a904b272dc1eba37, type: 2}
+    level: 1
+  - moveBase: {fileID: 11400000, guid: fcba5eeb0a6460c4dbc07e65cb644de2, type: 2}
+    level: 1
+  - moveBase: {fileID: 11400000, guid: 6fec9d9b0ddce494f92a8bae7dff645a, type: 2}
+    level: 9
+  - moveBase: {fileID: 11400000, guid: f1eeb4910966c0848bb12803df48505a, type: 2}
+    level: 12
+  - moveBase: {fileID: 11400000, guid: 8aa15d5264d16a4418fd8ef860c25334, type: 2}
+    level: 15
+  - moveBase: {fileID: 11400000, guid: 6d041fb503c96e1449a2a40186ae8bd0, type: 2}
+    level: 23
+  - moveBase: {fileID: 11400000, guid: 9ef5ca7170309234694d3dbf076d91a4, type: 2}
+    level: 30
+  - moveBase: {fileID: 11400000, guid: 0f25167084af9e248bd55d072711687c, type: 2}
+    level: 39
+  - moveBase: {fileID: 11400000, guid: 955c1ab8b16f4fa49a24bc5b5a57ec86, type: 2}
+    level: 45
+  - moveBase: {fileID: 11400000, guid: 061c3253556e7fd408e202566f1dba9d, type: 2}
+    level: 50
+  learnableByItems:
+  - {fileID: 11400000, guid: 2b41860f606a9e544a012aaa52485d0a, type: 2}
+  evolutions:
+  - evolvesInto: {fileID: 11400000, guid: a36f6be2664b62f408a719c0ea94aec6, type: 2}
+    requiredLevel: 36
+    requiredItem: {fileID: 0}

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: "G\u1EA7m g\u1EEB"
   decsription: 
-  type: 0
+  type: 1
   power: 0
   accuracy: 100
   alwaysHits: 0
@@ -29,3 +29,4 @@ MonoBehaviour:
     volatileStatus: 0
   secondaries: []
   target: 0
+  sprite: {fileID: 0}

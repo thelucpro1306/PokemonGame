@@ -33,7 +33,7 @@ public class MoveSelectionUI : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.UpArrow))
             currentSelection -= 2;
 
-        currentSelection = Mathf.Clamp(currentSelection, 0, PokemonBase.MaxNumOfMoves);
+        currentSelection = Mathf.Clamp(currentSelection, 0,3);
 
         UpdateOldSelection(currentSelection);
 

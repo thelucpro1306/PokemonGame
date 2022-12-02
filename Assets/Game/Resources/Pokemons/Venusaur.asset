@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1be7dec461ce11e4787de6cf7b405d8f, type: 3}
+  m_Name: Venusaur
+  m_EditorClassIdentifier: 
+  name: Venusaur
+  decsription: 
+  frontSprite: {fileID: 21300000, guid: af951455ffce6f7468317660eae86289, type: 3}
+  backSprite: {fileID: 21300000, guid: 4c11ee8a940767c4896fe62952d37d10, type: 3}
+  type1: 5
+  type2: 8
+  maxHp: 80
+  attack: 82
+  defense: 83
+  spAttack: 100
+  spDefense: 100
+  speed: 80
+  expYield: 208
+  growthRate: 3
+  catchRate: 45
+  learnableMoves:
+  - moveBase: {fileID: 11400000, guid: fbd0980856dd5f745908604990195519, type: 2}
+    level: 1
+  - moveBase: {fileID: 11400000, guid: 7a107c9b29ffd5745b48c17225a342e2, type: 2}
+    level: 1
+  - moveBase: {fileID: 11400000, guid: 367cff781e4b98c4ab0f54bec520a2a5, type: 2}
+    level: 1
+  - moveBase: {fileID: 11400000, guid: f4048e6c64a9d1f468ed03a58e5fad5e, type: 2}
+    level: 1
+  - moveBase: {fileID: 11400000, guid: 7e8bdd48ad811964ea1fb76ef014fcc8, type: 2}
+    level: 1
+  - moveBase: {fileID: 11400000, guid: 93c8ac313bd95f54a999211b29b98a74, type: 2}
+    level: 9
+  - moveBase: {fileID: 11400000, guid: e82557ede35a6be4397179f6936ac853, type: 2}
+    level: 12
+  - moveBase: {fileID: 11400000, guid: 80eabb30b9735c94e948f208dec754e2, type: 2}
+    level: 15
+  - moveBase: {fileID: 11400000, guid: a691b555d10441147a83db45ca374afb, type: 2}
+    level: 15
+  - moveBase: {fileID: 11400000, guid: 564af37b76369d64bb99454aae7024f7, type: 2}
+    level: 20
+  - moveBase: {fileID: 11400000, guid: 514c34d836389d64ca477d4b2b6fecd9, type: 2}
+    level: 30
+  - moveBase: {fileID: 11400000, guid: 34de2afb2224515408dcecd51282974f, type: 2}
+    level: 51
+  - moveBase: {fileID: 11400000, guid: c125464f4e6af2f458e7cd27891c71e3, type: 2}
+    level: 58
+  learnableByItems: []
+  evolutions: []

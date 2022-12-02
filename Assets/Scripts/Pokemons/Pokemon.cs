@@ -184,11 +184,12 @@ public class Pokemon
             
             if(boost > 0)
             {
-                StatusChanges.Enqueue($"Pokemon {Base.Name} Tăng {stat} !");
+                StatusChanges.Enqueue($"Pokemon {Base.Name} tăng "+ ChangeLang( stat)+"!");
+                
             }
             else
             {
-                StatusChanges.Enqueue($"Pokemon {Base.Name} giảm {stat} !");
+                StatusChanges.Enqueue($"Pokemon {Base.Name} giảm " + ChangeLang(stat) + "!");
             }
 
         }
@@ -199,6 +200,52 @@ public class Pokemon
         return Base.Evolutions.FirstOrDefault(e => e.RequiredLevel <= level);
     }
 
+    public string ChangeLang(Stat stat)
+    {
+        if (stat == Stat.Accuracy)
+        {
+            return "Chính xác";
+        }
+        else
+        {
+            if (stat == Stat.Evasion)
+            {
+                return "Né tránh";
+            }
+            else
+            {
+                if (stat == Stat.Attack)
+                {
+                    return "Tấn công";
+                }
+                else
+                {
+                    if (stat == Stat.Defense)
+                    {
+                        return "thủ";
+                    }
+                    else
+                    {
+                        if (stat == Stat.SpAttack)
+                        {
+                            return "Tấn công đặc biệt";
+                        }
+                        else
+                        {
+                            if (stat == Stat.SpDefense)
+                            {
+                                return "thủ đặc biệt";
+                            }
+                            else
+                            {
+                                return "tốc độ";
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
     public Evolution CheckForEvolution(ItemBase item)
     {
         return Base.Evolutions.FirstOrDefault(e => e.RequiredItem == item);
