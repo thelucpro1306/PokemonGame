@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum GameState { FreeRoam, Battle, Dialog, CutScene, Paused, Menu, PartyScreen, Bag, Evolution, Shop }
+public enum GameState { FreeRoam, Battle, Dialog, CutScene, Paused, Menu, PartyScreen, Bag, Evolution, Shop,PokemonInfor }
 
 public class GameController : MonoBehaviour
 {
@@ -14,6 +14,8 @@ public class GameController : MonoBehaviour
     [SerializeField] PartyScreen partyScreen;
     [SerializeField] InventoryUI inventoryUI;
     [SerializeField] WalletUI walletUI;
+    PokemonInfor pokemonInfor;
+
     public static GameController Instance { get; private set; }
 
     TrainerController trainer;
@@ -38,8 +40,9 @@ public class GameController : MonoBehaviour
         ItemDB.Init();
         QuestDB.Init();
         menuController = GetComponent<MenuController>();
-        ConditionsDB.Init();
 
+        ConditionsDB.Init();
+        
     }
 
     public void Start()
@@ -68,6 +71,7 @@ public class GameController : MonoBehaviour
         {
             state = GameState.FreeRoam;
         };
+        
 
         menuController.onMenuSelected += OnMenuSelected;
 
@@ -119,6 +123,11 @@ public class GameController : MonoBehaviour
     public void StartFreeRoamState()
     {
         state = GameState.FreeRoam;
+    }
+
+    public void StartPartyScreenState()
+    {
+        state = GameState.PartyScreen;
     }
 
 
@@ -188,7 +197,6 @@ public class GameController : MonoBehaviour
                 state = GameState.Menu;
 
             }
-
         }
         else
         {
@@ -220,10 +228,7 @@ public class GameController : MonoBehaviour
                             {
                                 Action onSelected = () =>
                                 {
-                                    // lam man hinh tom tat thong tin cua pokemon
-
-
-
+                                   
                                 };
 
                                 Action onBack = () =>

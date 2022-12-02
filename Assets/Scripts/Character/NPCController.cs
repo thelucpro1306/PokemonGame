@@ -72,11 +72,11 @@ public class NPCController : MonoBehaviour, Interactable, ISavable
                         yield return activeQuest.StartQuest();
                         questToStart = null;
                         // uncomment hoàn thành quest ngay lập tức khi có vật phẩm
-                        if (activeQuest.CanBeCompleted())
-                        {
-                            yield return activeQuest.CompletedQuest(initiator);
-                            activeQuest = null;
-                        }
+                        //if (activeQuest.CanBeCompleted())
+                        //{
+                        //    yield return activeQuest.CompletedQuest(initiator);
+                        //    activeQuest = null;
+                        //}
 
                     }
                     else

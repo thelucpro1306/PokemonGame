@@ -50,8 +50,12 @@ public class Pokemon
     public event System.Action OnStatusChanged;
     public event System.Action OnHpChanged;
 
-    public int dmgTake;
-    public bool isCritical = true;
+    int dmgTake;
+    bool isCritical = true;
+
+    public bool IsCritical => isCritical;
+
+    public int DmgTake => dmgTake;
 
     public void Init()
     {
@@ -398,7 +402,6 @@ public class Pokemon
         HP = Mathf.Clamp(HP - damage, 0, MaxHP);
         OnHpChanged?.Invoke();
         
-
     }
 
     public void IncreaseHP(int amount)

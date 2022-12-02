@@ -17,7 +17,7 @@ MonoBehaviour:
   type: 4
   power: 0
   accuracy: 100
-  alwaysHits: 0
+  alwaysHits: 1
   pp: 20
   priority: 0
   category: 2
@@ -27,3 +27,4 @@ MonoBehaviour:
     volatileStatus: 0
   secondaries: []
   target: 0
+  sprite: {fileID: 0}

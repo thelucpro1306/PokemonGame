@@ -10,7 +10,7 @@ public class TrainerController : MonoBehaviour, Interactable, ISavable
     [SerializeField] GameObject fov;
     [SerializeField] Sprite sprite;
     [SerializeField] string name;
-
+    [SerializeField] float money = 100f;
     bool battleLost = false;
 
     Character character;
@@ -47,6 +47,7 @@ public class TrainerController : MonoBehaviour, Interactable, ISavable
         }
         else
         {
+
             yield return DialogManager.Instance.ShowDialog(dialogAfterBattle);
         }
 
@@ -133,4 +134,10 @@ public class TrainerController : MonoBehaviour, Interactable, ISavable
     {
         get => sprite;
     }
+
+    public float Money
+    {
+        get => money;
+    }
+
 }

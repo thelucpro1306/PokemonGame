@@ -24,12 +24,28 @@ public class Character : MonoBehaviour
 
     public IEnumerator Move(Vector2 moveVec, Action OnMoveOver = null, bool isCheckCollisions = true )
     {
-        animator.MoveX = Mathf.Clamp(moveVec.x,-1f, 1f);
-        animator.MoveY = Mathf.Clamp(moveVec.y, -1f, 1f);
+        animator.MoveX = Mathf.Clamp(moveVec.x,-1f, 1f) ;
+        animator.MoveY = Mathf.Clamp(moveVec.y, -1f, 1f) ;
                 
         var targetPos = transform.position;
-        targetPos.x += moveVec.x;
-        targetPos.y += moveVec.y;
+        targetPos.x += moveVec.x ;
+        targetPos.y += moveVec.y ;
+
+        if(moveVec.x == 0 )
+        {
+            if(moveVec.x < 0)
+                moveVec.y -= 1;
+            else
+                moveVec.y += 1;
+        }
+        else
+        {
+            if (moveVec.y < 0)
+                moveVec.x -= 1;
+            else
+                moveVec.x += 1;
+        }
+
 
         if ( isCheckCollisions && !IsPathClear(targetPos))
         {
@@ -40,12 +56,12 @@ public class Character : MonoBehaviour
 
         while ((targetPos - transform.position).sqrMagnitude > Mathf.Epsilon)
         {
-            transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * (Time.deltaTime));
             yield return null;
         }
         transform.position = targetPos;
         isMoving = false;
-
+        Debug.Log(targetPos);
         OnMoveOver?.Invoke();
 
     }
