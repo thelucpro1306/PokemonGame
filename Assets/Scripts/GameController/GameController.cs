@@ -31,8 +31,7 @@ public class GameController : MonoBehaviour
 
     private void Awake()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+
         Instance = this;
         PokemonDB.Init();
         MoveDB.Init();
@@ -278,7 +277,7 @@ public class GameController : MonoBehaviour
         }
     }
 
-    void OnMenuSelected(int slectedItem)
+    public void OnMenuSelected(int slectedItem)
     {
         if (slectedItem == 0)
         {

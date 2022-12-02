@@ -58070,6 +58070,7 @@ MonoBehaviour:
     lines:
     - "B\u1EA1n kh\xF4ng th\u1EC3 ra ngo\xE0i m\xE0 kh\xF4ng mang theo Pokemon"
   backPos: {x: 0, y: -1}
+  isDestroy: 0
 --- !u!61 &1615708604
 BoxCollider2D:
   m_ObjectHideFlags: 0

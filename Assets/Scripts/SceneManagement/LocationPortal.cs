@@ -28,7 +28,6 @@ public class LocationPortal : MonoBehaviour,IPlayerTriggerable
     IEnumerator Teleport()
     {
        
-
         GameController.Instance.PauseGame(true);
 
         //lam` mo` 

@@ -9,10 +9,17 @@ public class SceneDetails : MonoBehaviour
     [SerializeField] List<SceneDetails> connectedScene;
 
     public bool isLoaded { get; private set; }
+
     List<SavableEntity> savableEntities;
 
+    public static SceneDetails Instance { get; set; }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void Awake()
+    {
+        Instance = this;
+    }
+
+    public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
         {
@@ -78,7 +85,7 @@ public class SceneDetails : MonoBehaviour
         }
     }
 
-    List<SavableEntity> GetSavableEntitiesInScene()
+    public List<SavableEntity> GetSavableEntitiesInScene()
     {
         var currScene = SceneManager.GetSceneByName(gameObject.name);
 

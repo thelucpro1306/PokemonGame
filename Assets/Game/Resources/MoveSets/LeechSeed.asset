@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78baa30db7eba0648a4d7e97e576c29b, type: 3}
+  m_Name: LeechSeed
+  m_EditorClassIdentifier: 
+  name: "H\u1EA1t h\xFAt m\xE1u"
+  decsription: 
+  type: 5
+  power: 0
+  accuracy: 90
+  alwaysHits: 0
+  pp: 10
+  priority: 0
+  category: 2
+  effects:
+    boosts: []
+    status: 0
+    volatileStatus: 0
+  secondaries:
+  - boosts:
+    - stat: 1
+      boost: 1
+    status: 0
+    volatileStatus: 0
+    chance: 0
+    target: 1
+  target: 0
+  sprite: {fileID: 0}

@@ -6,14 +6,20 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 63aae8f16d2528a40b43f1660df957b2
+  - enabled: 1
     path: Assets/Scenes/GamePlayer.unity
     guid: 4386c0b32f4c291428eefe8be2d8705e
   - enabled: 1
-    path: Assets/Scenes/ViridianCity.unity
-    guid: 7f0f5acf80a2fb344a1a1a0fe91067de
+    path: Assets/Scenes/Gym#1.unity
+    guid: 254425bf0c318d548840f4a94d30f623
   - enabled: 1
     path: Assets/Scenes/PalletTown.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/PewterCity.unity
+    guid: b232a590094f8d94aafb9ab0a296de19
   - enabled: 1
     path: Assets/Scenes/PlayerHouse.unity
     guid: afb1249567cd04b4080b3f46dce464e9
@@ -29,4 +35,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Route1.unity
     guid: 068c75c0e19143f4cb9c771c77a2ba38
+  - enabled: 1
+    path: Assets/Scenes/Something,... Maybe.unity
+    guid: f58f1daececcc714d8b541b93ab5bf88
+  - enabled: 1
+    path: Assets/Scenes/ViridianCity.unity
+    guid: 7f0f5acf80a2fb344a1a1a0fe91067de
   m_configObjects: {}

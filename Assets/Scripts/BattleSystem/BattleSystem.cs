@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public enum BattleState { Start, ActionSelection, MoveSelection, RunningTurn, Busy, Bag, PartyScreen, BattleOver, AboutToUse, MoveToForget }
@@ -82,14 +83,7 @@ public class BattleSystem : MonoBehaviour
             enemyUnit.setUp(wildPokemon);
 
             dialogBox.setMoveNames(playerUnit.pokemon.Moves);
-
-
-
-
             yield return dialogBox.TypeDialog($"Pokemon {playerUnit.pokemon.Base.Name} xuất hiện!");
-
-
-
         }
         else
         {
@@ -103,31 +97,14 @@ public class BattleSystem : MonoBehaviour
             trainerImage.gameObject.SetActive(true);
             playerImage.sprite = player.Sprite;
             trainerImage.sprite = trainer.Sprite;
-
-
-
-
-
             yield return dialogBox.TypeDialog($"{trainer.Name} muốn chiến đấu với bạn!!");
-
-
-
-
 
             //Send out first pokemon of the trainer
             trainerImage.gameObject.SetActive(false);
             enemyUnit.gameObject.SetActive(true);
             var enemyPokemon = trainerParty.GetHealthyPokemon();
             enemyUnit.setUp(enemyPokemon);
-
-
-
-
             yield return dialogBox.TypeDialog($"{trainer.Name} đã chọn {enemyPokemon.Base.Name} để chiến đấu");
-
-
-
-
 
             //Send out first pokemon of the player
             playerImage.gameObject.SetActive(false);
@@ -329,17 +306,46 @@ public class BattleSystem : MonoBehaviour
     void HandleMoveSelection()
     {
         if (Input.GetKeyDown(KeyCode.RightArrow))
-            ++currentMove;
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
-            --currentMove;
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
-            currentMove += 2;
-        else if (Input.GetKeyDown(KeyCode.UpArrow))
-            currentMove -= 2;
+        {
+            if(currentMove < playerUnit.pokemon.Moves.Count - 1)
+            {
+                ++currentMove;
+            }
+        }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                if (currentMove > 0)
+                {
+                    --currentMove;
+                }
+            }
+            else
+            {
+                if (Input.GetKeyDown(KeyCode.DownArrow))
+                {
+                    if (currentMove < playerUnit.pokemon.Moves.Count -2)
+                    {
+                        currentMove += 2;
+                    }
+                }
+                else
+                {
+                    if (Input.GetKeyDown(KeyCode.UpArrow  ))
+                    {
+                        if (currentMove < 1)
+                        {
+                            currentMove -= 2;
+                        }
+                    }
+                }
+            }
+        }
 
-        currentAction = Mathf.Clamp(currentMove, 0, 4);
-
-        dialogBox.updateMoveSelection(currentMove, playerUnit.pokemon.Moves[currentMove]);
+        currentMove = Mathf.Clamp(currentMove, 0, playerUnit.pokemon.Moves.Count -1);
+         dialogBox.updateMoveSelection(currentMove, playerUnit.pokemon.Moves[currentMove]);  
+        
 
         if (Input.GetKeyDown(KeyCode.Return))
         {
@@ -620,7 +626,11 @@ public class BattleSystem : MonoBehaviour
             if (nextPokemon != null)
                 OpenPartyScreen();
             else
-                BattleOver(false);
+            {
+                BattleOver(false);      
+                    GameController.Instance.OnMenuSelected(3);
+            }    
+            
         }
         else
         {
