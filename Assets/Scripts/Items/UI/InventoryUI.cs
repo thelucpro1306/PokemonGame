@@ -80,7 +80,7 @@ public class InventoryUI : MonoBehaviour
 
         if (state == InventoryUIState.ItemSelection)
         {
-            walletUI.Show();
+            
             int prevSelection = selectedItem;
             int prevCategory = selectedCategory;
 

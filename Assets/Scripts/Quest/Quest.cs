@@ -61,11 +61,14 @@ public class Quest
         {
             inventory.AddItem(Base.RewardItem);
             var playerName = player.GetComponent<PlayerMove>().Name;
-            Base.RewardPokemon.Init();
-            pokemon.AddPokemon(Base.RewardPokemon);
+            
             yield return DialogManager.Instance.ShowDialogText($"{playerName} đã nhận được {Base.RewardItem.Name}");
         }
-
+        if (Base.RewardPokemon.Base != null)
+        {
+            Base.RewardPokemon.Init();
+            pokemon.AddPokemon(Base.RewardPokemon);
+        }
         var questList = QuestList.GetQuestList();
         questList.AddQuest(this);
     }
@@ -74,13 +77,21 @@ public class Quest
     {
         var inventory = Inventory.GetInventory();
         var pokemon = PokemonParty.GetPlayerParty();
-        if (Base.RequiredItem != null || Base.RequiredPokemon != null)
+        if (Base.RequiredItem != null)
         {
-            if (!inventory.HasItem(Base.RequiredItem) || !pokemon.IsInParty(Base.RequiredPokemon))
+            if (!inventory.HasItem(Base.RequiredItem))
             {
                 return false;
             }
 
+        }
+
+        if (Base.RequiredPokemon.Base != null)
+        {
+            if (!pokemon.IsInParty(Base.RequiredPokemon))
+            {
+                return false;
+            }
         }
         return true;
     }

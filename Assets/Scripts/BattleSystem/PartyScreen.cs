@@ -122,7 +122,6 @@ public class PartyScreen : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
-
             onBack?.Invoke();
         }
     }

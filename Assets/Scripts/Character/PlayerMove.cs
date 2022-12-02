@@ -10,7 +10,7 @@ public class PlayerMove : MonoBehaviour, ISavable
     [SerializeField] string name;
     [SerializeField] Sprite sprite;
 
-    public Vector2 input;
+    public Vector2 input ;
     public static PlayerMove instance { get; private set; }
 
     private Character character;
@@ -28,15 +28,18 @@ public class PlayerMove : MonoBehaviour, ISavable
         {
             input.x = Input.GetAxisRaw("Horizontal");
             input.y = Input.GetAxisRaw("Vertical");
-
+            
             if (input.x != 0)
             {
                 input.y = 0;
+
             }
+
 
             if (input != Vector2.zero)
             {
-                StartCoroutine(character.Move(input, OnMoveOver));
+                
+                StartCoroutine(character.Move(input , OnMoveOver));
             }
         }
 

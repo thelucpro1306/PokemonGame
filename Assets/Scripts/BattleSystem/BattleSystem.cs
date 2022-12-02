@@ -82,14 +82,7 @@ public class BattleSystem : MonoBehaviour
             enemyUnit.setUp(wildPokemon);
 
             dialogBox.setMoveNames(playerUnit.pokemon.Moves);
-
-
-
-
             yield return dialogBox.TypeDialog($"Pokemon {playerUnit.pokemon.Base.Name} xuất hiện!");
-
-
-
         }
         else
         {
@@ -103,46 +96,20 @@ public class BattleSystem : MonoBehaviour
             trainerImage.gameObject.SetActive(true);
             playerImage.sprite = player.Sprite;
             trainerImage.sprite = trainer.Sprite;
-
-
-
-
-
             yield return dialogBox.TypeDialog($"{trainer.Name} muốn chiến đấu với bạn!!");
-
-
-
-
-
             //Send out first pokemon of the trainer
             trainerImage.gameObject.SetActive(false);
             enemyUnit.gameObject.SetActive(true);
             var enemyPokemon = trainerParty.GetHealthyPokemon();
             enemyUnit.setUp(enemyPokemon);
-
-
-
-
             yield return dialogBox.TypeDialog($"{trainer.Name} đã chọn {enemyPokemon.Base.Name} để chiến đấu");
-
-
-
-
 
             //Send out first pokemon of the player
             playerImage.gameObject.SetActive(false);
             playerUnit.gameObject.SetActive(true);
             var playerPokemon = playerParty.GetHealthyPokemon();
             playerUnit.setUp(playerPokemon);
-
-
-
-
             yield return dialogBox.TypeDialog($"Hãy lên nào {enemyPokemon.Base.Name} !!!");
-
-
-
-
             dialogBox.setMoveNames(playerUnit.pokemon.Moves);
         }
 
@@ -158,6 +125,7 @@ public class BattleSystem : MonoBehaviour
         state = BattleState.BattleOver;
         playerParty.Pokemons.ForEach(p => p.OnBattleOver());
         playerUnit.Hud.ClearData();
+        
         enemyUnit.Hud.ClearData();
         OnBattleOver(won);
     }
@@ -172,9 +140,6 @@ public class BattleSystem : MonoBehaviour
     IEnumerator AboutToUse(Pokemon newPokemon)
     {
         state = BattleState.Busy;
-
-
-
 
         yield return dialogBox.TypeDialog($"{ trainer.Name} chuẩn bị đưa " +
             $"{newPokemon.Base.Name} ra trận chiến.");
@@ -509,7 +474,7 @@ public class BattleSystem : MonoBehaviour
         {
 
         }
-        CheckForBattleOver(fanitedUnit);
+        yield return CheckForBattleOver(fanitedUnit);
     }
 
     IEnumerator ChooseMoveToForget(Pokemon pokemon, MoveBase newMove)
@@ -556,7 +521,7 @@ public class BattleSystem : MonoBehaviour
                 var damageDetails = targetUnit.pokemon.TakeDamage(move, sourceUnit.pokemon);
 
                 yield return ShowDmg(targetUnit.transform.position + new Vector3(0, 1, 0)
-                    , targetUnit.pokemon.dmgTake, targetUnit.pokemon.isCritical);
+                    , targetUnit.pokemon.DmgTake, targetUnit.pokemon.IsCritical);
                 yield return targetUnit.Hud.WaitForHPUpdate();
                 yield return ShowDamageDetails(damageDetails);
             }
@@ -612,7 +577,7 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-    void CheckForBattleOver(BattleUnit faintedUnit)
+    IEnumerator CheckForBattleOver(BattleUnit faintedUnit)
     {
         if (faintedUnit.IsPlayerUnit)
         {
@@ -637,6 +602,8 @@ public class BattleSystem : MonoBehaviour
                 }
                 else
                 {
+                    yield return DialogManager.Instance.ShowDialogText($"Bạn đã nhận được {trainer.Money}G");
+                    Wallet.Instance.AddMoney(trainer.Money);
                     BattleOver(true);
                 }
             }

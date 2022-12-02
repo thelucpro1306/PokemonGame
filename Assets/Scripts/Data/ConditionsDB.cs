@@ -26,7 +26,7 @@ public class ConditionsDB
                 OnAfterTurn = (Pokemon pokemon) =>
                 {
                     pokemon.DecreaseHP(pokemon.MaxHP / 8);
-                    pokemon.StatusChanges.Enqueue($"{pokemon.Base.Name} tự làm đau mình bởi vì độc");
+                    pokemon.StatusChanges.Enqueue($"{pokemon.Base.Name} bị độc làm mất {pokemon.MaxHP / 8} máu.");
                 }
             }
         },
@@ -39,7 +39,7 @@ public class ConditionsDB
                 OnAfterTurn = (Pokemon pokemon) =>
                 {
                     pokemon.DecreaseHP(pokemon.MaxHP / 16);
-                    pokemon.StatusChanges.Enqueue($"{pokemon.Base.Name} tự làm đau mình bởi vì bỏng");
+                    pokemon.StatusChanges.Enqueue($"{pokemon.Base.Name} bị lửa đốt và mất {pokemon.MaxHP / 16} máu.");
                 }
             }
         },
@@ -75,7 +75,6 @@ public class ConditionsDB
                         pokemon.StatusChanges.Enqueue($"{pokemon.Base.Name} không còn bị đóng băng nữa");
                         return true;
                     }
-
                     return false;
                 }
             }
