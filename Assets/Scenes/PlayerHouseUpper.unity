@@ -11235,7 +11235,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialog:
     lines:
-    - hello
+    - "M\xECnh n\xEAn \u0111i xu\u1ED1ng nh\xE0 n\xF3i chuy\u1EC7n v\u1EDBi m\u1EB9!"
+    - "Di chuy\u1EC3n b\u1EB1ng WADS"
+    - "T\u01B0\u01A1ng t\xE1c b\u1EB1ng ph\xEDm Enter"
+    - "M\u1EDF menu b\u1EB1ng ph\xEDm O"
+    - "Tho\xE1t menu b\u1EB1ng ph\xEDm ESC"
   backPos: {x: 0, y: 0}
   isDestroy: 0
 --- !u!61 &2050045609

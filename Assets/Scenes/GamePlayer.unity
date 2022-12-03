@@ -2448,10 +2448,10 @@ PrefabInstance:
     - target: {fileID: 2774444430599451569, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
       propertyPath: pokemons.Array.data[0]._base
       value: 
-      objectReference: {fileID: 11400000, guid: f469603d34ec5334e85ba63ad75e2183, type: 2}
+      objectReference: {fileID: 11400000, guid: 9605aa5dc7c8b0b40ace0a8a2d62f5c7, type: 2}
     - target: {fileID: 2774444430599451569, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
       propertyPath: pokemons.Array.data[0].level
-      value: 1
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2774444430599451569, guid: d83c2882aab115c47924be47e7bd5247, type: 3}
       propertyPath: pokemons.Array.data[1]._base
