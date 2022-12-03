@@ -29612,11 +29612,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8166960431489609354, guid: 35247fcdf113cf948a783da7c2c4add2, type: 3}
       propertyPath: pokemons.Array.data[0].level
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8166960431489609354, guid: 35247fcdf113cf948a783da7c2c4add2, type: 3}
+      propertyPath: pokemons.Array.data[1]._base
+      value: 
+      objectReference: {fileID: 11400000, guid: ddddd812387b3694992552aa8a339331, type: 2}
+    - target: {fileID: 8166960431489609354, guid: 35247fcdf113cf948a783da7c2c4add2, type: 3}
       propertyPath: pokemons.Array.data[1].level
-      value: 4
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8166960431489609355, guid: 35247fcdf113cf948a783da7c2c4add2, type: 3}
       propertyPath: dialog.lines.Array.data[0]
@@ -29705,8 +29709,12 @@ PrefabInstance:
       value: -1.5327688
       objectReference: {fileID: 0}
     - target: {fileID: 8166960431489609354, guid: 35247fcdf113cf948a783da7c2c4add2, type: 3}
+      propertyPath: pokemons.Array.data[0]._base
+      value: 
+      objectReference: {fileID: 11400000, guid: ddddd812387b3694992552aa8a339331, type: 2}
+    - target: {fileID: 8166960431489609354, guid: 35247fcdf113cf948a783da7c2c4add2, type: 3}
       propertyPath: pokemons.Array.data[0].level
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8166960431489609354, guid: 35247fcdf113cf948a783da7c2c4add2, type: 3}
       propertyPath: pokemons.Array.data[1].level
