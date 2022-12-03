@@ -10,23 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 78baa30db7eba0648a4d7e97e576c29b, type: 3}
-  m_Name: TailWhip
+  m_Name: QuickAttack
   m_EditorClassIdentifier: 
-  name: "Qu\u1EADt \u0111u\xF4i"
+  name: "C\xF4ng nhanh"
   decsription: 
   type: 1
-  power: 0
+  power: 40
   accuracy: 100
   alwaysHits: 0
   pp: 30
-  priority: 0
-  category: 2
+  priority: 1
+  category: 0
   effects:
-    boosts:
-    - stat: 1
-      boost: -6
+    boosts: []
     status: 0
     volatileStatus: 0
   secondaries: []
   target: 0
-  sprite: {fileID: 199108227, guid: 6e16cae33d2f3b545ae49fb78ff78113, type: 3}
+  sprite: {fileID: 0}

@@ -27,4 +27,4 @@ MonoBehaviour:
     volatileStatus: 0
   secondaries: []
   target: 0
-  sprite: {fileID: 0}
+  sprite: {fileID: 1910875327, guid: 6e16cae33d2f3b545ae49fb78ff78113, type: 3}
